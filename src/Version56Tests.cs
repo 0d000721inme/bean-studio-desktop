@@ -1,0 +1,21 @@
+using System;using System.Drawing;using System.Drawing.Imaging;using System.Collections.Generic;using System.Diagnostics;using System.IO;using System.Threading;using System.Windows.Forms;using System.Runtime.InteropServices;
+namespace MuMuBeans {static class Version56Tests {
+ static List<string> rows;static int failed;static void Check(bool ok,string s){rows.Add((ok?"PASS ":"FAIL ")+s);if(!ok)failed++;}
+ public static void Run(string[] a){rows=new List<string>();failed=0;Directory.CreateDirectory(a[1]);try{
+  using(Bitmap two=new Bitmap(a[2]))using(Bitmap four=new Bitmap(a[3]))foreach(double scale in new[]{1.0,.75,.5})using(Bitmap b2=new Bitmap(two,new Size((int)(two.Width*scale),(int)(two.Height*scale))))using(Bitmap b4=new Bitmap(four,b2.Size)){
+   var p2=AutoLocator.Find(b2);var p4=AutoLocator.Find(b4);Check(p2.RightReading!=null&&p2.RightReading.Count==2,"真实紫色2豆 scale="+scale+" ROI="+p2.Right);Check(p4.RightReading!=null&&p4.RightReading.Count==4,"真实紫色满豆流光 scale="+scale+" ROI="+p4.Right);
+   var r4=Detector.Analyze(b4,p2.Right,150);var r2=Detector.Analyze(b2,p4.Right,150);Check(r4.Valid&&r4.Count==4,"锁定2豆位置后满豆流光 "+scale+" n="+r4.Count+" "+r4.Reason+" bright="+string.Join(",",r4.Bright)+" contrast="+string.Join(",",r4.Contrast));Check(r2.Valid&&r2.Count==2,"锁定满豆位置后识别2豆 "+scale);
+  }
+  Check(GameClockWorker.LateRecovery(40,8).Contains("32.00"),"中途40秒减剩余8秒=32秒");Check(GameClockWorker.LateRecovery(6.43,5.15).Contains("1.28"),"小数时间中途补算");Check(GameClockWorker.LateRecovery(3,8).Contains("不足")&&GameClockWorker.LateRecovery(null,8).Contains("未确认")&&GameClockWorker.LateRecovery(40,0).Contains("未确认"),"回合不足、无读数、倒计时结束均不编造恢复点");
+  using(ClockReader reader=new ClockReader())using(Bitmap b=new Bitmap(a[4]))foreach(double scale in new[]{1.0,.75,.5})using(Bitmap scaled=new Bitmap(b,new Size((int)(b.Width*scale),(int)(b.Height*scale))))using(Bitmap crop=scaled.Clone(ClockReader.Area(scaled.Size),PixelFormat.Format32bppArgb)){Check(reader.Read(crop)==3.20,"用户3.20时间样本 "+scale);}
+ }catch(Exception e){failed++;rows.Add(e.ToString());}rows.Add("FAILURES="+failed);File.WriteAllLines(Path.Combine(a[1],"V56样本与补算.txt"),rows);Environment.ExitCode=failed==0?0:1;}
+ sealed class Fixture:Form{public Bitmap Image;public Fixture(){FormBorderStyle=FormBorderStyle.None;StartPosition=FormStartPosition.Manual;Location=new Point(30,40);ClientSize=new Size(930,523);DoubleBuffered=true;}protected override void OnPaint(PaintEventArgs e){e.Graphics.DrawImage(Image,ClientRectangle);}}
+ static void Pump(int ms){var sw=Stopwatch.StartNew();while(sw.ElapsedMilliseconds<ms){Application.DoEvents();Thread.Sleep(10);}}
+ [DllImport("user32.dll")]static extern int GetGuiResources(IntPtr h,int flag);
+ public static void Live(string[] a){rows=new List<string>();failed=0;Directory.CreateDirectory(a[1]);try{using(Bitmap image=new Bitmap(a[2]))using(Fixture f=new Fixture{Image=image})using(Form cover=new Form{FormBorderStyle=FormBorderStyle.None,StartPosition=FormStartPosition.Manual,Location=new Point(30,40),ClientSize=new Size(930,523),BackColor=Color.Black,TopMost=true})using(Engine engine=new Engine()){
+  f.Show();Application.DoEvents();engine.ConfigureAuto(f.Handle,1,true,true);Pump(2000);cover.Show();Pump(2000);var snap=engine.GetSnapshot();var clock=engine.Clock.State();Check(!Native.Uncovered(f.Handle,Native.ClientBounds(f.Handle)),"测试窗口确实被完全遮挡");Check(WindowCapture.Status.StartsWith("WGC 窗口"),"使用WGC而非屏幕截图 "+WindowCapture.Status);Check(snap.Count==4,"遮挡下定位并识别4颗金豆 "+snap.Status);Check(clock.Value==49&&clock.Age<.6,"遮挡下持续读取49 "+clock.Status);
+  var proc=Process.GetCurrentProcess();GC.Collect();GC.WaitForPendingFinalizers();proc.Refresh();long before=proc.PrivateMemorySize64;int gdi=GetGuiResources(proc.Handle,0);Pump(30000);GC.Collect();GC.WaitForPendingFinalizers();proc.Refresh();rows.Add("INFO 30秒稳态私有内存 MB: "+(before/1048576.0).ToString("F1")+" -> "+(proc.PrivateMemorySize64/1048576.0).ToString("F1"));int after=GetGuiResources(proc.Handle,0);Check(after-gdi<=8,"GDI句柄 "+gdi+" -> "+after);Check(engine.Clock.State().Value==49&&engine.Clock.State().Age<.6,"30秒后仍有新时钟读数");engine.Export(a[1]);
+  cover.Hide();f.Hide();
+ }}catch(Exception e){failed++;rows.Add("FAIL "+e);}finally{WindowCapture.Shutdown();}rows.Add("FAILURES="+failed);File.WriteAllLines(Path.Combine(a[1],"V56遮挡与资源.txt"),rows);Environment.ExitCode=failed==0?0:1;}
+}}
+
