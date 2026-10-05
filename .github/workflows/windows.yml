@@ -1,0 +1,19 @@
+name: Check Windows source
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Restore official dependencies and build
+        shell: powershell
+        run: .\build.ps1
+      - name: Check clock tracker
+        shell: powershell
+        run: .\scripts\test.ps1 -SkipBuild
