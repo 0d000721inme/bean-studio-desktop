@@ -1,0 +1,28 @@
+# Build output and downloaded dependencies
+*.exe
+*.dll
+*.pdb
+*.nupkg
+.cache/
+x64/
+tessdata/
+bin/
+obj/
+test-results/
+artifacts/
+
+# Local calibration, crash reports and manually saved diagnostics
+clock-region.txt
+启动错误.txt
+诊断_*/
+diagnostics/
+*.error.txt
+
+# User screenshots and local editor files
+*.png
+*.jpg
+*.jpeg
+.vs/
+.vscode/
+*.user
+*.suo
