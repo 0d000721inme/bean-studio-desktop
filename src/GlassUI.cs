@@ -192,16 +192,19 @@ namespace MuMuBeans
         readonly GlassPanel source=new GlassPanel{Material=true,Radius=20},picture=new GlassPanel{Radius=28},timerPanel=new GlassPanel{Blue=true,Radius=28},live=new GlassPanel{Radius=24};
         readonly CooldownRail rail=new CooldownRail();readonly SessionBadge sessionBadge=new SessionBadge();
         readonly Label gameTitle=Theme.Label("游戏时间",10,true),gameValue=Theme.Label("—",28),gameState=Theme.Label("等待时间数字",9),duration=Theme.Label("15 秒",9);
-        readonly Label title=Theme.Label("豆子",26,true),subtitle=Theme.Label("Bean Studio   /   MuMu 对局助手",9),edition=Theme.Label("V5.7",9);
+        readonly Label title=Theme.Label("豆子",26,true),subtitle=Theme.Label("Bean Studio   /   MuMu 对局助手",9),edition=Theme.Label("V5.7.1",9);
         readonly Label sourceTitle=Theme.Label("画面来源",10,true),pictureTitle=Theme.Label("游戏画面",13,true),pictureHint=Theme.Label("扫描时的定位预览",9),previewNote=Theme.Label("静态定位预览  ·  下方选择监测方向",9);
         readonly Label timerTitle=Theme.Label("冷却剩余",11,true),clockLabel=Theme.Label("00.00",60,true),timerState=Theme.Label("等待下一次少豆",10),timerRule=Theme.Label("每次减少，重新开始完整 15 秒",9);
         readonly Label liveTitle=Theme.Label("豆子识别",11,true),countLabel=Theme.Label("待确认",11,true),metrics=Theme.Label("开始监测后显示采样状态",9),status=Theme.Label("选择 MuMu 窗口，然后扫描画面。",9);
         readonly GlassButton calibrate=new GlassButton{Text="校准",AccessibleName="游戏时间校准"};
         readonly GlassButton refresh=new GlassButton{Text="刷新列表"},scan=new GlassButton{Text="扫描画面",Icon="scan"},left=new GlassButton{Text="左侧"},right=new GlassButton{Text="右侧",Selected=true},run=new GlassButton{Text="开始监测",Primary=true,Icon="play"},floating=new GlassButton{Text="悬浮倒计时",Icon="float"},clear=new GlassButton{Text="清空冷却",Icon="reset"},save=new GlassButton{Text="保存诊断",Icon="save"},minimize=new GlassButton{Text="—"},close=new GlassButton{Text="×"};
         bool monitoring,refreshing,released,demo,uiReady;int side=1,uiFrames;string transient="";double transientUntil;readonly Stopwatch uptime=Stopwatch.StartNew();
+        readonly bool activateOnShow;
+        protected override bool ShowWithoutActivation{get{return !activateOnShow;}}
         public MainForm(bool connectOnShow=true)
         {
-            AutoScaleMode=AutoScaleMode.None;Text="豆子 Bean Studio V5.7";Font=new Font("Microsoft YaHei UI",10);ForeColor=Theme.Ink;BackColor=Color.FromArgb(230,237,250);FormBorderStyle=FormBorderStyle.None;DoubleBuffered=true;SetStyle(ControlStyles.ResizeRedraw,true);ClientSize=new Size(1240,860);MinimumSize=new Size(1040,760);StartPosition=FormStartPosition.CenterScreen;
+            activateOnShow=connectOnShow;
+            AutoScaleMode=AutoScaleMode.None;Text="豆子 Bean Studio V5.7.1";Font=new Font("Microsoft YaHei UI",10);ForeColor=Theme.Ink;BackColor=Color.FromArgb(230,237,250);FormBorderStyle=FormBorderStyle.None;DoubleBuffered=true;SetStyle(ControlStyles.ResizeRedraw,true);ClientSize=new Size(1240,860);MinimumSize=new Size(1040,760);StartPosition=FormStartPosition.CenterScreen;
             Controls.AddRange(new Control[]{title,subtitle,edition,sessionBadge,source,picture,timerPanel,live,run,floating,clear,save,minimize,close,status});
             source.Controls.AddRange(new Control[]{sourceTitle,windows,refresh,scan});picture.Controls.AddRange(new Control[]{pictureTitle,pictureHint,preview,previewNote,left,right});timerPanel.Controls.AddRange(new Control[]{timerTitle,duration,clockLabel,timerState,timerRule,rail});live.Controls.AddRange(new Control[]{liveTitle,crop,dots,countLabel,gameTitle,gameValue,gameState,calibrate});picture.Controls.Add(metrics);
             BackColor=Theme.Bg;sourceTitle.ForeColor=timerTitle.ForeColor=liveTitle.ForeColor=Theme.Ink;subtitle.ForeColor=edition.ForeColor=pictureHint.ForeColor=previewNote.ForeColor=timerRule.ForeColor=metrics.ForeColor=status.ForeColor=duration.ForeColor=gameState.ForeColor=Theme.Muted;
@@ -212,7 +215,7 @@ namespace MuMuBeans
             calibrate.Click+=delegate{using(Bitmap b=preview.CopyFrame())using(ClockPanel panel=new ClockPanel(engine.Clock,b)){panel.ShowDialog(this);}};
             tips.SetToolTip(calibrate,"查看实际时间区域、失败原因；在扫描预览上手动框选中间数字。");
             refresh.Click+=delegate{RefreshWindows();};scan.Click+=delegate{RequestPreview();};left.Click+=delegate{SelectSide(0);};right.Click+=delegate{SelectSide(1);};
-            run.Click+=delegate{if(Selected==null){Notice("请先打开并选择 MuMu 窗口。");return;}monitoring=!monitoring;run.Text=monitoring?"暂停监测":"开始监测";run.Icon=monitoring?"pause":"play";SyncEngine(false);};
+            run.Click+=delegate{if(Selected==null){Notice("请先打开并选择 MuMu 窗口。");return;}monitoring=!monitoring;run.Text=monitoring?"暂停监测":"开始监测";run.Icon=monitoring?"pause":"play";engine.SetPaused(!monitoring);SyncEngine(false);};
             floating.Text="悬浮倒计时 ▾";floating.Click+=delegate{floatingMenu.Show(floating,new Point(0,-floatingMenu.PreferredSize.Height-6));};clear.Click+=delegate{engine.Reset();};
             save.Click+=delegate{try{string folder=engine.Export(AppDomain.CurrentDomain.BaseDirectory);Notice("诊断已保存："+Path.GetFileName(folder));}catch(Exception ex){Notice("保存失败："+ex.Message);}};
             minimize.Click+=delegate{WindowState=FormWindowState.Minimized;};close.Click+=delegate{Close();};
@@ -221,7 +224,7 @@ namespace MuMuBeans
             Point offset=Point.Empty;bool dragging=false;foreach(Control c in new Control[]{this,title,subtitle,edition})
             {c.MouseDown+=delegate(object sender,MouseEventArgs e){if(e.Button==MouseButtons.Left&&Cursor.Position.Y<Top+95){dragging=true;offset=new Point(Cursor.Position.X-Left,Cursor.Position.Y-Top);((Control)sender).Capture=true;}};c.MouseMove+=delegate{if(dragging)Location=new Point(Cursor.Position.X-offset.X,Cursor.Position.Y-offset.Y);};c.MouseUp+=delegate(object sender,MouseEventArgs e){dragging=false;((Control)sender).Capture=false;};}
             floatingMenu.Font=Font;floatingMenu.Items.Add("打开悬浮窗 · 默认置顶",null,delegate{overlay.ShowAt(new Point(Left+24,Top+120));});floatingMenu.Items.Add("关闭悬浮窗",null,delegate{overlay.Hide();});floatingMenu.Items.Add(new ToolStripSeparator());floatingMenu.Items.Add(new ToolStripMenuItem("悬浮窗内可直接切换左右；主界面保持打开"){Enabled=false});
-            tips.SetToolTip(floating,"先打开菜单，再选择显示悬浮窗。默认置顶，主界面不会自动隐藏。");tips.SetToolTip(left,"监测左侧；切换时重新建立豆数基准，不触发计时。");tips.SetToolTip(right,"监测右侧；增长不触发，减少重置完整15秒。");tips.SetToolTip(scan,"截取定位预览时主界面短暂收起。请露出顶部血条和豆子。");tips.SetToolTip(run,"开始后启用高速采样；暂停不会清除已有倒计时。");
+            tips.SetToolTip(floating,"先打开菜单，再选择显示悬浮窗。默认置顶，主界面不会自动隐藏。");tips.SetToolTip(left,"监测左侧；切换时重新建立豆数基准，不触发计时。");tips.SetToolTip(right,"监测右侧；增长不触发，减少重置完整15秒。");tips.SetToolTip(scan,"截取定位预览时主界面短暂收起。请露出顶部血条和豆子。");tips.SetToolTip(run,"暂停会停止后台窗口捕获、豆子识别和游戏时间识别；已有倒计时继续。");
             Shown+=delegate{MinimumSize=new Size(1040,760);if(connectOnShow)RefreshWindows();};pulse.Tick+=Tick;pulse.Start();uiReady=true;LayoutUI();
         }
         protected override void OnResize(EventArgs e){base.OnResize(e);if(uiReady&&WindowState!=FormWindowState.Minimized&&ClientSize.Width>0&&ClientSize.Height>0){LayoutUI();Theme.RoundedWindow(this,16);}}
@@ -265,7 +268,8 @@ namespace MuMuBeans
                 try
                 {
                     Rectangle bounds=Native.ClientBounds(selected.Handle);if(bounds.Width<320||!SystemInformation.VirtualScreen.Contains(bounds))throw new InvalidOperationException("请把 MuMu 窗口完整移到屏幕内。");
-                    using(Bitmap image=WindowCapture.Capture(selected.Handle,bounds)){LocatedPair pair=AutoLocator.Find(image);preview.LeftRegion=Normalized(pair.Left,image.Size);preview.RightRegion=Normalized(pair.Right,image.Size);preview.SetFrame((Bitmap)image.Clone());}
+                    if(WindowCapture.Paused&&!Native.Uncovered(selected.Handle,bounds))throw new InvalidOperationException("暂停时扫描只截取一次屏幕，请移开遮挡窗口。");
+                    using(Bitmap image=WindowCapture.Paused?Native.Capture(bounds):WindowCapture.Capture(selected.Handle,bounds)){LocatedPair pair=AutoLocator.Find(image);preview.LeftRegion=Normalized(pair.Left,image.Size);preview.RightRegion=Normalized(pair.Right,image.Size);preview.SetFrame((Bitmap)image.Clone());}
                     SyncEngine(true);
                 }
                 catch(Exception ex){Notice("扫描失败："+ex.Message);}
@@ -275,11 +279,12 @@ namespace MuMuBeans
         static RectangleF Normalized(Rectangle r,Size size){return r.IsEmpty?RectangleF.Empty:new RectangleF(r.X/(float)size.Width,r.Y/(float)size.Height,r.Width/(float)size.Width,r.Height/(float)size.Height);}
         void Tick(object sender,EventArgs e)
         {
-            Snapshot s=engine.GetSnapshot();clockLabel.Text=Theme.Clock(s.Remaining);timerState.Text=s.Remaining>0?"计时中 · 再次减少即重置":"等待下一次少豆";clockLabel.ForeColor=Theme.Urgency(s.Remaining);timerState.Text=s.Remaining>0&&s.Remaining<3?"即将恢复 · 留意游戏时间":timerState.Text;timerRule.Text=s.Recovery;rail.Remaining=s.Remaining;rail.Invalidate();
+            Snapshot s=engine.GetSnapshot();pulse.Interval=s.Paused?100:33;clockLabel.Text=Theme.Clock(s.Remaining);timerState.Text=s.Remaining>0?"计时中 · 再次减少即重置":"等待下一次少豆";clockLabel.ForeColor=Theme.Urgency(s.Remaining);timerState.Text=s.Remaining>0&&s.Remaining<3?"即将恢复 · 留意游戏时间":timerState.Text;timerRule.Text=s.Recovery;rail.Remaining=s.Remaining;rail.Invalidate();
             ClockState cs=engine.Clock.State();bool fresh=cs.Value.HasValue&&cs.Age<=.65;gameValue.Text=fresh?cs.Value.Value.ToString(cs.Value<10?"0.00":"0",CultureInfo.InvariantCulture):"—";gameState.Text=fresh?"已确认\r\n持续读取中":cs.Value.HasValue?"读数已过期\r\n可点校准检查":"等待时间数字\r\n可点校准检查";tips.SetToolTip(gameState,cs.Status+"\r\n"+cs.Backend+"\r\n识别方式："+cs.Method+"；本帧匹配分数："+cs.Confidence.ToString("0.00",CultureInfo.InvariantCulture));gameValue.AccessibleName="游戏时间："+(fresh?gameValue.Text:"未确认");sessionBadge.Caption=Selected==null?"尚未连接":s.Enabled?"正在监测":"预览模式";sessionBadge.Active=s.Enabled;sessionBadge.Invalidate();
             Reading display=s.Enabled?s.ConfirmedReading:s.Reading;
             dots.Reading=display;dots.Invalidate();countLabel.Text=display!=null&&display.Valid?display.Count+" / 4 颗":"待确认";
-            metrics.Text=!s.Enabled?"开始监测后显示采样状态":string.Format("采样 {0:0} ms    确认 {1:0} ms    {2}",s.GapMs,s.ConfirmationMs,WindowCapture.Status=="WGC 窗口捕获"?"窗口捕获":"兼容 / 等待帧");metrics.ForeColor=s.Enabled&&s.GapMs>100?Theme.Red:Theme.Muted;
+            if(s.Paused){gameValue.Text="—";gameState.Text="已暂停\r\n停止读取时间";sessionBadge.Caption="监测已暂停";}
+            metrics.Text=s.Paused?s.Status : !s.Enabled?"开始监测后显示采样状态":string.Format("采样 {0:0} ms    确认 {1:0} ms    {2}",s.GapMs,s.ConfirmationMs,WindowCapture.Status=="WGC 窗口捕获"?"窗口捕获":"兼容 / 等待帧");metrics.ForeColor=s.Enabled&&s.GapMs>100?Theme.Red:Theme.Muted;
             status.Text=uptime.Elapsed.TotalSeconds<transientUntil?transient:s.Status;previewNote.Text=(side==0?"监测左侧":"监测右侧")+"  ·  增长不触发";
             if(++uiFrames%4==0&&WindowState!=FormWindowState.Minimized){Bitmap b=engine.GetFrame();crop.SetFrame(s.Reading==null?null:b);if(s.Reading==null&&b!=null)b.Dispose();preview.LeftRegion=s.LeftRegion;preview.RightRegion=s.RightRegion;preview.Invalidate();}
         }

@@ -22,6 +22,7 @@ namespace MuMuBeans
             Native.SetProcessDPIAware();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if(args.Length>0 && args[0]=="--pause-test"){try{PauseTests.Run(args[1]);}catch(Exception ex){Directory.CreateDirectory(args[1]);File.WriteAllText(Path.Combine(args[1],"pause-error.txt"),ex.ToString());Environment.ExitCode=1;}return;}
             if (args.Length > 0 && args[0] == "--self-test")
             {
                 try { Tests.Run(args[1], args[2], args[3]); }
@@ -264,7 +265,7 @@ namespace MuMuBeans
         public long TriggerStamp;
         public string Status;
         public string Recovery;
-        public bool Enabled;
+        public bool Enabled,Paused;
         public int? Count;
     }
 
@@ -285,7 +286,8 @@ namespace MuMuBeans
         IntPtr window;
         RectangleF region;
         int threshold=150, version;
-        bool enabled, stopped, automatic;
+        bool enabled, stopped, automatic,paused;
+        long samples;int idle;
         int selectedSide=1;
         RectangleF leftRegion,rightRegion;
         Size lockedSize;
@@ -296,10 +298,17 @@ namespace MuMuBeans
         int slowSamples;
         long triggerStamp;
         public Engine()
-        { preciseTimer=Native.timeBeginPeriod(1)==0;worker=new Thread(Loop) { IsBackground=true, Priority=ThreadPriority.AboveNormal, Name="MuMu ROI capture" }; worker.Start(); }
+        { WindowCapture.SetPaused(false);preciseTimer=Native.timeBeginPeriod(1)==0;worker=new Thread(Loop) { IsBackground=true, Priority=ThreadPriority.AboveNormal, Name="MuMu ROI capture" }; worker.Start(); }
+        public long Samples{get{return Interlocked.Read(ref samples);}}
+        public bool PauseCompleted{get{lock(gate)return paused&&Interlocked.CompareExchange(ref idle,0,0)==1&&gameClock.PausedIdle&&WindowCapture.CaptureStopped;}}
+        public void SetPaused(bool value)
+        {
+            lock(gate){if(paused==value)return;paused=value;Interlocked.Exchange(ref idle,0);version++;counter.Forget();previousSample=-1;if(value){enabled=false;status="监测已暂停 · 正在停止捕获";}}
+            WindowCapture.SetPaused(value);gameClock.SetPaused(value);wake.Set();
+        }
         public void Configure(IntPtr h, RectangleF r, int t, bool run)
         {
-            lock(gate) { window=h; automatic=false; region=r; threshold=t; enabled=run; version++; counter.Forget(); previousSample=-1; }
+            lock(gate) { window=h; automatic=false; region=r; threshold=t; enabled=run&&!paused; version++; counter.Forget(); previousSample=-1; }
             gameClock.Configure(h);wake.Set();
         }
         public void ConfigureAuto(IntPtr h,int side,bool run,bool relocate=false)
@@ -307,7 +316,7 @@ namespace MuMuBeans
             lock(gate)
             {
                 bool changed=window!=h||selectedSide!=side||!automatic||relocate;
-                window=h;selectedSide=side;automatic=true;enabled=run;version++;counter.Forget();previousSample=-1;
+                window=h;selectedSide=side;automatic=true;enabled=run&&!paused;version++;counter.Forget();previousSample=-1;
                 if(changed){region=RectangleF.Empty;leftRegion=rightRegion=RectangleF.Empty;lockedSize=Size.Empty;nextLocate=0;invalidSince=-1;reading=null;}
             }
             gameClock.Configure(h);wake.Set();
@@ -319,7 +328,7 @@ namespace MuMuBeans
 
         public Snapshot GetSnapshot()
         {
-            lock(gate) return new Snapshot { Recovery=recovery,ConfirmedReading=counter.Baseline.HasValue?confirmedReading:null,Side=selectedSide,CaptureSize=lockedSize,LeftRegion=leftRegion,RightRegion=rightRegion,LocateMs=locateMs,Reading=reading, Remaining=counter.Remaining(time.Elapsed.TotalSeconds), ProcessMs=processMs, GapMs=gapMs, MaxGapMs=maxGapMs, ConfirmationMs=counter.LastConfirmationMs, Triggers=counter.Triggers, SlowSamples=slowSamples, Status=status, Enabled=enabled, Count=counter.Baseline, TriggerStamp=triggerStamp };
+            lock(gate) return new Snapshot { Recovery=recovery,ConfirmedReading=counter.Baseline.HasValue?confirmedReading:null,Side=selectedSide,CaptureSize=lockedSize,LeftRegion=leftRegion,RightRegion=rightRegion,LocateMs=locateMs,Reading=reading, Remaining=counter.Remaining(time.Elapsed.TotalSeconds), ProcessMs=processMs, GapMs=gapMs, MaxGapMs=maxGapMs, ConfirmationMs=counter.LastConfirmationMs, Triggers=counter.Triggers, SlowSamples=slowSamples, Status=paused?(PauseCompleted?"监测已暂停 · 捕获与识别已停止":WindowCapture.PauseCompleted.IsFaulted?WindowCapture.Status:"正在暂停 · 等待在途采集与识别结束"):status, Enabled=enabled, Paused=paused, Count=counter.Baseline, TriggerStamp=triggerStamp };
         }
         public Bitmap GetFrame()
         { lock(gate) { if(frames.Count==0) return null; Bitmap last=null; foreach(Bitmap b in frames) last=b; return (Bitmap)last.Clone(); } }
@@ -342,8 +351,9 @@ namespace MuMuBeans
         {
             while(true)
             {
-                IntPtr h; RectangleF r; int t,v,side; bool run,auto; Size size;
-                lock(gate) { if(stopped) return; h=window;r=region;t=threshold;v=version;run=enabled;auto=automatic;side=selectedSide;size=lockedSize; }
+                IntPtr h; RectangleF r; int t,v,side; bool run,auto,pause; Size size;
+                lock(gate) { if(stopped) return; h=window;r=region;t=threshold;v=version;run=enabled;auto=automatic;side=selectedSide;size=lockedSize;pause=paused;Interlocked.Exchange(ref idle,pause?1:0); }
+                if(pause){wake.WaitOne();continue;}
                 double start=time.Elapsed.TotalSeconds;
                 Reading current=null; Bitmap bitmap=null; string state;
                 try
@@ -372,6 +382,7 @@ namespace MuMuBeans
                     else
                     {
                         bitmap=WindowCapture.Capture(h,area);
+                        Interlocked.Increment(ref samples);
                         current=Detector.Analyze(bitmap,new Rectangle(Point.Empty,bitmap.Size),t);
                         state=current.Valid ? (run?"监测中 · 少豆立即重置 15 秒":"定位完成 · 点击开始监测") : current.Reason+" · 暂停判定";
                     }
@@ -451,7 +462,7 @@ namespace MuMuBeans
                         hud.SurfacePresented+=delegate{if(displayedTrigger>paintedTrigger){Interlocked.Exchange(ref paintedStamp,Stopwatch.GetTimestamp());Interlocked.Exchange(ref paintedTrigger,displayedTrigger);}};
                         timer.Tick+=delegate
                         {
-                            Snapshot s=engine.GetSnapshot();displayedTrigger=s.Triggers;
+                            Snapshot s=engine.GetSnapshot();displayedTrigger=s.Triggers;timer.Interval=s.Paused?100:16;
                             hud.ClockLabel.Text=Theme.Clock(s.Remaining);hud.SetSide(s.Side);hud.ClockLabel.ForeColor=Theme.Urgency(s.Remaining);hud.Target.Text=s.Recovery;
                             Reading display=s.Enabled?s.ConfirmedReading:s.Reading;
                             hud.Detail.Text=(!s.Enabled?"已暂停 · ":"")+(display!=null&&display.Valid?display.Count+" / 4 颗":"画面待确认");hud.RefreshSurface();
