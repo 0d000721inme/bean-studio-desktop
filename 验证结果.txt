@@ -1,0 +1,44 @@
+Bean Studio V5.7.1 本地验证 · 2026-10-05
+仅使用本程序自建动态窗口和状态检查，不操作 MuMu。
+暂停回归：20 PASS，FAILURES=0；时钟状态：12 PASS，FAILURES=0。
+尚未测量真实 MuMu 鼠标延迟，不据此保证全部游戏卡顿消失。
+
+PASS 真实少豆设置完整 15.000 秒 deadline
+PASS 暂停忘记豆数基准，已存在的冷却按现实时间继续
+PASS 恢复后较少豆数建立新基准，不把暂停期间变化误判为新消耗
+INFO 生产同样 MTA 线程的 WGC 构造/取帧/处置探针、完整异常栈及 HResult 已保存 wgc-probe.txt
+PASS 自建动态窗实际 WGC 完成 GPU 读回且 Capture 返回完整非空 Bitmap（WGC 窗口捕获）
+INFO initial 实际完成读回=5/3；fixture Tick=7 Paint=7；详细取帧诊断见 wgc-broker-initial.txt
+PASS 暂停完成任务等待 WGC 会话与初始化任务释放
+PASS 暂停拒绝 Capture/Available 重建，动态窗连续重绘 700 ms 读回计数不变
+PASS 恢复重新创建 WGC 会话，成功读回复增且 Capture 返回完整非空 Bitmap，无兼容截图代替
+INFO resume 实际完成读回=5/3；fixture Tick=9 Paint=9；详细取帧诊断见 wgc-broker-resume.txt
+PASS WGC 初始化与暂停竞态 8 轮，过期初始化不复活会话且无死锁
+PASS 真实动态窗驱动豆子与游戏时间两个识别线程采样
+PASS Engine 暂停等待捕获及两个识别线程真正空闲
+PASS 暂停时切左右、改区域、Configure(run=true)、Refresh 均不启动捕获或两识别线程
+PASS Engine 暂停保留既有 deadline，浮窗剩余时间继续下降而不清零/重置
+PASS 暂停清除已确认豆数，恢复不会沿用陈旧基准
+PASS Engine 恢复后两个识别线程重新采样，WGC 成功读回且返回完整 Bitmap
+PASS 重复暂停/恢复各 8 轮保持幂等，无死锁，最终采样归零
+PASS Dispose 释放暂停中的捕获会话
+PASS 真实开始按钮 Click 接通监测
+PASS 真实暂停按钮及左侧按钮 Click：保持暂停，两识别线程与捕获停止，主窗未显示
+PASS 暂停状态主界面在屏幕外无激活渲染并隐藏，未置顶或进入任务栏
+PASS 真实开始按钮可恢复暂停状态
+FAILURES=0
+
+时钟状态检查：
+PASS 基准需两帧
+PASS 单帧错读少一秒后恢复，不污染确认值
+PASS 真实整数减一秒在第二帧确认
+PASS 大跳变前两帧保持旧值
+PASS 持续大跳变第三帧重新确认
+PASS 空帧保留历史但不刷新时效
+PASS 游戏暂停不扣现实时间
+PASS 新回合需三帧确认
+PASS 整数到小数连续下降两帧确认
+PASS 单帧小数跳变被阻止
+PASS 失去时间后重获需两帧，不推算未读秒数
+PASS 恢复点计算及未知时间不猜60
+FAILURES=0

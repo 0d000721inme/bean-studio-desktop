@@ -1,0 +1,22 @@
+# 官方许可来源与 SHA-256
+
+下列通知原样保存；路径相对于运行包 / 源码仓库根目录。完整原始 URL 也保存于 `license-sources.json`。
+
+| 组件 / 版本 | 通知文件 | 官方来源 | SHA-256 |
+| --- | --- | --- | --- |
+| Tesseract.NET / 5.2.0 | [licenses/Tesseract.NET-LICENSE.txt](licenses/Tesseract.NET-LICENSE.txt) | [官方原文](https://raw.githubusercontent.com/charlesw/tesseract/2c993543f7fa66576a8890a6c4ab053c4598aaed/LICENSE.txt) | `cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30` |
+| Tesseract.NET / 5.2.0 | [licenses/Tesseract.NET-README.md](licenses/Tesseract.NET-README.md) | [官方原文](https://raw.githubusercontent.com/charlesw/tesseract/2c993543f7fa66576a8890a6c4ab053c4598aaed/ReadMe.md) | `273929b7bf5cde5fdb2e3f5dba0d347e61c05b39182f1c26f1dbea308e5d14ef` |
+| Tesseract OCR / 5.0.0 (verified using TessVersion on the packaged DLL) | [licenses/Tesseract.OCR-LICENSE.txt](licenses/Tesseract.OCR-LICENSE.txt) | [官方原文](https://raw.githubusercontent.com/tesseract-ocr/tesseract/5.0.0/LICENSE) | `cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30` |
+| Tesseract OCR / 5.0.0 | [licenses/Tesseract.OCR-AUTHORS.txt](licenses/Tesseract.OCR-AUTHORS.txt) | [官方原文](https://raw.githubusercontent.com/tesseract-ocr/tesseract/5.0.0/AUTHORS) | `720862b7253993b348fe15f37ed6e0d4feb0fc8df8324284d75975d54dd29923` |
+| Tesseract OCR / 5.0.0 | [licenses/Tesseract.OCR-README.md](licenses/Tesseract.OCR-README.md) | [官方原文](https://raw.githubusercontent.com/tesseract-ocr/tesseract/5.0.0/README.md) | `7d003eccb87fc1a2ee10f58df34fac1d7379fd0f1f5913be65e2dca3e1a4b432` |
+| tessdata_fast / 4.1.0 (65727574dfcd264acbb0c3e07860e4e9e9b22185) | [licenses/tessdata_fast-LICENSE.txt](licenses/tessdata_fast-LICENSE.txt) | [官方原文](https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/65727574dfcd264acbb0c3e07860e4e9e9b22185/LICENSE) | `cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30` |
+| Leptonica / 1.82.0 | [licenses/Leptonica-LICENSE.txt](licenses/Leptonica-LICENSE.txt) | [官方原文](https://raw.githubusercontent.com/DanBloomberg/leptonica/1.82.0/leptonica-license.txt) | `87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806` |
+| InteropDotNet / embedded in Tesseract.NET 5.2.0; upstream license at 0b15eee809716c50562458d6fe95d52bea46b9c6 | [licenses/InteropDotNet-LICENSE.md](licenses/InteropDotNet-LICENSE.md) | [官方原文](https://raw.githubusercontent.com/AndreyAkinshin/InteropDotNet/0b15eee809716c50562458d6fe95d52bea46b9c6/LICENSE.md) | `8fb016cd2a9efaa281ecce3075f69d20ffa8314ba8ecf8586d6744dd346cea25` |
+| libjpeg-turbo / 2.1.4 | [licenses/libjpeg-turbo-LICENSE.md](licenses/libjpeg-turbo-LICENSE.md) | [官方原文](https://raw.githubusercontent.com/libjpeg-turbo/libjpeg-turbo/2.1.4/LICENSE.md) | `ee1eaf194d5924b6360af8a6ba6a4e1554037091f7505943300cdeec65f1aebb` |
+| libjpeg-turbo / 2.1.4 (IJG acknowledgement and license) | [licenses/libjpeg-turbo-README.ijg](licenses/libjpeg-turbo-README.ijg) | [官方原文](https://raw.githubusercontent.com/libjpeg-turbo/libjpeg-turbo/2.1.4/README.ijg) | `4b7b9f8c03bb8d60270dfd12684e70ab21e4abfd27e73905cd1a7c4cae6f5cdb` |
+| libpng / 1.6.37 | [licenses/libpng-LICENSE.txt](licenses/libpng-LICENSE.txt) | [官方原文](https://raw.githubusercontent.com/pnggroup/libpng/v1.6.37/LICENSE) | `bf5e22b9dce8464064ae17a48ea1133c3369ac9e1d80ef9e320e5219aa14ea9b` |
+| zlib / 1.2.13 | [licenses/zlib-LICENSE.txt](licenses/zlib-LICENSE.txt) | [官方原文](https://raw.githubusercontent.com/madler/zlib/v1.2.13/LICENSE) | `845efc77857d485d91fb3e0b884aaa929368c717ae8186b66fe1ed2495753243` |
+| libtiff / 4.4.0 | [licenses/libtiff-COPYRIGHT.txt](licenses/libtiff-COPYRIGHT.txt) | [官方原文](https://gitlab.com/libtiff/libtiff/-/raw/v4.4.0/COPYRIGHT) | `fbd6fed7938541d2c809c0826225fc85e551fdbfa8732b10f0c87e0847acafd7` |
+| giflib / 5.2.1 | [licenses/giflib-COPYING.txt](licenses/giflib-COPYING.txt) | [官方原文](https://sourceforge.net/p/giflib/code/ci/5.2.1/tree/COPYING?format=raw) | `0c9b7990ecdca88b676db232c226548ac408b279f550d424d996f0d83591dd8e` |
+| giflib / 5.2.1 (OpenBSD allocation helper, unmodified upstream source retaining its notice) | [licenses/giflib-openbsd-reallocarray-notice.txt](licenses/giflib-openbsd-reallocarray-notice.txt) | [官方原文](https://sourceforge.net/p/giflib/code/ci/5.2.1/tree/openbsd-reallocarray.c?format=raw) | `3fbbe494d25aeac1e3464a7f8a6d57c159fe6b889ac587fb72d34510eb4f7f91` |
+| Tesseract.NET / 5.2.0 | [licenses/Tesseract-NuGet-metadata.xml](licenses/Tesseract-NuGet-metadata.xml) | [官方原文](https://api.nuget.org/v3-flatcontainer/tesseract/5.2.0/tesseract.5.2.0.nupkg) | `dc5caab65eec3ebfa14823ccacaf6c2e8e090de688540f5179133d1e62aa534c` |

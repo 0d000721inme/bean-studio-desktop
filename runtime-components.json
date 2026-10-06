@@ -1,0 +1,37 @@
+{
+  "scope": "BeanStudio Windows x64 V5.7.1 official pinned OCR runtime; versions read from packaged native DLL exports",
+  "nuget_package": {
+    "id": "Tesseract",
+    "version": "5.2.0",
+    "source_url": "https://api.nuget.org/v3-flatcontainer/tesseract/5.2.0/tesseract.5.2.0.nupkg",
+    "sha256": "202d82fc7c7d8384df7da57206d5e1f456ccdabd648c46e67cdfaa3a911d4795"
+  },
+  "native_version_exports": {
+    "TessVersion()": "5.0.0",
+    "getLeptonicaVersion()": "leptonica-1.82.0 (Nov  7 2022, 20:48:41) [MSC v.1933 LIB Release x64]",
+    "getImagelibVersions()": "libgif 5.2.1 : libjpeg 6b (libjpeg-turbo 2.1.4) : libpng 1.6.37 : libtiff 4.4.0 : zlib 1.2.13"
+  },
+  "runtime_files": [
+    {
+      "file": "Tesseract.dll",
+      "bytes": 133120,
+      "sha256": "bc2ad67ab5fb9e80e5e60f1a422a1f44f830fb1b9a77579e85a634b1a9630840"
+    },
+    {
+      "file": "x64/tesseract50.dll",
+      "bytes": 2788352,
+      "sha256": "de4d04ec75095374d98f5dd7a60d14d7e2e0f76589db693eccf7ae658be8cb2b"
+    },
+    {
+      "file": "x64/leptonica-1.82.0.dll",
+      "bytes": 4168192,
+      "sha256": "dfcb3e6ed0b16bc55bfdbcf53543cfe42a354b87c3e35bd3a95eebf005d73e76"
+    },
+    {
+      "file": "tessdata/eng.traineddata",
+      "bytes": 4113088,
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+    }
+  ],
+  "notices_manifest": "license-sources.json"
+}
