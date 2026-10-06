@@ -1,0 +1,23 @@
+{
+  "versions": 12,
+  "aliases": 1,
+  "zip_files": 26,
+  "source_count": 96,
+  "original_files_modified": false,
+  "private_file_scan": "PASS",
+  "zip_integrity": "PASS",
+  "original_exe_hashes": "Saved and included without rebuilding",
+  "historical_runtime_tests": "NOT_RUN",
+  "bundles": [
+    {
+      "file": "BeanStudio-history-source.zip",
+      "bytes": 621706,
+      "sha256": "8b1f02e1e4c7ef0dede21daf8492182a03bf19c7a9976698925ec3355d8f4e92"
+    },
+    {
+      "file": "BeanStudio-history-executables.zip",
+      "bytes": 10955433,
+      "sha256": "f821b707d6f4b2f4f43e39bce8873713f83409efbc058792cda7c5f717fc6c84"
+    }
+  ]
+}
