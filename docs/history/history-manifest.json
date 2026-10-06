@@ -1,0 +1,4120 @@
+{
+  "schema": 1,
+  "prepared_on": "2026-10-06",
+  "recommended_version": "V5.7.1",
+  "privacy": "Excluded all user screenshots, diagnostics, calibration, recordings, dataset labels and self-trained models. Historical sources and original EXEs were not changed.",
+  "versions": [
+    {
+      "version": "V1",
+      "source_directory": "outputs/MuMu豆子计时器",
+      "source_files": 1,
+      "changes": "手动框选四格；颜色、亮度与菱形局部规则；初次基准和减少触发。",
+      "known_issues": "连续确认约 250 ms；计时中再次减少不重置，是早期规则。真实紫色只做合成检查。",
+      "build": "Windows .NET Framework 4.8；运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/"
+      ],
+      "original_exe_sha256": "149096aa52e509caa29565be04a48095c3fa6b6d86faa27cf7d3a46e958388b9",
+      "original_sources": [
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "c4a56a597946556a65787495ab97f7a6bb34a99178db33f2e553a8367deae27a"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V1-source.zip",
+        "sha256": "790a7877ea4421832c6ef774c80e0c1a9eab98a8c202d0412a2049be2106aafa",
+        "bytes": 15233,
+        "entries": [
+          {
+            "path": "BeanStudio-V1/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V1/ARCHIVE.md",
+            "sha256": "33b3b961263ba883ef06fd51bc7ebcbac076d806fd37325a896334883f29fe09",
+            "bytes": 1244
+          },
+          {
+            "path": "BeanStudio-V1/HISTORICAL-USAGE.md",
+            "sha256": "16fbcf13fc7c5c3b6b2a82c5709bd4a38b6abe1b7901ad0f330eedfc2c1d1251",
+            "bytes": 3488
+          },
+          {
+            "path": "BeanStudio-V1/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V1/build.ps1",
+            "sha256": "9e12da4d542eaed18f66457d2d3fc51faf785a2fffcd43e40d6b7d55e5cd44a9",
+            "bytes": 464
+          },
+          {
+            "path": "BeanStudio-V1/src/BeanTimer.cs",
+            "sha256": "c4a56a597946556a65787495ab97f7a6bb34a99178db33f2e553a8367deae27a",
+            "bytes": 34561
+          }
+        ]
+      },
+      "binary_type": "historical-executable",
+      "binary_asset": {
+        "file": "BeanStudio-V1-historical-executable.zip",
+        "sha256": "1d6eb70b70f0be169a42480b9a41124e596ffeff3a0d160419ea377be0dc4add",
+        "bytes": 20369,
+        "entries": [
+          {
+            "path": "BeanStudio-V1/ARCHIVE.md",
+            "sha256": "33b3b961263ba883ef06fd51bc7ebcbac076d806fd37325a896334883f29fe09",
+            "bytes": 1244
+          },
+          {
+            "path": "BeanStudio-V1/HISTORICAL-USAGE.md",
+            "sha256": "16fbcf13fc7c5c3b6b2a82c5709bd4a38b6abe1b7901ad0f330eedfc2c1d1251",
+            "bytes": 3488
+          },
+          {
+            "path": "BeanStudio-V1/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V1/MuMu豆子计时器.exe",
+            "sha256": "149096aa52e509caa29565be04a48095c3fa6b6d86faa27cf7d3a46e958388b9",
+            "bytes": 31744
+          }
+        ]
+      },
+      "license_scope": "本项目原始 EXE 随包保存；Windows 系统组件不再分发。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V2",
+      "source_directory": "outputs/MuMu豆子计时器V2",
+      "source_files": 1,
+      "changes": "每次减少重置完整 15 秒；独立采集和悬浮线程；局部图诊断缓存。",
+      "known_issues": "需手动校准；按屏幕可见区域取图，遮挡和最小化影响识别。内部采样耗时不等于游戏端到端延迟。",
+      "build": "Windows .NET Framework 4.8；运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/"
+      ],
+      "original_exe_sha256": "cc50ed837b042e516e10e3bd005e0c693c3e8f773e62357c3db36417d7917e27",
+      "original_sources": [
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "ae88377d38cc3eab703e086effcf2500e880192d4c5082d5561afefdb4487759"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V2-source.zip",
+        "sha256": "6aba1236086394ac2847a81ad9d45edb517812d62ef128084ed55ae3c284936f",
+        "bytes": 23248,
+        "entries": [
+          {
+            "path": "BeanStudio-V2/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V2/ARCHIVE.md",
+            "sha256": "a19d56c4d61eaca4e6fca33c02f479f3de48db531782ec83c6d9780dc86eca63",
+            "bytes": 1265
+          },
+          {
+            "path": "BeanStudio-V2/HISTORICAL-USAGE.md",
+            "sha256": "3e476055c1cf43a398fde5a5db51bbde482ac8fac6b7eb495c04f25f597b311c",
+            "bytes": 5448
+          },
+          {
+            "path": "BeanStudio-V2/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V2/build.ps1",
+            "sha256": "9e12da4d542eaed18f66457d2d3fc51faf785a2fffcd43e40d6b7d55e5cd44a9",
+            "bytes": 464
+          },
+          {
+            "path": "BeanStudio-V2/src/BeanTimer.cs",
+            "sha256": "ae88377d38cc3eab703e086effcf2500e880192d4c5082d5561afefdb4487759",
+            "bytes": 58336
+          }
+        ]
+      },
+      "binary_type": "historical-executable",
+      "binary_asset": {
+        "file": "BeanStudio-V2-historical-executable.zip",
+        "sha256": "66ae5c13c605921189c0315391fb25df989cb09915b8c2c545a042c373e80275",
+        "bytes": 30920,
+        "entries": [
+          {
+            "path": "BeanStudio-V2/ARCHIVE.md",
+            "sha256": "a19d56c4d61eaca4e6fca33c02f479f3de48db531782ec83c6d9780dc86eca63",
+            "bytes": 1265
+          },
+          {
+            "path": "BeanStudio-V2/HISTORICAL-USAGE.md",
+            "sha256": "3e476055c1cf43a398fde5a5db51bbde482ac8fac6b7eb495c04f25f597b311c",
+            "bytes": 5448
+          },
+          {
+            "path": "BeanStudio-V2/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V2/MuMu豆子计时器.exe",
+            "sha256": "cc50ed837b042e516e10e3bd005e0c693c3e8f773e62357c3db36417d7917e27",
+            "bytes": 51200
+          }
+        ]
+      },
+      "license_scope": "本项目原始 EXE 随包保存；Windows 系统组件不再分发。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V3-AI",
+      "source_directory": "outputs/MuMu豆子计时器V3-AI",
+      "source_files": 3,
+      "changes": "人工采集标注、720→48→3 MLP 训练、C# 本地推理和模型版本加载。",
+      "known_issues": "没有可靠实战模型；数据集和自训模型不公开。本版菜单释放错误在 V4 改写窗口选择器时修复。",
+      "build": "Windows .NET Framework 4.8；运行 .\\build.ps1。 自训练另需 Python、NumPy、Pillow，数据集不随归档提供。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/"
+      ],
+      "original_exe_sha256": "9d44a7cec734fb2dcb51f7b1382a907efeb2c98bc35fbf0440e83cd4d295cf03",
+      "original_sources": [
+        {
+          "path": "src/AiTests.cs",
+          "sha256": "964841824bfd662d6e248bac19e88bc08acfe604a16bee44f2584dd5c18284c7"
+        },
+        {
+          "path": "src/AiTraining.cs",
+          "sha256": "469a489f3557430c630e1bb5d347b5c0e9f10ddd1a8b126d9292acfd035c2dee"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "ade8333f273b0ae004faaac28e6845961c865ec005bb9954734c7b05d991e943"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V3-AI-source.zip",
+        "sha256": "d478817014eb05a32a84a39f9dc3ddb16591c457fd0cd0ba0cb9cfbd802598bf",
+        "bytes": 41334,
+        "entries": [
+          {
+            "path": "BeanStudio-V3-AI/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V3-AI/ARCHIVE.md",
+            "sha256": "b2279101a34156534d6647c044f311b7980c052c323cfd2c37a83ad5d811f55b",
+            "bytes": 1334
+          },
+          {
+            "path": "BeanStudio-V3-AI/HISTORICAL-USAGE.md",
+            "sha256": "e49c47ed83c4f56150f9f62c7d8fedf5532d01e2f14fb839235afb15a485483d",
+            "bytes": 6756
+          },
+          {
+            "path": "BeanStudio-V3-AI/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V3-AI/build.ps1",
+            "sha256": "f1e5b031b7e64927459c6d566c08e990d0748a15b10b6ec01aa02d7f39974b89",
+            "bytes": 530
+          },
+          {
+            "path": "BeanStudio-V3-AI/src/AiTests.cs",
+            "sha256": "964841824bfd662d6e248bac19e88bc08acfe604a16bee44f2584dd5c18284c7",
+            "bytes": 8513
+          },
+          {
+            "path": "BeanStudio-V3-AI/src/AiTraining.cs",
+            "sha256": "469a489f3557430c630e1bb5d347b5c0e9f10ddd1a8b126d9292acfd035c2dee",
+            "bytes": 21874
+          },
+          {
+            "path": "BeanStudio-V3-AI/src/BeanTimer.cs",
+            "sha256": "ade8333f273b0ae004faaac28e6845961c865ec005bb9954734c7b05d991e943",
+            "bytes": 60199
+          },
+          {
+            "path": "BeanStudio-V3-AI/training/train.py",
+            "sha256": "e951e8770e4799f7a7647236ed44f38bbd15d3113d5baeeb9c40741e587033c5",
+            "bytes": 8107
+          },
+          {
+            "path": "BeanStudio-V3-AI/training/实现说明.md",
+            "sha256": "5e190e1103191ad5c48555c45237186a5fcfc61914f9c174b94472b3612c9977",
+            "bytes": 1584
+          }
+        ]
+      },
+      "binary_type": "historical-executable",
+      "binary_asset": {
+        "file": "BeanStudio-V3-AI-historical-executable.zip",
+        "sha256": "04929aadfdc0f229ba234ffa99cedec4fdd96f7781fc4b6e6d714c1356eb8203",
+        "bytes": 49476,
+        "entries": [
+          {
+            "path": "BeanStudio-V3-AI/ARCHIVE.md",
+            "sha256": "b2279101a34156534d6647c044f311b7980c052c323cfd2c37a83ad5d811f55b",
+            "bytes": 1334
+          },
+          {
+            "path": "BeanStudio-V3-AI/HISTORICAL-USAGE.md",
+            "sha256": "e49c47ed83c4f56150f9f62c7d8fedf5532d01e2f14fb839235afb15a485483d",
+            "bytes": 6756
+          },
+          {
+            "path": "BeanStudio-V3-AI/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V3-AI/MuMu豆子计时器.exe",
+            "sha256": "9d44a7cec734fb2dcb51f7b1382a907efeb2c98bc35fbf0440e83cd4d295cf03",
+            "bytes": 76800
+          },
+          {
+            "path": "BeanStudio-V3-AI/training/train.py",
+            "sha256": "e951e8770e4799f7a7647236ed44f38bbd15d3113d5baeeb9c40741e587033c5",
+            "bytes": 8107
+          },
+          {
+            "path": "BeanStudio-V3-AI/training/实现说明.md",
+            "sha256": "5e190e1103191ad5c48555c45237186a5fcfc61914f9c174b94472b3612c9977",
+            "bytes": 1584
+          }
+        ]
+      },
+      "license_scope": "本项目原始 EXE 随包保存；Windows 系统组件不再分发。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V4",
+      "source_directory": "outputs/MuMu豆子计时器V4",
+      "source_files": 4,
+      "changes": "自动定位左右四颗豆；选择监测侧；浅色自绘玻璃 UI；修复 V3 菜单生命周期。",
+      "known_issues": "LayoutUI 根据窗口高度计算字号但没有正数下限，缩放/最小化可触发 emSize 异常；V5 修复。",
+      "build": "Windows .NET Framework 4.8；运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/"
+      ],
+      "original_exe_sha256": "98f260dcc610593ff476e358d1dca32b1f88e3fa67c098a67fa7bcbf2db70333",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "c6303135ba3da7a15910b2edc7b76d8bc495b090d3f782c657c294887eac6c0e"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "bd3fc5590dae2e0e3032527965dfe1c703a453d80eacae4886c4a6e5a57b15f6"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "78f7186739b0040a695880086b2fd64cd10129471df8d5d5fcb85fbe04341a58"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "a0136611b0dac0891acc8bcc907d85b7f3b612679dd26e053aa38a0292c838db"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V4-source.zip",
+        "sha256": "b68fa54794feb4c8c0e43d08707a546374d5cb8a76da32563db42d1dfd48369a",
+        "bytes": 32250,
+        "entries": [
+          {
+            "path": "BeanStudio-V4/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V4/ARCHIVE.md",
+            "sha256": "a934181de9de2ce980ad8844d7fd7901f6cdff3f4fd5e43890e42dd5bb873538",
+            "bytes": 1265
+          },
+          {
+            "path": "BeanStudio-V4/HISTORICAL-USAGE.md",
+            "sha256": "110fdca9a294b4eba2b0730027f8f823324ece117f3802650a5a7f3082a19f94",
+            "bytes": 4344
+          },
+          {
+            "path": "BeanStudio-V4/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V4/build.ps1",
+            "sha256": "626538fb7b623ab0a09d85e18dc1f3e2b2648f32a99bb1392b11f6c3cd07e60d",
+            "bytes": 538
+          },
+          {
+            "path": "BeanStudio-V4/src/AutoLocator.cs",
+            "sha256": "c6303135ba3da7a15910b2edc7b76d8bc495b090d3f782c657c294887eac6c0e",
+            "bytes": 6572
+          },
+          {
+            "path": "BeanStudio-V4/src/AutoTests.cs",
+            "sha256": "bd3fc5590dae2e0e3032527965dfe1c703a453d80eacae4886c4a6e5a57b15f6",
+            "bytes": 9235
+          },
+          {
+            "path": "BeanStudio-V4/src/BeanTimer.cs",
+            "sha256": "78f7186739b0040a695880086b2fd64cd10129471df8d5d5fcb85fbe04341a58",
+            "bytes": 38426
+          },
+          {
+            "path": "BeanStudio-V4/src/GlassUI.cs",
+            "sha256": "a0136611b0dac0891acc8bcc907d85b7f3b612679dd26e053aa38a0292c838db",
+            "bytes": 30627
+          }
+        ]
+      },
+      "binary_type": "historical-executable",
+      "binary_asset": {
+        "file": "BeanStudio-V4-historical-executable.zip",
+        "sha256": "67c9a623e131cf7b87ceba3a5c2d578418e8b3b89a06e2eb9bdcc7efabc59491",
+        "bytes": 39188,
+        "entries": [
+          {
+            "path": "BeanStudio-V4/ARCHIVE.md",
+            "sha256": "a934181de9de2ce980ad8844d7fd7901f6cdff3f4fd5e43890e42dd5bb873538",
+            "bytes": 1265
+          },
+          {
+            "path": "BeanStudio-V4/HISTORICAL-USAGE.md",
+            "sha256": "110fdca9a294b4eba2b0730027f8f823324ece117f3802650a5a7f3082a19f94",
+            "bytes": 4344
+          },
+          {
+            "path": "BeanStudio-V4/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V4/MuMu豆子计时器.exe",
+            "sha256": "98f260dcc610593ff476e358d1dca32b1f88e3fa67c098a67fa7bcbf2db70333",
+            "bytes": 70144
+          }
+        ]
+      },
+      "license_scope": "本项目原始 EXE 随包保存；Windows 系统组件不再分发。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5",
+      "source_directory": "outputs/MuMu豆子计时器V5",
+      "source_files": 4,
+      "changes": "字号边界修复；ReaLTaiizor Hope 窗口及按钮；悬浮左右切换和二级菜单。",
+      "known_issues": "短暂假增长可造成随后假减少，反复把倒计时重置；V5.1 增加增长防抖。屏幕覆盖仍影响采集。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "01153b402466eea30e7fca805472f01a75bc841e2eab444fdcc3c0ffbbb403d0",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "c6303135ba3da7a15910b2edc7b76d8bc495b090d3f782c657c294887eac6c0e"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "bd3fc5590dae2e0e3032527965dfe1c703a453d80eacae4886c4a6e5a57b15f6"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "95a7655d8867f5c87edc841d4c5b4485201bed38df600c894b3eb13fca08b186"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "3fd26c922c49e9e6c43c2c2ec48683bc451746020e33a86fd788105c58571896"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5-source.zip",
+        "sha256": "f7a771b77574a406b2d4aacdf750535d2630650ba0955914ea47706ab17c71d3",
+        "bytes": 36334,
+        "entries": [
+          {
+            "path": "BeanStudio-V5/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5/ARCHIVE.md",
+            "sha256": "740de424e51aca08cb220aef34fd6ab7749ffe2e915bbb84fed427c597abc355",
+            "bytes": 1409
+          },
+          {
+            "path": "BeanStudio-V5/HISTORICAL-USAGE.md",
+            "sha256": "bb1efbf46f9e7927ebb404caa9e7579716a3b316355f578ca7a08bacfa0bdc39",
+            "bytes": 3267
+          },
+          {
+            "path": "BeanStudio-V5/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5/RestoreDependencies.ps1",
+            "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+            "bytes": 86
+          },
+          {
+            "path": "BeanStudio-V5/THIRD_PARTY.md",
+            "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+            "bytes": 692
+          },
+          {
+            "path": "BeanStudio-V5/build.ps1",
+            "sha256": "142112642b73cfb7a006cb2a8d08ba3a2364b466c11b6526a939bcf2c975e082",
+            "bytes": 596
+          },
+          {
+            "path": "BeanStudio-V5/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5/src/AutoLocator.cs",
+            "sha256": "c6303135ba3da7a15910b2edc7b76d8bc495b090d3f782c657c294887eac6c0e",
+            "bytes": 6572
+          },
+          {
+            "path": "BeanStudio-V5/src/AutoTests.cs",
+            "sha256": "bd3fc5590dae2e0e3032527965dfe1c703a453d80eacae4886c4a6e5a57b15f6",
+            "bytes": 9235
+          },
+          {
+            "path": "BeanStudio-V5/src/BeanTimer.cs",
+            "sha256": "95a7655d8867f5c87edc841d4c5b4485201bed38df600c894b3eb13fca08b186",
+            "bytes": 39423
+          },
+          {
+            "path": "BeanStudio-V5/src/GlassUI.cs",
+            "sha256": "3fd26c922c49e9e6c43c2c2ec48683bc451746020e33a86fd788105c58571896",
+            "bytes": 35387
+          }
+        ]
+      },
+      "binary_type": "historical-executable",
+      "binary_asset": {
+        "file": "BeanStudio-V5-historical-executable.zip",
+        "sha256": "3281b0d6eb0c21a26f9903c62fe85bc535affdae586cd9ebe9ad8784be654829",
+        "bytes": 5174856,
+        "entries": [
+          {
+            "path": "BeanStudio-V5/ARCHIVE.md",
+            "sha256": "740de424e51aca08cb220aef34fd6ab7749ffe2e915bbb84fed427c597abc355",
+            "bytes": 1409
+          },
+          {
+            "path": "BeanStudio-V5/HISTORICAL-USAGE.md",
+            "sha256": "bb1efbf46f9e7927ebb404caa9e7579716a3b316355f578ca7a08bacfa0bdc39",
+            "bytes": 3267
+          },
+          {
+            "path": "BeanStudio-V5/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5/MuMu豆子计时器.exe",
+            "sha256": "01153b402466eea30e7fca805472f01a75bc841e2eab444fdcc3c0ffbbb403d0",
+            "bytes": 75264
+          },
+          {
+            "path": "BeanStudio-V5/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5/ReaLTaiizor.dll",
+            "sha256": "6c81fe2db65ef256429ac3ad1c037c04ae6d8e1c48e21794458b3d873981689b",
+            "bytes": 10933248
+          },
+          {
+            "path": "BeanStudio-V5/RestoreDependencies.ps1",
+            "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+            "bytes": 86
+          },
+          {
+            "path": "BeanStudio-V5/THIRD_PARTY.md",
+            "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+            "bytes": 692
+          },
+          {
+            "path": "BeanStudio-V5/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          }
+        ]
+      },
+      "license_scope": "本项目原始 EXE 随包保存；Windows 系统组件不再分发。 ReaLTaiizor 3.8.2.1 未修改 DLL 与完整 MIT 原文一同提供。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5.1",
+      "source_directory": "outputs/MuMu豆子计时器V5.1",
+      "source_files": 4,
+      "changes": "蓝色三颗读成两颗的取样/间距修正；增长确认 120 ms、减少确认 40 ms。",
+      "known_issues": "曾增加连续不可识别约 180 ms 清零计时，技能黑屏也会触发；V5.2 删除这一行为。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "cc64ed052b7e13075bb934ff35b36cd45dc3b92e3d9f333b3c86538afaeceb8c",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "4f08f05eccd27d981b7971f91cefa48ca916bfb787e91832d10de97eaf34b9fa"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "02a4c37692b899bfc8b1e98274354dce68e3c21d23347f23b9846b5bd2a32248"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "20a8d30fbf0c0dac5b698f5f1decb1ce37d254a24f52edfb3e821c7e79e478d2"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5.1-source.zip",
+        "sha256": "02d28318590b5d195601e5ee21f933fab67e973618fff6dfbafaba14cd25b0b1",
+        "bytes": 38774,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.1/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5.1/ARCHIVE.md",
+            "sha256": "58d2c15cdf237051a4ebb0d73924745aeaef9ba62901b69b4c59b65e44a70bbd",
+            "bytes": 1392
+          },
+          {
+            "path": "BeanStudio-V5.1/HISTORICAL-USAGE.md",
+            "sha256": "c26baeb2e848998f94403631518601b80b0171937e80eb8c71c5722bc07cd5d5",
+            "bytes": 3232
+          },
+          {
+            "path": "BeanStudio-V5.1/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.1/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.1/RestoreDependencies.ps1",
+            "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+            "bytes": 86
+          },
+          {
+            "path": "BeanStudio-V5.1/THIRD_PARTY.md",
+            "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+            "bytes": 692
+          },
+          {
+            "path": "BeanStudio-V5.1/build.ps1",
+            "sha256": "142112642b73cfb7a006cb2a8d08ba3a2364b466c11b6526a939bcf2c975e082",
+            "bytes": 596
+          },
+          {
+            "path": "BeanStudio-V5.1/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.1/src/AutoLocator.cs",
+            "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010",
+            "bytes": 7085
+          },
+          {
+            "path": "BeanStudio-V5.1/src/AutoTests.cs",
+            "sha256": "4f08f05eccd27d981b7971f91cefa48ca916bfb787e91832d10de97eaf34b9fa",
+            "bytes": 16345
+          },
+          {
+            "path": "BeanStudio-V5.1/src/BeanTimer.cs",
+            "sha256": "02a4c37692b899bfc8b1e98274354dce68e3c21d23347f23b9846b5bd2a32248",
+            "bytes": 40691
+          },
+          {
+            "path": "BeanStudio-V5.1/src/GlassUI.cs",
+            "sha256": "20a8d30fbf0c0dac5b698f5f1decb1ce37d254a24f52edfb3e821c7e79e478d2",
+            "bytes": 35497
+          }
+        ]
+      },
+      "binary_type": "historical-executable",
+      "binary_asset": {
+        "file": "BeanStudio-V5.1-historical-executable.zip",
+        "sha256": "d1f7fefb11e1f5917579ab8fde5cbe70212a7372b7f811b46d0fec0a6e192ff3",
+        "bytes": 5177546,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.1/ARCHIVE.md",
+            "sha256": "58d2c15cdf237051a4ebb0d73924745aeaef9ba62901b69b4c59b65e44a70bbd",
+            "bytes": 1392
+          },
+          {
+            "path": "BeanStudio-V5.1/HISTORICAL-USAGE.md",
+            "sha256": "c26baeb2e848998f94403631518601b80b0171937e80eb8c71c5722bc07cd5d5",
+            "bytes": 3232
+          },
+          {
+            "path": "BeanStudio-V5.1/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.1/MuMu豆子计时器.exe",
+            "sha256": "cc64ed052b7e13075bb934ff35b36cd45dc3b92e3d9f333b3c86538afaeceb8c",
+            "bytes": 82432
+          },
+          {
+            "path": "BeanStudio-V5.1/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.1/ReaLTaiizor.dll",
+            "sha256": "6c81fe2db65ef256429ac3ad1c037c04ae6d8e1c48e21794458b3d873981689b",
+            "bytes": 10933248
+          },
+          {
+            "path": "BeanStudio-V5.1/RestoreDependencies.ps1",
+            "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+            "bytes": 86
+          },
+          {
+            "path": "BeanStudio-V5.1/THIRD_PARTY.md",
+            "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+            "bytes": 692
+          },
+          {
+            "path": "BeanStudio-V5.1/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          }
+        ]
+      },
+      "license_scope": "本项目原始 EXE 随包保存；Windows 系统组件不再分发。 ReaLTaiizor 3.8.2.1 未修改 DLL 与完整 MIT 原文一同提供。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5.2",
+      "source_directory": "outputs/MuMu豆子计时器V5.2",
+      "source_files": 7,
+      "changes": "删除不可识别清零；加入 0–60 秒游戏时间与固定恢复点；缩小半透明悬浮窗。",
+      "known_issues": "游戏数字模板覆盖有限；只读触发附近时间，失败后可能长期显示时间未确认。整数显示无百分秒精度。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "5296e0f21feed9c0aa499293571609c5842e8b181c5f7b1c8cef2cd2d006752b",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "93b782fa2e190fa696495dd12c2fa79c8c96bee68ba9e5196aa894a03348f0dc"
+        },
+        {
+          "path": "src/ClockScreenTest.cs",
+          "sha256": "962e153853619840475bb6c9d8483da97dddedaea227b5b9514f2c1912aadb0e"
+        },
+        {
+          "path": "src/ClockTests.cs",
+          "sha256": "15e19f1d05ab5847a48e3d12e2823131432bac068a266b45683759b7d8a48e85"
+        },
+        {
+          "path": "src/GameClock.cs",
+          "sha256": "08f0124a97ab9fd8238b80a0a2e4e1dec68b9a72d1b5eede6e243744e5dec1ca"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "c82da6c7e230037c11bd1281c54e7feba7c0cf566f3b8e530abb2d0d550e99fb"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5.2-source.zip",
+        "sha256": "6e5a4b11d96657ef7b9b8c9f06b042d2a458cb34ec7b09c47ab88146b2777512",
+        "bytes": 57430,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.2/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5.2/ARCHIVE.md",
+            "sha256": "0d1738d16952150c7b58e344cc456fba188e71079984cfc681ff81b67a0c17b2",
+            "bytes": 1582
+          },
+          {
+            "path": "BeanStudio-V5.2/HISTORICAL-USAGE.md",
+            "sha256": "b470220ef6fe3afcefc5da45b37079a05bb22b738a5a58b563ada8e470e86d99",
+            "bytes": 3421
+          },
+          {
+            "path": "BeanStudio-V5.2/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.2/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.2/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.2/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.2/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.2/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.2/build.ps1",
+            "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+            "bytes": 648
+          },
+          {
+            "path": "BeanStudio-V5.2/clock-templates.txt",
+            "sha256": "26986226c20f4b656cbf5fced5297419f76208d45330abe7b52561c53c98ef4e",
+            "bytes": 6748
+          },
+          {
+            "path": "BeanStudio-V5.2/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.2/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.2/src/AutoLocator.cs",
+            "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010",
+            "bytes": 7085
+          },
+          {
+            "path": "BeanStudio-V5.2/src/AutoTests.cs",
+            "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+            "bytes": 16295
+          },
+          {
+            "path": "BeanStudio-V5.2/src/BeanTimer.cs",
+            "sha256": "93b782fa2e190fa696495dd12c2fa79c8c96bee68ba9e5196aa894a03348f0dc",
+            "bytes": 41446
+          },
+          {
+            "path": "BeanStudio-V5.2/src/ClockScreenTest.cs",
+            "sha256": "962e153853619840475bb6c9d8483da97dddedaea227b5b9514f2c1912aadb0e",
+            "bytes": 2583
+          },
+          {
+            "path": "BeanStudio-V5.2/src/ClockTests.cs",
+            "sha256": "15e19f1d05ab5847a48e3d12e2823131432bac068a266b45683759b7d8a48e85",
+            "bytes": 1531
+          },
+          {
+            "path": "BeanStudio-V5.2/src/GameClock.cs",
+            "sha256": "08f0124a97ab9fd8238b80a0a2e4e1dec68b9a72d1b5eede6e243744e5dec1ca",
+            "bytes": 10460
+          },
+          {
+            "path": "BeanStudio-V5.2/src/GlassUI.cs",
+            "sha256": "c82da6c7e230037c11bd1281c54e7feba7c0cf566f3b8e530abb2d0d550e99fb",
+            "bytes": 35949
+          },
+          {
+            "path": "BeanStudio-V5.2/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "binary_type": "executable-patch",
+      "binary_asset": {
+        "file": "BeanStudio-V5.2-executable-patch.zip",
+        "sha256": "d874a0027a3b3a0a63bef46f83586e432f7fe65b7cae413bc63f46248102b4ee",
+        "bytes": 64660,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.2/ARCHIVE.md",
+            "sha256": "0d1738d16952150c7b58e344cc456fba188e71079984cfc681ff81b67a0c17b2",
+            "bytes": 1582
+          },
+          {
+            "path": "BeanStudio-V5.2/HISTORICAL-USAGE.md",
+            "sha256": "b470220ef6fe3afcefc5da45b37079a05bb22b738a5a58b563ada8e470e86d99",
+            "bytes": 3421
+          },
+          {
+            "path": "BeanStudio-V5.2/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.2/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.2/MuMu豆子计时器.exe",
+            "sha256": "5296e0f21feed9c0aa499293571609c5842e8b181c5f7b1c8cef2cd2d006752b",
+            "bytes": 94720
+          },
+          {
+            "path": "BeanStudio-V5.2/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.2/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.2/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.2/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.2/clock-templates.txt",
+            "sha256": "26986226c20f4b656cbf5fced5297419f76208d45330abe7b52561c53c98ef4e",
+            "bytes": 6748
+          },
+          {
+            "path": "BeanStudio-V5.2/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.2/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.2/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "license_scope": "本包不含 OCR 托管/原生 DLL 或 eng.traineddata；自行运行 RestoreDependencies.ps1 恢复。原生 OCR 依赖的完整传递 NOTICE 未在历史目录中核实，故不再分发第三方 OCR 二进制。 ReaLTaiizor 也由官方恢复脚本下载，校验原版 DLL SHA256。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5.3",
+      "source_directory": "outputs/MuMu豆子计时器V5.3",
+      "source_files": 8,
+      "changes": "补充 6.43、49 数字模板；短暂补读；216×112 逐像素透明浮窗、描边文字。",
+      "known_issues": "时间补读受 0.25 秒等待窗口限制；未知数字或特效仍会未确认；暗豆定位仍依赖较强颜色线索。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "95aa2b923d95851e5a9a6dbf9afeed8d3855f5a83460ab917978531286084e23",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "d12913035fa5b32a0ab1325fb2d3474c1f0fc09ccc40e9c2e1fac2118620476f"
+        },
+        {
+          "path": "src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775"
+        },
+        {
+          "path": "src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e"
+        },
+        {
+          "path": "src/GameClock.cs",
+          "sha256": "9f7d7e1c75861b998e11b0e23b97521bdcf52cfdd4ceb32400da25aceb8861e0"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "c5864f4f38e50bde1bd7d728063d4cef9b2bafb9a215f6dd1c701a7f80995ff9"
+        },
+        {
+          "path": "src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5.3-source.zip",
+        "sha256": "4868d4a024003a4cba98b4c2153bce269c61103b699519dc4d6fa2590d9b0f0f",
+        "bytes": 60557,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.3/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5.3/ARCHIVE.md",
+            "sha256": "2170b8aa17c3c9c24d35939786d19de11e5ea9ca9eb66989391ba56147114f63",
+            "bytes": 1561
+          },
+          {
+            "path": "BeanStudio-V5.3/HISTORICAL-USAGE.md",
+            "sha256": "b593327437154a8fc23e20ba0b3fac011c1f67c7c6cd997f69e4b23aa0d89b40",
+            "bytes": 3470
+          },
+          {
+            "path": "BeanStudio-V5.3/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.3/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.3/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.3/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.3/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.3/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.3/build.ps1",
+            "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+            "bytes": 648
+          },
+          {
+            "path": "BeanStudio-V5.3/clock-templates.txt",
+            "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+            "bytes": 11568
+          },
+          {
+            "path": "BeanStudio-V5.3/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.3/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.3/src/AutoLocator.cs",
+            "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010",
+            "bytes": 7085
+          },
+          {
+            "path": "BeanStudio-V5.3/src/AutoTests.cs",
+            "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+            "bytes": 16295
+          },
+          {
+            "path": "BeanStudio-V5.3/src/BeanTimer.cs",
+            "sha256": "d12913035fa5b32a0ab1325fb2d3474c1f0fc09ccc40e9c2e1fac2118620476f",
+            "bytes": 42124
+          },
+          {
+            "path": "BeanStudio-V5.3/src/ClockScreenTest.cs",
+            "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+            "bytes": 3676
+          },
+          {
+            "path": "BeanStudio-V5.3/src/ClockTests.cs",
+            "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+            "bytes": 2391
+          },
+          {
+            "path": "BeanStudio-V5.3/src/GameClock.cs",
+            "sha256": "9f7d7e1c75861b998e11b0e23b97521bdcf52cfdd4ceb32400da25aceb8861e0",
+            "bytes": 10632
+          },
+          {
+            "path": "BeanStudio-V5.3/src/GlassUI.cs",
+            "sha256": "c5864f4f38e50bde1bd7d728063d4cef9b2bafb9a215f6dd1c701a7f80995ff9",
+            "bytes": 32878
+          },
+          {
+            "path": "BeanStudio-V5.3/src/Overlay.cs",
+            "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+            "bytes": 5232
+          },
+          {
+            "path": "BeanStudio-V5.3/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "binary_type": "executable-patch",
+      "binary_asset": {
+        "file": "BeanStudio-V5.3-executable-patch.zip",
+        "sha256": "f1ea0e3ed51e22d0d00092b709785ed42c501be3b8e2fd1c3fb09291c0dbdce3",
+        "bytes": 67206,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.3/ARCHIVE.md",
+            "sha256": "2170b8aa17c3c9c24d35939786d19de11e5ea9ca9eb66989391ba56147114f63",
+            "bytes": 1561
+          },
+          {
+            "path": "BeanStudio-V5.3/HISTORICAL-USAGE.md",
+            "sha256": "b593327437154a8fc23e20ba0b3fac011c1f67c7c6cd997f69e4b23aa0d89b40",
+            "bytes": 3470
+          },
+          {
+            "path": "BeanStudio-V5.3/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.3/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.3/MuMu豆子计时器.exe",
+            "sha256": "95aa2b923d95851e5a9a6dbf9afeed8d3855f5a83460ab917978531286084e23",
+            "bytes": 98816
+          },
+          {
+            "path": "BeanStudio-V5.3/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.3/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.3/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.3/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.3/clock-templates.txt",
+            "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+            "bytes": 11568
+          },
+          {
+            "path": "BeanStudio-V5.3/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.3/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.3/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "license_scope": "本包不含 OCR 托管/原生 DLL 或 eng.traineddata；自行运行 RestoreDependencies.ps1 恢复。原生 OCR 依赖的完整传递 NOTICE 未在历史目录中核实，故不再分发第三方 OCR 二进制。 ReaLTaiizor 也由官方恢复脚本下载，校验原版 DLL SHA256。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5.4",
+      "source_directory": "outputs/MuMu豆子计时器V5.4",
+      "source_files": 11,
+      "changes": "增加无有效红血条的菱形定位、暗槽形状验证、锁定位置和满豆假血条排除。",
+      "known_issues": "本版文档明确实际屏幕检查 NOT_RUN；中间时间 OCR 问题未全部解决。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "d744af44dd4f0e9242f03f175a0f43978ecddb59551f6483de843ebcf7a9a2b7",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "d770b5ee28b1178c208a84d224c3fd1a88bd3825406f0294462c5c0c3d3f0e0a"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "6f2306692db275c50c1b94a8591acb284bfe1fd0916482f858b1e083d34dd832"
+        },
+        {
+          "path": "src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775"
+        },
+        {
+          "path": "src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e"
+        },
+        {
+          "path": "src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0"
+        },
+        {
+          "path": "src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce"
+        },
+        {
+          "path": "src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64"
+        },
+        {
+          "path": "src/GameClock.cs",
+          "sha256": "9f7d7e1c75861b998e11b0e23b97521bdcf52cfdd4ceb32400da25aceb8861e0"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "47959f490cc08d9b4d0263b7fa277477c8b652d002d3ddfeec71607acbe25cf4"
+        },
+        {
+          "path": "src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5.4-source.zip",
+        "sha256": "66ddac048df42c9b81d3579f1478cea50913b093881937323eaab175efc8a9d8",
+        "bytes": 66033,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.4/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5.4/ARCHIVE.md",
+            "sha256": "d1dc57cacdaa38c7f2db456315ed449fcab85dd25fe02531fc7666f5e87c9998",
+            "bytes": 1530
+          },
+          {
+            "path": "BeanStudio-V5.4/HISTORICAL-USAGE.md",
+            "sha256": "35cc2669899dc8cf418da18711a76f1685a5d9a36bd801c9f83e5fa4bfe9f91c",
+            "bytes": 2855
+          },
+          {
+            "path": "BeanStudio-V5.4/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.4/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.4/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.4/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.4/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.4/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.4/build.ps1",
+            "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+            "bytes": 648
+          },
+          {
+            "path": "BeanStudio-V5.4/clock-templates.txt",
+            "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+            "bytes": 11568
+          },
+          {
+            "path": "BeanStudio-V5.4/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.4/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.4/src/AutoLocator.cs",
+            "sha256": "d770b5ee28b1178c208a84d224c3fd1a88bd3825406f0294462c5c0c3d3f0e0a",
+            "bytes": 7749
+          },
+          {
+            "path": "BeanStudio-V5.4/src/AutoTests.cs",
+            "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+            "bytes": 16295
+          },
+          {
+            "path": "BeanStudio-V5.4/src/BeanTimer.cs",
+            "sha256": "6f2306692db275c50c1b94a8591acb284bfe1fd0916482f858b1e083d34dd832",
+            "bytes": 42641
+          },
+          {
+            "path": "BeanStudio-V5.4/src/ClockScreenTest.cs",
+            "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+            "bytes": 3676
+          },
+          {
+            "path": "BeanStudio-V5.4/src/ClockTests.cs",
+            "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+            "bytes": 2391
+          },
+          {
+            "path": "BeanStudio-V5.4/src/DarkGemShape.cs",
+            "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+            "bytes": 1356
+          },
+          {
+            "path": "BeanStudio-V5.4/src/DarkScreenTests.cs",
+            "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+            "bytes": 3900
+          },
+          {
+            "path": "BeanStudio-V5.4/src/DarkTests.cs",
+            "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+            "bytes": 6266
+          },
+          {
+            "path": "BeanStudio-V5.4/src/GameClock.cs",
+            "sha256": "9f7d7e1c75861b998e11b0e23b97521bdcf52cfdd4ceb32400da25aceb8861e0",
+            "bytes": 10632
+          },
+          {
+            "path": "BeanStudio-V5.4/src/GlassUI.cs",
+            "sha256": "47959f490cc08d9b4d0263b7fa277477c8b652d002d3ddfeec71607acbe25cf4",
+            "bytes": 32881
+          },
+          {
+            "path": "BeanStudio-V5.4/src/Overlay.cs",
+            "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+            "bytes": 5232
+          },
+          {
+            "path": "BeanStudio-V5.4/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "binary_type": "executable-patch",
+      "binary_asset": {
+        "file": "BeanStudio-V5.4-executable-patch.zip",
+        "sha256": "0309784e3091a2522b1e410de324b4e5d86f177bf66eb8355d0d8f9c4b2f50ea",
+        "bytes": 71148,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.4/ARCHIVE.md",
+            "sha256": "d1dc57cacdaa38c7f2db456315ed449fcab85dd25fe02531fc7666f5e87c9998",
+            "bytes": 1530
+          },
+          {
+            "path": "BeanStudio-V5.4/HISTORICAL-USAGE.md",
+            "sha256": "35cc2669899dc8cf418da18711a76f1685a5d9a36bd801c9f83e5fa4bfe9f91c",
+            "bytes": 2855
+          },
+          {
+            "path": "BeanStudio-V5.4/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.4/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.4/MuMu豆子计时器.exe",
+            "sha256": "d744af44dd4f0e9242f03f175a0f43978ecddb59551f6483de843ebcf7a9a2b7",
+            "bytes": 108544
+          },
+          {
+            "path": "BeanStudio-V5.4/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.4/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.4/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.4/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.4/clock-templates.txt",
+            "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+            "bytes": 11568
+          },
+          {
+            "path": "BeanStudio-V5.4/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.4/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.4/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "license_scope": "本包不含 OCR 托管/原生 DLL 或 eng.traineddata；自行运行 RestoreDependencies.ps1 恢复。原生 OCR 依赖的完整传递 NOTICE 未在历史目录中核实，故不再分发第三方 OCR 二进制。 ReaLTaiizor 也由官方恢复脚本下载，校验原版 DLL SHA256。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5.5",
+      "source_directory": "outputs/MuMu豆子计时器V5.5",
+      "source_files": 15,
+      "changes": "手动游戏时间区域校准；独立 ClockWorker；连续读数检查和失败局部图诊断。",
+      "known_issues": "仍用屏幕可见区域采集，外部窗口遮挡会进入待确认；既有模板测试不是独立多局准确率。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "c9fcfb93d98c964add36216f20fd338fe18e88606bc49c7e9536c2091f633b9d",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "d770b5ee28b1178c208a84d224c3fd1a88bd3825406f0294462c5c0c3d3f0e0a"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "f3955c1dc71bf7b6daf75ded955a518a865761a016465f90c273467368816c02"
+        },
+        {
+          "path": "src/Clock55Live.cs",
+          "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8"
+        },
+        {
+          "path": "src/Clock55Tests.cs",
+          "sha256": "919eceb15fd60d83b8a209c766e904c09cfed2d01c9f2b1f59e77f10b1026eaa"
+        },
+        {
+          "path": "src/ClockPanel.cs",
+          "sha256": "8d0fb7705e35bb7912ff5ab1ee9f29ba407517ea4a9a42ff8579eb5f5d703385"
+        },
+        {
+          "path": "src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775"
+        },
+        {
+          "path": "src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e"
+        },
+        {
+          "path": "src/ClockWorker.cs",
+          "sha256": "0895889c3e905b8006468a78dc8ea07d3823591de82c2738ff1c5adf665c5493"
+        },
+        {
+          "path": "src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0"
+        },
+        {
+          "path": "src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce"
+        },
+        {
+          "path": "src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64"
+        },
+        {
+          "path": "src/GameClock.cs",
+          "sha256": "bbcd068b20fe4c1633ac7917192f9cbb021821effc8493c083eae47dde69aae8"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "2b1b7539d329eec3379a4d83ce71e3cecd3b2655e380f0f97acb09327997f40c"
+        },
+        {
+          "path": "src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5.5-source.zip",
+        "sha256": "536c43d84d988fa6a5aaaff1c3c0ffadb56cbdef6c62933e5648735bb3882373",
+        "bytes": 75401,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.5/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5.5/ARCHIVE.md",
+            "sha256": "a3ab2fd7b1bfb257f2ec937c0e6bf6f96264e36a9b56b1abefd31f574b0e8e86",
+            "bytes": 1559
+          },
+          {
+            "path": "BeanStudio-V5.5/HISTORICAL-USAGE.md",
+            "sha256": "7dae910b1e7e3bacd71612661cd11abcae22e466dde78224a4f19428e9378e5e",
+            "bytes": 4102
+          },
+          {
+            "path": "BeanStudio-V5.5/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.5/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.5/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.5/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.5/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.5/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.5/build.ps1",
+            "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+            "bytes": 648
+          },
+          {
+            "path": "BeanStudio-V5.5/clock-templates.txt",
+            "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+            "bytes": 11568
+          },
+          {
+            "path": "BeanStudio-V5.5/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.5/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.5/src/AutoLocator.cs",
+            "sha256": "d770b5ee28b1178c208a84d224c3fd1a88bd3825406f0294462c5c0c3d3f0e0a",
+            "bytes": 7749
+          },
+          {
+            "path": "BeanStudio-V5.5/src/AutoTests.cs",
+            "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+            "bytes": 16295
+          },
+          {
+            "path": "BeanStudio-V5.5/src/BeanTimer.cs",
+            "sha256": "f3955c1dc71bf7b6daf75ded955a518a865761a016465f90c273467368816c02",
+            "bytes": 42956
+          },
+          {
+            "path": "BeanStudio-V5.5/src/Clock55Live.cs",
+            "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8",
+            "bytes": 2914
+          },
+          {
+            "path": "BeanStudio-V5.5/src/Clock55Tests.cs",
+            "sha256": "919eceb15fd60d83b8a209c766e904c09cfed2d01c9f2b1f59e77f10b1026eaa",
+            "bytes": 3305
+          },
+          {
+            "path": "BeanStudio-V5.5/src/ClockPanel.cs",
+            "sha256": "8d0fb7705e35bb7912ff5ab1ee9f29ba407517ea4a9a42ff8579eb5f5d703385",
+            "bytes": 4999
+          },
+          {
+            "path": "BeanStudio-V5.5/src/ClockScreenTest.cs",
+            "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+            "bytes": 3676
+          },
+          {
+            "path": "BeanStudio-V5.5/src/ClockTests.cs",
+            "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+            "bytes": 2391
+          },
+          {
+            "path": "BeanStudio-V5.5/src/ClockWorker.cs",
+            "sha256": "0895889c3e905b8006468a78dc8ea07d3823591de82c2738ff1c5adf665c5493",
+            "bytes": 7584
+          },
+          {
+            "path": "BeanStudio-V5.5/src/DarkGemShape.cs",
+            "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+            "bytes": 1356
+          },
+          {
+            "path": "BeanStudio-V5.5/src/DarkScreenTests.cs",
+            "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+            "bytes": 3900
+          },
+          {
+            "path": "BeanStudio-V5.5/src/DarkTests.cs",
+            "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+            "bytes": 6266
+          },
+          {
+            "path": "BeanStudio-V5.5/src/GameClock.cs",
+            "sha256": "bbcd068b20fe4c1633ac7917192f9cbb021821effc8493c083eae47dde69aae8",
+            "bytes": 8628
+          },
+          {
+            "path": "BeanStudio-V5.5/src/GlassUI.cs",
+            "sha256": "2b1b7539d329eec3379a4d83ce71e3cecd3b2655e380f0f97acb09327997f40c",
+            "bytes": 33383
+          },
+          {
+            "path": "BeanStudio-V5.5/src/Overlay.cs",
+            "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+            "bytes": 5232
+          },
+          {
+            "path": "BeanStudio-V5.5/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "binary_type": "executable-patch",
+      "binary_asset": {
+        "file": "BeanStudio-V5.5-executable-patch.zip",
+        "sha256": "d5d9c430b1edecb65064d7272047dd03d8f109473eb3073853ae9577cd92ce46",
+        "bytes": 78833,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.5/ARCHIVE.md",
+            "sha256": "a3ab2fd7b1bfb257f2ec937c0e6bf6f96264e36a9b56b1abefd31f574b0e8e86",
+            "bytes": 1559
+          },
+          {
+            "path": "BeanStudio-V5.5/HISTORICAL-USAGE.md",
+            "sha256": "7dae910b1e7e3bacd71612661cd11abcae22e466dde78224a4f19428e9378e5e",
+            "bytes": 4102
+          },
+          {
+            "path": "BeanStudio-V5.5/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.5/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.5/MuMu豆子计时器.exe",
+            "sha256": "c9fcfb93d98c964add36216f20fd338fe18e88606bc49c7e9536c2091f633b9d",
+            "bytes": 124928
+          },
+          {
+            "path": "BeanStudio-V5.5/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.5/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.5/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.5/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.5/clock-templates.txt",
+            "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+            "bytes": 11568
+          },
+          {
+            "path": "BeanStudio-V5.5/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.5/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.5/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "license_scope": "本包不含 OCR 托管/原生 DLL 或 eng.traineddata；自行运行 RestoreDependencies.ps1 恢复。原生 OCR 依赖的完整传递 NOTICE 未在历史目录中核实，故不再分发第三方 OCR 二进制。 ReaLTaiizor 也由官方恢复脚本下载，校验原版 DLL SHA256。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5.6",
+      "source_directory": "outputs/MuMu豆子计时器V5.6",
+      "source_files": 18,
+      "changes": "紫色空槽/满豆流光修正；WGC 优先捕获；中途读到时间补算一次恢复点。",
+      "known_issues": "旧 WGC 取帧/缓冲通知和暂停逻辑尚未包含 V5.7.1 修复；系统不支持时兼容截图受遮挡影响。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。 64 位 Windows 10 1903 或更新；需要系统 WinRT 元数据。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "25394fba142098afc33973c15cfc383d25c0cbbd96f194deec21e507d2b9d6c0",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "224484ecd97c94bb07a814bef5990379754e44f1738cf445a6497ac9fa2355ca"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "69cb460c8b130e5fa598f83e5f567c4bcb831e067dc93706456168b0a91cba60"
+        },
+        {
+          "path": "src/Clock55Live.cs",
+          "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8"
+        },
+        {
+          "path": "src/Clock55Tests.cs",
+          "sha256": "919eceb15fd60d83b8a209c766e904c09cfed2d01c9f2b1f59e77f10b1026eaa"
+        },
+        {
+          "path": "src/ClockPanel.cs",
+          "sha256": "64f735e996e50916401d28fa6279cd3ee03d43bf52e3fdf5c58fa8b7f9467f6e"
+        },
+        {
+          "path": "src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775"
+        },
+        {
+          "path": "src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e"
+        },
+        {
+          "path": "src/ClockWorker.cs",
+          "sha256": "2640dfc0f439265a8c5abb15c8290aa63a583a5d46b471607f4b6b7aea8e6e30"
+        },
+        {
+          "path": "src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0"
+        },
+        {
+          "path": "src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce"
+        },
+        {
+          "path": "src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64"
+        },
+        {
+          "path": "src/GameClock.cs",
+          "sha256": "0e30e77f8ebb7e26eb217588ece9fb6a0086625af2094068a21866befffcc8ad"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "5fcc038a19aaa781c4e0a9d70379bcd621ff622b6005d6fd7ab743ae02067804"
+        },
+        {
+          "path": "src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8"
+        },
+        {
+          "path": "src/Version56Tests.cs",
+          "sha256": "f118ac9250bd2f37822bd6bcdcd43ed1099a9c97640ff6dd5a124a39f5cea2ca"
+        },
+        {
+          "path": "src/WindowCapture.cs",
+          "sha256": "f4ff70d03fb4f343e7a77ba05549bea58f342c920a39c089e19e0d24b819c61e"
+        },
+        {
+          "path": "src/WindowFrames.cs",
+          "sha256": "761a7b848940b0609b26822be1f581fa40138d7595df6147105f80e02d136a97"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5.6-source.zip",
+        "sha256": "5f5890e243bbf8391b7de5afc7393686d6adc119de5338ea2b3bb45e5a5a3974",
+        "bytes": 83602,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.6/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5.6/ARCHIVE.md",
+            "sha256": "edcb1a64601ccd2f9334adb5873e5900b11c674559ed357ee538f3daf5cffd60",
+            "bytes": 1621
+          },
+          {
+            "path": "BeanStudio-V5.6/HISTORICAL-USAGE.md",
+            "sha256": "981d12f13b29eee61c744fd88bca9b1765fcc2eeceed739f759a0e3c216faaa6",
+            "bytes": 4040
+          },
+          {
+            "path": "BeanStudio-V5.6/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.6/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.6/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.6/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.6/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.6/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.6/build.ps1",
+            "sha256": "ada9858c56126d86f753d81ce140bb26b4e1280f1eee3befaac2b0902c4d01f2",
+            "bytes": 1094
+          },
+          {
+            "path": "BeanStudio-V5.6/clock-templates.txt",
+            "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+            "bytes": 20244
+          },
+          {
+            "path": "BeanStudio-V5.6/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.6/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.6/src/AutoLocator.cs",
+            "sha256": "224484ecd97c94bb07a814bef5990379754e44f1738cf445a6497ac9fa2355ca",
+            "bytes": 8627
+          },
+          {
+            "path": "BeanStudio-V5.6/src/AutoTests.cs",
+            "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+            "bytes": 16295
+          },
+          {
+            "path": "BeanStudio-V5.6/src/BeanTimer.cs",
+            "sha256": "69cb460c8b130e5fa598f83e5f567c4bcb831e067dc93706456168b0a91cba60",
+            "bytes": 45182
+          },
+          {
+            "path": "BeanStudio-V5.6/src/Clock55Live.cs",
+            "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8",
+            "bytes": 2914
+          },
+          {
+            "path": "BeanStudio-V5.6/src/Clock55Tests.cs",
+            "sha256": "919eceb15fd60d83b8a209c766e904c09cfed2d01c9f2b1f59e77f10b1026eaa",
+            "bytes": 3305
+          },
+          {
+            "path": "BeanStudio-V5.6/src/ClockPanel.cs",
+            "sha256": "64f735e996e50916401d28fa6279cd3ee03d43bf52e3fdf5c58fa8b7f9467f6e",
+            "bytes": 5024
+          },
+          {
+            "path": "BeanStudio-V5.6/src/ClockScreenTest.cs",
+            "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+            "bytes": 3676
+          },
+          {
+            "path": "BeanStudio-V5.6/src/ClockTests.cs",
+            "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+            "bytes": 2391
+          },
+          {
+            "path": "BeanStudio-V5.6/src/ClockWorker.cs",
+            "sha256": "2640dfc0f439265a8c5abb15c8290aa63a583a5d46b471607f4b6b7aea8e6e30",
+            "bytes": 8132
+          },
+          {
+            "path": "BeanStudio-V5.6/src/DarkGemShape.cs",
+            "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+            "bytes": 1356
+          },
+          {
+            "path": "BeanStudio-V5.6/src/DarkScreenTests.cs",
+            "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+            "bytes": 3900
+          },
+          {
+            "path": "BeanStudio-V5.6/src/DarkTests.cs",
+            "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+            "bytes": 6266
+          },
+          {
+            "path": "BeanStudio-V5.6/src/GameClock.cs",
+            "sha256": "0e30e77f8ebb7e26eb217588ece9fb6a0086625af2094068a21866befffcc8ad",
+            "bytes": 9482
+          },
+          {
+            "path": "BeanStudio-V5.6/src/GlassUI.cs",
+            "sha256": "5fcc038a19aaa781c4e0a9d70379bcd621ff622b6005d6fd7ab743ae02067804",
+            "bytes": 33544
+          },
+          {
+            "path": "BeanStudio-V5.6/src/Overlay.cs",
+            "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+            "bytes": 5232
+          },
+          {
+            "path": "BeanStudio-V5.6/src/Version56Tests.cs",
+            "sha256": "f118ac9250bd2f37822bd6bcdcd43ed1099a9c97640ff6dd5a124a39f5cea2ca",
+            "bytes": 4662
+          },
+          {
+            "path": "BeanStudio-V5.6/src/WindowCapture.cs",
+            "sha256": "f4ff70d03fb4f343e7a77ba05549bea58f342c920a39c089e19e0d24b819c61e",
+            "bytes": 1734
+          },
+          {
+            "path": "BeanStudio-V5.6/src/WindowFrames.cs",
+            "sha256": "761a7b848940b0609b26822be1f581fa40138d7595df6147105f80e02d136a97",
+            "bytes": 6540
+          },
+          {
+            "path": "BeanStudio-V5.6/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "binary_type": "executable-patch",
+      "binary_asset": {
+        "file": "BeanStudio-V5.6-executable-patch.zip",
+        "sha256": "378e1a5dd467f4b967bfda5134076afc59d0930cde5fc8f0320534ed26dd0b78",
+        "bytes": 86693,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.6/ARCHIVE.md",
+            "sha256": "edcb1a64601ccd2f9334adb5873e5900b11c674559ed357ee538f3daf5cffd60",
+            "bytes": 1621
+          },
+          {
+            "path": "BeanStudio-V5.6/HISTORICAL-USAGE.md",
+            "sha256": "981d12f13b29eee61c744fd88bca9b1765fcc2eeceed739f759a0e3c216faaa6",
+            "bytes": 4040
+          },
+          {
+            "path": "BeanStudio-V5.6/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.6/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.6/MuMu豆子计时器.exe",
+            "sha256": "25394fba142098afc33973c15cfc383d25c0cbbd96f194deec21e507d2b9d6c0",
+            "bytes": 139776
+          },
+          {
+            "path": "BeanStudio-V5.6/ReaLTaiizor-LICENSE.txt",
+            "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+            "bytes": 1083
+          },
+          {
+            "path": "BeanStudio-V5.6/RestoreDependencies.ps1",
+            "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+            "bytes": 147
+          },
+          {
+            "path": "BeanStudio-V5.6/THIRD_PARTY.md",
+            "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+            "bytes": 1592
+          },
+          {
+            "path": "BeanStudio-V5.6/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.6/clock-templates.txt",
+            "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+            "bytes": 20244
+          },
+          {
+            "path": "BeanStudio-V5.6/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.6/scripts/fetch-ui.ps1",
+            "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+            "bytes": 1855
+          },
+          {
+            "path": "BeanStudio-V5.6/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "license_scope": "本包不含 OCR 托管/原生 DLL 或 eng.traineddata；自行运行 RestoreDependencies.ps1 恢复。原生 OCR 依赖的完整传递 NOTICE 未在历史目录中核实，故不再分发第三方 OCR 二进制。 ReaLTaiizor 也由官方恢复脚本下载，校验原版 DLL SHA256。",
+      "retested_for_archive": false
+    },
+    {
+      "version": "V5.7",
+      "source_directory": "outputs/MuMu豆子计时器V5.7",
+      "source_files": 20,
+      "changes": "自绘雾白深青 UI；完整整数/小数字形布局；弱光和碎片合并容差；连续确认。",
+      "known_issues": "暂停按钮只停触发，后台窗口捕获和游戏时间识别仍运行；V5.7.1 修复。WGC 新帧通知存在竞争问题，V5.7.1 修复。",
+      "build": "Windows .NET Framework 4.8；先运行 .\\RestoreDependencies.ps1，从固定官方来源恢复依赖，再运行 .\\build.ps1。 64 位 Windows 10 1903 或更新；需要系统 WinRT 元数据。",
+      "evidence": [
+        "HISTORICAL-USAGE.md",
+        "build.ps1",
+        "src/",
+        "THIRD_PARTY.md"
+      ],
+      "original_exe_sha256": "9b4d553000a8a41c7765845312ab0e8f7b430ca50360ffa26a3e1f8298420bfc",
+      "original_sources": [
+        {
+          "path": "src/AutoLocator.cs",
+          "sha256": "224484ecd97c94bb07a814bef5990379754e44f1738cf445a6497ac9fa2355ca"
+        },
+        {
+          "path": "src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266"
+        },
+        {
+          "path": "src/BeanTimer.cs",
+          "sha256": "3c7702831c26c3bf26bd4fb0dbd8b18133ee08ba71ce8ab10c54fec8d22f2333"
+        },
+        {
+          "path": "src/Clock55Live.cs",
+          "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8"
+        },
+        {
+          "path": "src/Clock55Tests.cs",
+          "sha256": "e7d7b71a67f4fdeb86073f483c9f0f3464e96cb79fbb4cbeb26c3c4ed022d96a"
+        },
+        {
+          "path": "src/Clock57Live.cs",
+          "sha256": "7a62a525484917bcd303984cd4f5b86cc89906573871d67c8ac8fe34e8bc0b17"
+        },
+        {
+          "path": "src/Clock57Tests.cs",
+          "sha256": "306e2a9be0dfe69d947915d90e0f5961101b6e1866ec4334b447db89d9345a42"
+        },
+        {
+          "path": "src/ClockPanel.cs",
+          "sha256": "815a1cf2337e1277c22d2dd6916b3c5dbd07c87e892197caf0e93847c12f9dc4"
+        },
+        {
+          "path": "src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775"
+        },
+        {
+          "path": "src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e"
+        },
+        {
+          "path": "src/ClockWorker.cs",
+          "sha256": "cca0f64cf491b386188ea6dfda5ab0dce7ad5af0525fe1c12be2b305c1cd8948"
+        },
+        {
+          "path": "src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0"
+        },
+        {
+          "path": "src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce"
+        },
+        {
+          "path": "src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64"
+        },
+        {
+          "path": "src/GameClock.cs",
+          "sha256": "75ac9166f3076654a616501d523c2f8f13a2fa6f62e0b2c462df0745081066d3"
+        },
+        {
+          "path": "src/GlassUI.cs",
+          "sha256": "68c29403d0e114ec60ab94dd6f12c65506c761759fa74c449ed860cf8cecd16b"
+        },
+        {
+          "path": "src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8"
+        },
+        {
+          "path": "src/Version56Tests.cs",
+          "sha256": "f118ac9250bd2f37822bd6bcdcd43ed1099a9c97640ff6dd5a124a39f5cea2ca"
+        },
+        {
+          "path": "src/WindowCapture.cs",
+          "sha256": "f4ff70d03fb4f343e7a77ba05549bea58f342c920a39c089e19e0d24b819c61e"
+        },
+        {
+          "path": "src/WindowFrames.cs",
+          "sha256": "761a7b848940b0609b26822be1f581fa40138d7595df6147105f80e02d136a97"
+        }
+      ],
+      "source_asset": {
+        "file": "BeanStudio-V5.7-source.zip",
+        "sha256": "1a6fdaaec0a2701bd2c4213b2d1169937bee1eefce739100988fc30735fdd381",
+        "bytes": 91752,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.7/.gitignore",
+            "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+            "bytes": 124
+          },
+          {
+            "path": "BeanStudio-V5.7/ARCHIVE.md",
+            "sha256": "311725b45ed976db0c648525537ec47ee7e51d5f0b74c4cb1f581ac857ed997d",
+            "bytes": 1585
+          },
+          {
+            "path": "BeanStudio-V5.7/HISTORICAL-USAGE.md",
+            "sha256": "8e1ea8802c2c518a7d83af9d09ce58b9a1f2d0a180e2dd1a315d097a8aa1114a",
+            "bytes": 5107
+          },
+          {
+            "path": "BeanStudio-V5.7/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.7/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.7/RestoreDependencies.ps1",
+            "sha256": "7cecc6fae064922932fc1ec8e6446121d900cdff22e98c900cb50fef2a2ddd1d",
+            "bytes": 96
+          },
+          {
+            "path": "BeanStudio-V5.7/THIRD_PARTY.md",
+            "sha256": "87e6aa6bf0d3f1d820c2ca6b7bf20f9baa7ccec184edfb76180a9e8f1e68ab7c",
+            "bytes": 1106
+          },
+          {
+            "path": "BeanStudio-V5.7/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.7/build.ps1",
+            "sha256": "53381875db43d83ca2a6b96cae8f9472b4867ccf8d8b0c01e955ee335805aac0",
+            "bytes": 1059
+          },
+          {
+            "path": "BeanStudio-V5.7/clock-templates.txt",
+            "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+            "bytes": 20244
+          },
+          {
+            "path": "BeanStudio-V5.7/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.7/src/AutoLocator.cs",
+            "sha256": "224484ecd97c94bb07a814bef5990379754e44f1738cf445a6497ac9fa2355ca",
+            "bytes": 8627
+          },
+          {
+            "path": "BeanStudio-V5.7/src/AutoTests.cs",
+            "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+            "bytes": 16295
+          },
+          {
+            "path": "BeanStudio-V5.7/src/BeanTimer.cs",
+            "sha256": "3c7702831c26c3bf26bd4fb0dbd8b18133ee08ba71ce8ab10c54fec8d22f2333",
+            "bytes": 46094
+          },
+          {
+            "path": "BeanStudio-V5.7/src/Clock55Live.cs",
+            "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8",
+            "bytes": 2914
+          },
+          {
+            "path": "BeanStudio-V5.7/src/Clock55Tests.cs",
+            "sha256": "e7d7b71a67f4fdeb86073f483c9f0f3464e96cb79fbb4cbeb26c3c4ed022d96a",
+            "bytes": 3378
+          },
+          {
+            "path": "BeanStudio-V5.7/src/Clock57Live.cs",
+            "sha256": "7a62a525484917bcd303984cd4f5b86cc89906573871d67c8ac8fe34e8bc0b17",
+            "bytes": 6917
+          },
+          {
+            "path": "BeanStudio-V5.7/src/Clock57Tests.cs",
+            "sha256": "306e2a9be0dfe69d947915d90e0f5961101b6e1866ec4334b447db89d9345a42",
+            "bytes": 2821
+          },
+          {
+            "path": "BeanStudio-V5.7/src/ClockPanel.cs",
+            "sha256": "815a1cf2337e1277c22d2dd6916b3c5dbd07c87e892197caf0e93847c12f9dc4",
+            "bytes": 5711
+          },
+          {
+            "path": "BeanStudio-V5.7/src/ClockScreenTest.cs",
+            "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+            "bytes": 3676
+          },
+          {
+            "path": "BeanStudio-V5.7/src/ClockTests.cs",
+            "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+            "bytes": 2391
+          },
+          {
+            "path": "BeanStudio-V5.7/src/ClockWorker.cs",
+            "sha256": "cca0f64cf491b386188ea6dfda5ab0dce7ad5af0525fe1c12be2b305c1cd8948",
+            "bytes": 8421
+          },
+          {
+            "path": "BeanStudio-V5.7/src/DarkGemShape.cs",
+            "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+            "bytes": 1356
+          },
+          {
+            "path": "BeanStudio-V5.7/src/DarkScreenTests.cs",
+            "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+            "bytes": 3900
+          },
+          {
+            "path": "BeanStudio-V5.7/src/DarkTests.cs",
+            "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+            "bytes": 6266
+          },
+          {
+            "path": "BeanStudio-V5.7/src/GameClock.cs",
+            "sha256": "75ac9166f3076654a616501d523c2f8f13a2fa6f62e0b2c462df0745081066d3",
+            "bytes": 15687
+          },
+          {
+            "path": "BeanStudio-V5.7/src/GlassUI.cs",
+            "sha256": "68c29403d0e114ec60ab94dd6f12c65506c761759fa74c449ed860cf8cecd16b",
+            "bytes": 45781
+          },
+          {
+            "path": "BeanStudio-V5.7/src/Overlay.cs",
+            "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+            "bytes": 5232
+          },
+          {
+            "path": "BeanStudio-V5.7/src/Version56Tests.cs",
+            "sha256": "f118ac9250bd2f37822bd6bcdcd43ed1099a9c97640ff6dd5a124a39f5cea2ca",
+            "bytes": 4662
+          },
+          {
+            "path": "BeanStudio-V5.7/src/WindowCapture.cs",
+            "sha256": "f4ff70d03fb4f343e7a77ba05549bea58f342c920a39c089e19e0d24b819c61e",
+            "bytes": 1734
+          },
+          {
+            "path": "BeanStudio-V5.7/src/WindowFrames.cs",
+            "sha256": "761a7b848940b0609b26822be1f581fa40138d7595df6147105f80e02d136a97",
+            "bytes": 6540
+          },
+          {
+            "path": "BeanStudio-V5.7/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "binary_type": "executable-patch",
+      "binary_asset": {
+        "file": "BeanStudio-V5.7-executable-patch.zip",
+        "sha256": "cc76e292c1d172611deba51407e438dd4a1abb71c77ea9c1866a0d03af1d1c47",
+        "bytes": 94780,
+        "entries": [
+          {
+            "path": "BeanStudio-V5.7/ARCHIVE.md",
+            "sha256": "311725b45ed976db0c648525537ec47ee7e51d5f0b74c4cb1f581ac857ed997d",
+            "bytes": 1585
+          },
+          {
+            "path": "BeanStudio-V5.7/HISTORICAL-USAGE.md",
+            "sha256": "8e1ea8802c2c518a7d83af9d09ce58b9a1f2d0a180e2dd1a315d097a8aa1114a",
+            "bytes": 5107
+          },
+          {
+            "path": "BeanStudio-V5.7/LICENSE",
+            "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+            "bytes": 1069
+          },
+          {
+            "path": "BeanStudio-V5.7/Leptonica-LICENSE.txt",
+            "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+            "bytes": 1521
+          },
+          {
+            "path": "BeanStudio-V5.7/MuMu豆子计时器.exe",
+            "sha256": "9b4d553000a8a41c7765845312ab0e8f7b430ca50360ffa26a3e1f8298420bfc",
+            "bytes": 163328
+          },
+          {
+            "path": "BeanStudio-V5.7/RestoreDependencies.ps1",
+            "sha256": "7cecc6fae064922932fc1ec8e6446121d900cdff22e98c900cb50fef2a2ddd1d",
+            "bytes": 96
+          },
+          {
+            "path": "BeanStudio-V5.7/THIRD_PARTY.md",
+            "sha256": "87e6aa6bf0d3f1d820c2ca6b7bf20f9baa7ccec184edfb76180a9e8f1e68ab7c",
+            "bytes": 1106
+          },
+          {
+            "path": "BeanStudio-V5.7/Tesseract-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          },
+          {
+            "path": "BeanStudio-V5.7/clock-templates.txt",
+            "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+            "bytes": 20244
+          },
+          {
+            "path": "BeanStudio-V5.7/scripts/fetch-dependencies.ps1",
+            "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+            "bytes": 3353
+          },
+          {
+            "path": "BeanStudio-V5.7/tessdata-LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "bytes": 11358
+          }
+        ]
+      },
+      "license_scope": "本包不含 OCR 托管/原生 DLL 或 eng.traineddata；自行运行 RestoreDependencies.ps1 恢复。原生 OCR 依赖的完整传递 NOTICE 未在历史目录中核实，故不再分发第三方 OCR 二进制。",
+      "retested_for_archive": false
+    }
+  ],
+  "aliases": [
+    {
+      "version": "V4-玻璃界面",
+      "source_directory": "outputs/MuMu豆子计时器V4-玻璃界面/MuMu豆子计时器V4",
+      "identical_to": "V4",
+      "evidence": "All four C# sources, build.ps1 and original EXE match byte for byte. No duplicated asset was created."
+    }
+  ],
+  "bundles": [
+    {
+      "file": "BeanStudio-history-source.zip",
+      "sha256": "8b1f02e1e4c7ef0dede21daf8492182a03bf19c7a9976698925ec3355d8f4e92",
+      "bytes": 621706,
+      "entries": [
+        {
+          "path": "BeanStudio-V1/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V1/ARCHIVE.md",
+          "sha256": "33b3b961263ba883ef06fd51bc7ebcbac076d806fd37325a896334883f29fe09",
+          "bytes": 1244
+        },
+        {
+          "path": "BeanStudio-V1/HISTORICAL-USAGE.md",
+          "sha256": "16fbcf13fc7c5c3b6b2a82c5709bd4a38b6abe1b7901ad0f330eedfc2c1d1251",
+          "bytes": 3488
+        },
+        {
+          "path": "BeanStudio-V1/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V1/build.ps1",
+          "sha256": "9e12da4d542eaed18f66457d2d3fc51faf785a2fffcd43e40d6b7d55e5cd44a9",
+          "bytes": 464
+        },
+        {
+          "path": "BeanStudio-V1/src/BeanTimer.cs",
+          "sha256": "c4a56a597946556a65787495ab97f7a6bb34a99178db33f2e553a8367deae27a",
+          "bytes": 34561
+        },
+        {
+          "path": "BeanStudio-V2/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V2/ARCHIVE.md",
+          "sha256": "a19d56c4d61eaca4e6fca33c02f479f3de48db531782ec83c6d9780dc86eca63",
+          "bytes": 1265
+        },
+        {
+          "path": "BeanStudio-V2/HISTORICAL-USAGE.md",
+          "sha256": "3e476055c1cf43a398fde5a5db51bbde482ac8fac6b7eb495c04f25f597b311c",
+          "bytes": 5448
+        },
+        {
+          "path": "BeanStudio-V2/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V2/build.ps1",
+          "sha256": "9e12da4d542eaed18f66457d2d3fc51faf785a2fffcd43e40d6b7d55e5cd44a9",
+          "bytes": 464
+        },
+        {
+          "path": "BeanStudio-V2/src/BeanTimer.cs",
+          "sha256": "ae88377d38cc3eab703e086effcf2500e880192d4c5082d5561afefdb4487759",
+          "bytes": 58336
+        },
+        {
+          "path": "BeanStudio-V3-AI/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V3-AI/ARCHIVE.md",
+          "sha256": "b2279101a34156534d6647c044f311b7980c052c323cfd2c37a83ad5d811f55b",
+          "bytes": 1334
+        },
+        {
+          "path": "BeanStudio-V3-AI/HISTORICAL-USAGE.md",
+          "sha256": "e49c47ed83c4f56150f9f62c7d8fedf5532d01e2f14fb839235afb15a485483d",
+          "bytes": 6756
+        },
+        {
+          "path": "BeanStudio-V3-AI/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V3-AI/build.ps1",
+          "sha256": "f1e5b031b7e64927459c6d566c08e990d0748a15b10b6ec01aa02d7f39974b89",
+          "bytes": 530
+        },
+        {
+          "path": "BeanStudio-V3-AI/src/AiTests.cs",
+          "sha256": "964841824bfd662d6e248bac19e88bc08acfe604a16bee44f2584dd5c18284c7",
+          "bytes": 8513
+        },
+        {
+          "path": "BeanStudio-V3-AI/src/AiTraining.cs",
+          "sha256": "469a489f3557430c630e1bb5d347b5c0e9f10ddd1a8b126d9292acfd035c2dee",
+          "bytes": 21874
+        },
+        {
+          "path": "BeanStudio-V3-AI/src/BeanTimer.cs",
+          "sha256": "ade8333f273b0ae004faaac28e6845961c865ec005bb9954734c7b05d991e943",
+          "bytes": 60199
+        },
+        {
+          "path": "BeanStudio-V3-AI/training/train.py",
+          "sha256": "e951e8770e4799f7a7647236ed44f38bbd15d3113d5baeeb9c40741e587033c5",
+          "bytes": 8107
+        },
+        {
+          "path": "BeanStudio-V3-AI/training/实现说明.md",
+          "sha256": "5e190e1103191ad5c48555c45237186a5fcfc61914f9c174b94472b3612c9977",
+          "bytes": 1584
+        },
+        {
+          "path": "BeanStudio-V4/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V4/ARCHIVE.md",
+          "sha256": "a934181de9de2ce980ad8844d7fd7901f6cdff3f4fd5e43890e42dd5bb873538",
+          "bytes": 1265
+        },
+        {
+          "path": "BeanStudio-V4/HISTORICAL-USAGE.md",
+          "sha256": "110fdca9a294b4eba2b0730027f8f823324ece117f3802650a5a7f3082a19f94",
+          "bytes": 4344
+        },
+        {
+          "path": "BeanStudio-V4/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V4/build.ps1",
+          "sha256": "626538fb7b623ab0a09d85e18dc1f3e2b2648f32a99bb1392b11f6c3cd07e60d",
+          "bytes": 538
+        },
+        {
+          "path": "BeanStudio-V4/src/AutoLocator.cs",
+          "sha256": "c6303135ba3da7a15910b2edc7b76d8bc495b090d3f782c657c294887eac6c0e",
+          "bytes": 6572
+        },
+        {
+          "path": "BeanStudio-V4/src/AutoTests.cs",
+          "sha256": "bd3fc5590dae2e0e3032527965dfe1c703a453d80eacae4886c4a6e5a57b15f6",
+          "bytes": 9235
+        },
+        {
+          "path": "BeanStudio-V4/src/BeanTimer.cs",
+          "sha256": "78f7186739b0040a695880086b2fd64cd10129471df8d5d5fcb85fbe04341a58",
+          "bytes": 38426
+        },
+        {
+          "path": "BeanStudio-V4/src/GlassUI.cs",
+          "sha256": "a0136611b0dac0891acc8bcc907d85b7f3b612679dd26e053aa38a0292c838db",
+          "bytes": 30627
+        },
+        {
+          "path": "BeanStudio-V5.1/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5.1/ARCHIVE.md",
+          "sha256": "58d2c15cdf237051a4ebb0d73924745aeaef9ba62901b69b4c59b65e44a70bbd",
+          "bytes": 1392
+        },
+        {
+          "path": "BeanStudio-V5.1/HISTORICAL-USAGE.md",
+          "sha256": "c26baeb2e848998f94403631518601b80b0171937e80eb8c71c5722bc07cd5d5",
+          "bytes": 3232
+        },
+        {
+          "path": "BeanStudio-V5.1/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.1/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.1/RestoreDependencies.ps1",
+          "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+          "bytes": 86
+        },
+        {
+          "path": "BeanStudio-V5.1/THIRD_PARTY.md",
+          "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+          "bytes": 692
+        },
+        {
+          "path": "BeanStudio-V5.1/build.ps1",
+          "sha256": "142112642b73cfb7a006cb2a8d08ba3a2364b466c11b6526a939bcf2c975e082",
+          "bytes": 596
+        },
+        {
+          "path": "BeanStudio-V5.1/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.1/src/AutoLocator.cs",
+          "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010",
+          "bytes": 7085
+        },
+        {
+          "path": "BeanStudio-V5.1/src/AutoTests.cs",
+          "sha256": "4f08f05eccd27d981b7971f91cefa48ca916bfb787e91832d10de97eaf34b9fa",
+          "bytes": 16345
+        },
+        {
+          "path": "BeanStudio-V5.1/src/BeanTimer.cs",
+          "sha256": "02a4c37692b899bfc8b1e98274354dce68e3c21d23347f23b9846b5bd2a32248",
+          "bytes": 40691
+        },
+        {
+          "path": "BeanStudio-V5.1/src/GlassUI.cs",
+          "sha256": "20a8d30fbf0c0dac5b698f5f1decb1ce37d254a24f52edfb3e821c7e79e478d2",
+          "bytes": 35497
+        },
+        {
+          "path": "BeanStudio-V5.2/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5.2/ARCHIVE.md",
+          "sha256": "0d1738d16952150c7b58e344cc456fba188e71079984cfc681ff81b67a0c17b2",
+          "bytes": 1582
+        },
+        {
+          "path": "BeanStudio-V5.2/HISTORICAL-USAGE.md",
+          "sha256": "b470220ef6fe3afcefc5da45b37079a05bb22b738a5a58b563ada8e470e86d99",
+          "bytes": 3421
+        },
+        {
+          "path": "BeanStudio-V5.2/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.2/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.2/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.2/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.2/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.2/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.2/build.ps1",
+          "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+          "bytes": 648
+        },
+        {
+          "path": "BeanStudio-V5.2/clock-templates.txt",
+          "sha256": "26986226c20f4b656cbf5fced5297419f76208d45330abe7b52561c53c98ef4e",
+          "bytes": 6748
+        },
+        {
+          "path": "BeanStudio-V5.2/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.2/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.2/src/AutoLocator.cs",
+          "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010",
+          "bytes": 7085
+        },
+        {
+          "path": "BeanStudio-V5.2/src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+          "bytes": 16295
+        },
+        {
+          "path": "BeanStudio-V5.2/src/BeanTimer.cs",
+          "sha256": "93b782fa2e190fa696495dd12c2fa79c8c96bee68ba9e5196aa894a03348f0dc",
+          "bytes": 41446
+        },
+        {
+          "path": "BeanStudio-V5.2/src/ClockScreenTest.cs",
+          "sha256": "962e153853619840475bb6c9d8483da97dddedaea227b5b9514f2c1912aadb0e",
+          "bytes": 2583
+        },
+        {
+          "path": "BeanStudio-V5.2/src/ClockTests.cs",
+          "sha256": "15e19f1d05ab5847a48e3d12e2823131432bac068a266b45683759b7d8a48e85",
+          "bytes": 1531
+        },
+        {
+          "path": "BeanStudio-V5.2/src/GameClock.cs",
+          "sha256": "08f0124a97ab9fd8238b80a0a2e4e1dec68b9a72d1b5eede6e243744e5dec1ca",
+          "bytes": 10460
+        },
+        {
+          "path": "BeanStudio-V5.2/src/GlassUI.cs",
+          "sha256": "c82da6c7e230037c11bd1281c54e7feba7c0cf566f3b8e530abb2d0d550e99fb",
+          "bytes": 35949
+        },
+        {
+          "path": "BeanStudio-V5.2/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.3/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5.3/ARCHIVE.md",
+          "sha256": "2170b8aa17c3c9c24d35939786d19de11e5ea9ca9eb66989391ba56147114f63",
+          "bytes": 1561
+        },
+        {
+          "path": "BeanStudio-V5.3/HISTORICAL-USAGE.md",
+          "sha256": "b593327437154a8fc23e20ba0b3fac011c1f67c7c6cd997f69e4b23aa0d89b40",
+          "bytes": 3470
+        },
+        {
+          "path": "BeanStudio-V5.3/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.3/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.3/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.3/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.3/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.3/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.3/build.ps1",
+          "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+          "bytes": 648
+        },
+        {
+          "path": "BeanStudio-V5.3/clock-templates.txt",
+          "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+          "bytes": 11568
+        },
+        {
+          "path": "BeanStudio-V5.3/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.3/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.3/src/AutoLocator.cs",
+          "sha256": "294514fb89948263b8f8f543a0200c36d6f4b139e536dd1e179042627ba88010",
+          "bytes": 7085
+        },
+        {
+          "path": "BeanStudio-V5.3/src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+          "bytes": 16295
+        },
+        {
+          "path": "BeanStudio-V5.3/src/BeanTimer.cs",
+          "sha256": "d12913035fa5b32a0ab1325fb2d3474c1f0fc09ccc40e9c2e1fac2118620476f",
+          "bytes": 42124
+        },
+        {
+          "path": "BeanStudio-V5.3/src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+          "bytes": 3676
+        },
+        {
+          "path": "BeanStudio-V5.3/src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+          "bytes": 2391
+        },
+        {
+          "path": "BeanStudio-V5.3/src/GameClock.cs",
+          "sha256": "9f7d7e1c75861b998e11b0e23b97521bdcf52cfdd4ceb32400da25aceb8861e0",
+          "bytes": 10632
+        },
+        {
+          "path": "BeanStudio-V5.3/src/GlassUI.cs",
+          "sha256": "c5864f4f38e50bde1bd7d728063d4cef9b2bafb9a215f6dd1c701a7f80995ff9",
+          "bytes": 32878
+        },
+        {
+          "path": "BeanStudio-V5.3/src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+          "bytes": 5232
+        },
+        {
+          "path": "BeanStudio-V5.3/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.4/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5.4/ARCHIVE.md",
+          "sha256": "d1dc57cacdaa38c7f2db456315ed449fcab85dd25fe02531fc7666f5e87c9998",
+          "bytes": 1530
+        },
+        {
+          "path": "BeanStudio-V5.4/HISTORICAL-USAGE.md",
+          "sha256": "35cc2669899dc8cf418da18711a76f1685a5d9a36bd801c9f83e5fa4bfe9f91c",
+          "bytes": 2855
+        },
+        {
+          "path": "BeanStudio-V5.4/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.4/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.4/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.4/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.4/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.4/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.4/build.ps1",
+          "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+          "bytes": 648
+        },
+        {
+          "path": "BeanStudio-V5.4/clock-templates.txt",
+          "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+          "bytes": 11568
+        },
+        {
+          "path": "BeanStudio-V5.4/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.4/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.4/src/AutoLocator.cs",
+          "sha256": "d770b5ee28b1178c208a84d224c3fd1a88bd3825406f0294462c5c0c3d3f0e0a",
+          "bytes": 7749
+        },
+        {
+          "path": "BeanStudio-V5.4/src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+          "bytes": 16295
+        },
+        {
+          "path": "BeanStudio-V5.4/src/BeanTimer.cs",
+          "sha256": "6f2306692db275c50c1b94a8591acb284bfe1fd0916482f858b1e083d34dd832",
+          "bytes": 42641
+        },
+        {
+          "path": "BeanStudio-V5.4/src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+          "bytes": 3676
+        },
+        {
+          "path": "BeanStudio-V5.4/src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+          "bytes": 2391
+        },
+        {
+          "path": "BeanStudio-V5.4/src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+          "bytes": 1356
+        },
+        {
+          "path": "BeanStudio-V5.4/src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+          "bytes": 3900
+        },
+        {
+          "path": "BeanStudio-V5.4/src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+          "bytes": 6266
+        },
+        {
+          "path": "BeanStudio-V5.4/src/GameClock.cs",
+          "sha256": "9f7d7e1c75861b998e11b0e23b97521bdcf52cfdd4ceb32400da25aceb8861e0",
+          "bytes": 10632
+        },
+        {
+          "path": "BeanStudio-V5.4/src/GlassUI.cs",
+          "sha256": "47959f490cc08d9b4d0263b7fa277477c8b652d002d3ddfeec71607acbe25cf4",
+          "bytes": 32881
+        },
+        {
+          "path": "BeanStudio-V5.4/src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+          "bytes": 5232
+        },
+        {
+          "path": "BeanStudio-V5.4/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.5/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5.5/ARCHIVE.md",
+          "sha256": "a3ab2fd7b1bfb257f2ec937c0e6bf6f96264e36a9b56b1abefd31f574b0e8e86",
+          "bytes": 1559
+        },
+        {
+          "path": "BeanStudio-V5.5/HISTORICAL-USAGE.md",
+          "sha256": "7dae910b1e7e3bacd71612661cd11abcae22e466dde78224a4f19428e9378e5e",
+          "bytes": 4102
+        },
+        {
+          "path": "BeanStudio-V5.5/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.5/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.5/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.5/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.5/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.5/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.5/build.ps1",
+          "sha256": "c536417a802a1ba2a1596d6f4707201d378eea1468af67077bddedd79d93f9ee",
+          "bytes": 648
+        },
+        {
+          "path": "BeanStudio-V5.5/clock-templates.txt",
+          "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+          "bytes": 11568
+        },
+        {
+          "path": "BeanStudio-V5.5/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.5/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.5/src/AutoLocator.cs",
+          "sha256": "d770b5ee28b1178c208a84d224c3fd1a88bd3825406f0294462c5c0c3d3f0e0a",
+          "bytes": 7749
+        },
+        {
+          "path": "BeanStudio-V5.5/src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+          "bytes": 16295
+        },
+        {
+          "path": "BeanStudio-V5.5/src/BeanTimer.cs",
+          "sha256": "f3955c1dc71bf7b6daf75ded955a518a865761a016465f90c273467368816c02",
+          "bytes": 42956
+        },
+        {
+          "path": "BeanStudio-V5.5/src/Clock55Live.cs",
+          "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8",
+          "bytes": 2914
+        },
+        {
+          "path": "BeanStudio-V5.5/src/Clock55Tests.cs",
+          "sha256": "919eceb15fd60d83b8a209c766e904c09cfed2d01c9f2b1f59e77f10b1026eaa",
+          "bytes": 3305
+        },
+        {
+          "path": "BeanStudio-V5.5/src/ClockPanel.cs",
+          "sha256": "8d0fb7705e35bb7912ff5ab1ee9f29ba407517ea4a9a42ff8579eb5f5d703385",
+          "bytes": 4999
+        },
+        {
+          "path": "BeanStudio-V5.5/src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+          "bytes": 3676
+        },
+        {
+          "path": "BeanStudio-V5.5/src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+          "bytes": 2391
+        },
+        {
+          "path": "BeanStudio-V5.5/src/ClockWorker.cs",
+          "sha256": "0895889c3e905b8006468a78dc8ea07d3823591de82c2738ff1c5adf665c5493",
+          "bytes": 7584
+        },
+        {
+          "path": "BeanStudio-V5.5/src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+          "bytes": 1356
+        },
+        {
+          "path": "BeanStudio-V5.5/src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+          "bytes": 3900
+        },
+        {
+          "path": "BeanStudio-V5.5/src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+          "bytes": 6266
+        },
+        {
+          "path": "BeanStudio-V5.5/src/GameClock.cs",
+          "sha256": "bbcd068b20fe4c1633ac7917192f9cbb021821effc8493c083eae47dde69aae8",
+          "bytes": 8628
+        },
+        {
+          "path": "BeanStudio-V5.5/src/GlassUI.cs",
+          "sha256": "2b1b7539d329eec3379a4d83ce71e3cecd3b2655e380f0f97acb09327997f40c",
+          "bytes": 33383
+        },
+        {
+          "path": "BeanStudio-V5.5/src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+          "bytes": 5232
+        },
+        {
+          "path": "BeanStudio-V5.5/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.6/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5.6/ARCHIVE.md",
+          "sha256": "edcb1a64601ccd2f9334adb5873e5900b11c674559ed357ee538f3daf5cffd60",
+          "bytes": 1621
+        },
+        {
+          "path": "BeanStudio-V5.6/HISTORICAL-USAGE.md",
+          "sha256": "981d12f13b29eee61c744fd88bca9b1765fcc2eeceed739f759a0e3c216faaa6",
+          "bytes": 4040
+        },
+        {
+          "path": "BeanStudio-V5.6/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.6/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.6/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.6/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.6/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.6/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.6/build.ps1",
+          "sha256": "ada9858c56126d86f753d81ce140bb26b4e1280f1eee3befaac2b0902c4d01f2",
+          "bytes": 1094
+        },
+        {
+          "path": "BeanStudio-V5.6/clock-templates.txt",
+          "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+          "bytes": 20244
+        },
+        {
+          "path": "BeanStudio-V5.6/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.6/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.6/src/AutoLocator.cs",
+          "sha256": "224484ecd97c94bb07a814bef5990379754e44f1738cf445a6497ac9fa2355ca",
+          "bytes": 8627
+        },
+        {
+          "path": "BeanStudio-V5.6/src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+          "bytes": 16295
+        },
+        {
+          "path": "BeanStudio-V5.6/src/BeanTimer.cs",
+          "sha256": "69cb460c8b130e5fa598f83e5f567c4bcb831e067dc93706456168b0a91cba60",
+          "bytes": 45182
+        },
+        {
+          "path": "BeanStudio-V5.6/src/Clock55Live.cs",
+          "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8",
+          "bytes": 2914
+        },
+        {
+          "path": "BeanStudio-V5.6/src/Clock55Tests.cs",
+          "sha256": "919eceb15fd60d83b8a209c766e904c09cfed2d01c9f2b1f59e77f10b1026eaa",
+          "bytes": 3305
+        },
+        {
+          "path": "BeanStudio-V5.6/src/ClockPanel.cs",
+          "sha256": "64f735e996e50916401d28fa6279cd3ee03d43bf52e3fdf5c58fa8b7f9467f6e",
+          "bytes": 5024
+        },
+        {
+          "path": "BeanStudio-V5.6/src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+          "bytes": 3676
+        },
+        {
+          "path": "BeanStudio-V5.6/src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+          "bytes": 2391
+        },
+        {
+          "path": "BeanStudio-V5.6/src/ClockWorker.cs",
+          "sha256": "2640dfc0f439265a8c5abb15c8290aa63a583a5d46b471607f4b6b7aea8e6e30",
+          "bytes": 8132
+        },
+        {
+          "path": "BeanStudio-V5.6/src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+          "bytes": 1356
+        },
+        {
+          "path": "BeanStudio-V5.6/src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+          "bytes": 3900
+        },
+        {
+          "path": "BeanStudio-V5.6/src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+          "bytes": 6266
+        },
+        {
+          "path": "BeanStudio-V5.6/src/GameClock.cs",
+          "sha256": "0e30e77f8ebb7e26eb217588ece9fb6a0086625af2094068a21866befffcc8ad",
+          "bytes": 9482
+        },
+        {
+          "path": "BeanStudio-V5.6/src/GlassUI.cs",
+          "sha256": "5fcc038a19aaa781c4e0a9d70379bcd621ff622b6005d6fd7ab743ae02067804",
+          "bytes": 33544
+        },
+        {
+          "path": "BeanStudio-V5.6/src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+          "bytes": 5232
+        },
+        {
+          "path": "BeanStudio-V5.6/src/Version56Tests.cs",
+          "sha256": "f118ac9250bd2f37822bd6bcdcd43ed1099a9c97640ff6dd5a124a39f5cea2ca",
+          "bytes": 4662
+        },
+        {
+          "path": "BeanStudio-V5.6/src/WindowCapture.cs",
+          "sha256": "f4ff70d03fb4f343e7a77ba05549bea58f342c920a39c089e19e0d24b819c61e",
+          "bytes": 1734
+        },
+        {
+          "path": "BeanStudio-V5.6/src/WindowFrames.cs",
+          "sha256": "761a7b848940b0609b26822be1f581fa40138d7595df6147105f80e02d136a97",
+          "bytes": 6540
+        },
+        {
+          "path": "BeanStudio-V5.6/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.7/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5.7/ARCHIVE.md",
+          "sha256": "311725b45ed976db0c648525537ec47ee7e51d5f0b74c4cb1f581ac857ed997d",
+          "bytes": 1585
+        },
+        {
+          "path": "BeanStudio-V5.7/HISTORICAL-USAGE.md",
+          "sha256": "8e1ea8802c2c518a7d83af9d09ce58b9a1f2d0a180e2dd1a315d097a8aa1114a",
+          "bytes": 5107
+        },
+        {
+          "path": "BeanStudio-V5.7/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.7/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.7/RestoreDependencies.ps1",
+          "sha256": "7cecc6fae064922932fc1ec8e6446121d900cdff22e98c900cb50fef2a2ddd1d",
+          "bytes": 96
+        },
+        {
+          "path": "BeanStudio-V5.7/THIRD_PARTY.md",
+          "sha256": "87e6aa6bf0d3f1d820c2ca6b7bf20f9baa7ccec184edfb76180a9e8f1e68ab7c",
+          "bytes": 1106
+        },
+        {
+          "path": "BeanStudio-V5.7/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.7/build.ps1",
+          "sha256": "53381875db43d83ca2a6b96cae8f9472b4867ccf8d8b0c01e955ee335805aac0",
+          "bytes": 1059
+        },
+        {
+          "path": "BeanStudio-V5.7/clock-templates.txt",
+          "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+          "bytes": 20244
+        },
+        {
+          "path": "BeanStudio-V5.7/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.7/src/AutoLocator.cs",
+          "sha256": "224484ecd97c94bb07a814bef5990379754e44f1738cf445a6497ac9fa2355ca",
+          "bytes": 8627
+        },
+        {
+          "path": "BeanStudio-V5.7/src/AutoTests.cs",
+          "sha256": "6459984814648ff2c14ad1f35b40a9f8de7a309ee338516bc668fb6b454a3266",
+          "bytes": 16295
+        },
+        {
+          "path": "BeanStudio-V5.7/src/BeanTimer.cs",
+          "sha256": "3c7702831c26c3bf26bd4fb0dbd8b18133ee08ba71ce8ab10c54fec8d22f2333",
+          "bytes": 46094
+        },
+        {
+          "path": "BeanStudio-V5.7/src/Clock55Live.cs",
+          "sha256": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8",
+          "bytes": 2914
+        },
+        {
+          "path": "BeanStudio-V5.7/src/Clock55Tests.cs",
+          "sha256": "e7d7b71a67f4fdeb86073f483c9f0f3464e96cb79fbb4cbeb26c3c4ed022d96a",
+          "bytes": 3378
+        },
+        {
+          "path": "BeanStudio-V5.7/src/Clock57Live.cs",
+          "sha256": "7a62a525484917bcd303984cd4f5b86cc89906573871d67c8ac8fe34e8bc0b17",
+          "bytes": 6917
+        },
+        {
+          "path": "BeanStudio-V5.7/src/Clock57Tests.cs",
+          "sha256": "306e2a9be0dfe69d947915d90e0f5961101b6e1866ec4334b447db89d9345a42",
+          "bytes": 2821
+        },
+        {
+          "path": "BeanStudio-V5.7/src/ClockPanel.cs",
+          "sha256": "815a1cf2337e1277c22d2dd6916b3c5dbd07c87e892197caf0e93847c12f9dc4",
+          "bytes": 5711
+        },
+        {
+          "path": "BeanStudio-V5.7/src/ClockScreenTest.cs",
+          "sha256": "9c3cce8eb45d22e39818711334c0fc07a611847682324ca3fd38e86173718775",
+          "bytes": 3676
+        },
+        {
+          "path": "BeanStudio-V5.7/src/ClockTests.cs",
+          "sha256": "3a7915e19fb522a7060a9e42c9d956664f729b9bd9f362a3b2ecb171ba042d7e",
+          "bytes": 2391
+        },
+        {
+          "path": "BeanStudio-V5.7/src/ClockWorker.cs",
+          "sha256": "cca0f64cf491b386188ea6dfda5ab0dce7ad5af0525fe1c12be2b305c1cd8948",
+          "bytes": 8421
+        },
+        {
+          "path": "BeanStudio-V5.7/src/DarkGemShape.cs",
+          "sha256": "df40c1574ea694dad3bfa6b377cbd688fd03759881e124d2c80017f057387ee0",
+          "bytes": 1356
+        },
+        {
+          "path": "BeanStudio-V5.7/src/DarkScreenTests.cs",
+          "sha256": "64745db42228a73e107acfc830470b67ed6525b553eb6259e04b60cd8d76efce",
+          "bytes": 3900
+        },
+        {
+          "path": "BeanStudio-V5.7/src/DarkTests.cs",
+          "sha256": "0be7ae0d008a73c1bc5c2851de3aa4b4451312a0820ffca832530be95926ce64",
+          "bytes": 6266
+        },
+        {
+          "path": "BeanStudio-V5.7/src/GameClock.cs",
+          "sha256": "75ac9166f3076654a616501d523c2f8f13a2fa6f62e0b2c462df0745081066d3",
+          "bytes": 15687
+        },
+        {
+          "path": "BeanStudio-V5.7/src/GlassUI.cs",
+          "sha256": "68c29403d0e114ec60ab94dd6f12c65506c761759fa74c449ed860cf8cecd16b",
+          "bytes": 45781
+        },
+        {
+          "path": "BeanStudio-V5.7/src/Overlay.cs",
+          "sha256": "2899595eaf90aff5d3412c0bfa6e7e78479dbb1ab44f14fc161ab6100495f1a8",
+          "bytes": 5232
+        },
+        {
+          "path": "BeanStudio-V5.7/src/Version56Tests.cs",
+          "sha256": "f118ac9250bd2f37822bd6bcdcd43ed1099a9c97640ff6dd5a124a39f5cea2ca",
+          "bytes": 4662
+        },
+        {
+          "path": "BeanStudio-V5.7/src/WindowCapture.cs",
+          "sha256": "f4ff70d03fb4f343e7a77ba05549bea58f342c920a39c089e19e0d24b819c61e",
+          "bytes": 1734
+        },
+        {
+          "path": "BeanStudio-V5.7/src/WindowFrames.cs",
+          "sha256": "761a7b848940b0609b26822be1f581fa40138d7595df6147105f80e02d136a97",
+          "bytes": 6540
+        },
+        {
+          "path": "BeanStudio-V5.7/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5/.gitignore",
+          "sha256": "3ac953e0680eabaff5ec237eaba33318dbef55c36dff5ad264331a985f309f21",
+          "bytes": 124
+        },
+        {
+          "path": "BeanStudio-V5/ARCHIVE.md",
+          "sha256": "740de424e51aca08cb220aef34fd6ab7749ffe2e915bbb84fed427c597abc355",
+          "bytes": 1409
+        },
+        {
+          "path": "BeanStudio-V5/HISTORICAL-USAGE.md",
+          "sha256": "bb1efbf46f9e7927ebb404caa9e7579716a3b316355f578ca7a08bacfa0bdc39",
+          "bytes": 3267
+        },
+        {
+          "path": "BeanStudio-V5/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5/RestoreDependencies.ps1",
+          "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+          "bytes": 86
+        },
+        {
+          "path": "BeanStudio-V5/THIRD_PARTY.md",
+          "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+          "bytes": 692
+        },
+        {
+          "path": "BeanStudio-V5/build.ps1",
+          "sha256": "142112642b73cfb7a006cb2a8d08ba3a2364b466c11b6526a939bcf2c975e082",
+          "bytes": 596
+        },
+        {
+          "path": "BeanStudio-V5/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5/src/AutoLocator.cs",
+          "sha256": "c6303135ba3da7a15910b2edc7b76d8bc495b090d3f782c657c294887eac6c0e",
+          "bytes": 6572
+        },
+        {
+          "path": "BeanStudio-V5/src/AutoTests.cs",
+          "sha256": "bd3fc5590dae2e0e3032527965dfe1c703a453d80eacae4886c4a6e5a57b15f6",
+          "bytes": 9235
+        },
+        {
+          "path": "BeanStudio-V5/src/BeanTimer.cs",
+          "sha256": "95a7655d8867f5c87edc841d4c5b4485201bed38df600c894b3eb13fca08b186",
+          "bytes": 39423
+        },
+        {
+          "path": "BeanStudio-V5/src/GlassUI.cs",
+          "sha256": "3fd26c922c49e9e6c43c2c2ec48683bc451746020e33a86fd788105c58571896",
+          "bytes": 35387
+        }
+      ]
+    },
+    {
+      "file": "BeanStudio-history-executables.zip",
+      "sha256": "f821b707d6f4b2f4f43e39bce8873713f83409efbc058792cda7c5f717fc6c84",
+      "bytes": 10955433,
+      "entries": [
+        {
+          "path": "BeanStudio-V1/ARCHIVE.md",
+          "sha256": "33b3b961263ba883ef06fd51bc7ebcbac076d806fd37325a896334883f29fe09",
+          "bytes": 1244
+        },
+        {
+          "path": "BeanStudio-V1/HISTORICAL-USAGE.md",
+          "sha256": "16fbcf13fc7c5c3b6b2a82c5709bd4a38b6abe1b7901ad0f330eedfc2c1d1251",
+          "bytes": 3488
+        },
+        {
+          "path": "BeanStudio-V1/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V1/MuMu豆子计时器.exe",
+          "sha256": "149096aa52e509caa29565be04a48095c3fa6b6d86faa27cf7d3a46e958388b9",
+          "bytes": 31744
+        },
+        {
+          "path": "BeanStudio-V2/ARCHIVE.md",
+          "sha256": "a19d56c4d61eaca4e6fca33c02f479f3de48db531782ec83c6d9780dc86eca63",
+          "bytes": 1265
+        },
+        {
+          "path": "BeanStudio-V2/HISTORICAL-USAGE.md",
+          "sha256": "3e476055c1cf43a398fde5a5db51bbde482ac8fac6b7eb495c04f25f597b311c",
+          "bytes": 5448
+        },
+        {
+          "path": "BeanStudio-V2/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V2/MuMu豆子计时器.exe",
+          "sha256": "cc50ed837b042e516e10e3bd005e0c693c3e8f773e62357c3db36417d7917e27",
+          "bytes": 51200
+        },
+        {
+          "path": "BeanStudio-V3-AI/ARCHIVE.md",
+          "sha256": "b2279101a34156534d6647c044f311b7980c052c323cfd2c37a83ad5d811f55b",
+          "bytes": 1334
+        },
+        {
+          "path": "BeanStudio-V3-AI/HISTORICAL-USAGE.md",
+          "sha256": "e49c47ed83c4f56150f9f62c7d8fedf5532d01e2f14fb839235afb15a485483d",
+          "bytes": 6756
+        },
+        {
+          "path": "BeanStudio-V3-AI/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V3-AI/MuMu豆子计时器.exe",
+          "sha256": "9d44a7cec734fb2dcb51f7b1382a907efeb2c98bc35fbf0440e83cd4d295cf03",
+          "bytes": 76800
+        },
+        {
+          "path": "BeanStudio-V3-AI/training/train.py",
+          "sha256": "e951e8770e4799f7a7647236ed44f38bbd15d3113d5baeeb9c40741e587033c5",
+          "bytes": 8107
+        },
+        {
+          "path": "BeanStudio-V3-AI/training/实现说明.md",
+          "sha256": "5e190e1103191ad5c48555c45237186a5fcfc61914f9c174b94472b3612c9977",
+          "bytes": 1584
+        },
+        {
+          "path": "BeanStudio-V4/ARCHIVE.md",
+          "sha256": "a934181de9de2ce980ad8844d7fd7901f6cdff3f4fd5e43890e42dd5bb873538",
+          "bytes": 1265
+        },
+        {
+          "path": "BeanStudio-V4/HISTORICAL-USAGE.md",
+          "sha256": "110fdca9a294b4eba2b0730027f8f823324ece117f3802650a5a7f3082a19f94",
+          "bytes": 4344
+        },
+        {
+          "path": "BeanStudio-V4/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V4/MuMu豆子计时器.exe",
+          "sha256": "98f260dcc610593ff476e358d1dca32b1f88e3fa67c098a67fa7bcbf2db70333",
+          "bytes": 70144
+        },
+        {
+          "path": "BeanStudio-V5.1/ARCHIVE.md",
+          "sha256": "58d2c15cdf237051a4ebb0d73924745aeaef9ba62901b69b4c59b65e44a70bbd",
+          "bytes": 1392
+        },
+        {
+          "path": "BeanStudio-V5.1/HISTORICAL-USAGE.md",
+          "sha256": "c26baeb2e848998f94403631518601b80b0171937e80eb8c71c5722bc07cd5d5",
+          "bytes": 3232
+        },
+        {
+          "path": "BeanStudio-V5.1/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.1/MuMu豆子计时器.exe",
+          "sha256": "cc64ed052b7e13075bb934ff35b36cd45dc3b92e3d9f333b3c86538afaeceb8c",
+          "bytes": 82432
+        },
+        {
+          "path": "BeanStudio-V5.1/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.1/ReaLTaiizor.dll",
+          "sha256": "6c81fe2db65ef256429ac3ad1c037c04ae6d8e1c48e21794458b3d873981689b",
+          "bytes": 10933248
+        },
+        {
+          "path": "BeanStudio-V5.1/RestoreDependencies.ps1",
+          "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+          "bytes": 86
+        },
+        {
+          "path": "BeanStudio-V5.1/THIRD_PARTY.md",
+          "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+          "bytes": 692
+        },
+        {
+          "path": "BeanStudio-V5.1/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.2/ARCHIVE.md",
+          "sha256": "0d1738d16952150c7b58e344cc456fba188e71079984cfc681ff81b67a0c17b2",
+          "bytes": 1582
+        },
+        {
+          "path": "BeanStudio-V5.2/HISTORICAL-USAGE.md",
+          "sha256": "b470220ef6fe3afcefc5da45b37079a05bb22b738a5a58b563ada8e470e86d99",
+          "bytes": 3421
+        },
+        {
+          "path": "BeanStudio-V5.2/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.2/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.2/MuMu豆子计时器.exe",
+          "sha256": "5296e0f21feed9c0aa499293571609c5842e8b181c5f7b1c8cef2cd2d006752b",
+          "bytes": 94720
+        },
+        {
+          "path": "BeanStudio-V5.2/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.2/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.2/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.2/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.2/clock-templates.txt",
+          "sha256": "26986226c20f4b656cbf5fced5297419f76208d45330abe7b52561c53c98ef4e",
+          "bytes": 6748
+        },
+        {
+          "path": "BeanStudio-V5.2/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.2/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.2/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.3/ARCHIVE.md",
+          "sha256": "2170b8aa17c3c9c24d35939786d19de11e5ea9ca9eb66989391ba56147114f63",
+          "bytes": 1561
+        },
+        {
+          "path": "BeanStudio-V5.3/HISTORICAL-USAGE.md",
+          "sha256": "b593327437154a8fc23e20ba0b3fac011c1f67c7c6cd997f69e4b23aa0d89b40",
+          "bytes": 3470
+        },
+        {
+          "path": "BeanStudio-V5.3/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.3/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.3/MuMu豆子计时器.exe",
+          "sha256": "95aa2b923d95851e5a9a6dbf9afeed8d3855f5a83460ab917978531286084e23",
+          "bytes": 98816
+        },
+        {
+          "path": "BeanStudio-V5.3/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.3/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.3/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.3/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.3/clock-templates.txt",
+          "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+          "bytes": 11568
+        },
+        {
+          "path": "BeanStudio-V5.3/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.3/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.3/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.4/ARCHIVE.md",
+          "sha256": "d1dc57cacdaa38c7f2db456315ed449fcab85dd25fe02531fc7666f5e87c9998",
+          "bytes": 1530
+        },
+        {
+          "path": "BeanStudio-V5.4/HISTORICAL-USAGE.md",
+          "sha256": "35cc2669899dc8cf418da18711a76f1685a5d9a36bd801c9f83e5fa4bfe9f91c",
+          "bytes": 2855
+        },
+        {
+          "path": "BeanStudio-V5.4/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.4/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.4/MuMu豆子计时器.exe",
+          "sha256": "d744af44dd4f0e9242f03f175a0f43978ecddb59551f6483de843ebcf7a9a2b7",
+          "bytes": 108544
+        },
+        {
+          "path": "BeanStudio-V5.4/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.4/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.4/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.4/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.4/clock-templates.txt",
+          "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+          "bytes": 11568
+        },
+        {
+          "path": "BeanStudio-V5.4/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.4/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.4/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.5/ARCHIVE.md",
+          "sha256": "a3ab2fd7b1bfb257f2ec937c0e6bf6f96264e36a9b56b1abefd31f574b0e8e86",
+          "bytes": 1559
+        },
+        {
+          "path": "BeanStudio-V5.5/HISTORICAL-USAGE.md",
+          "sha256": "7dae910b1e7e3bacd71612661cd11abcae22e466dde78224a4f19428e9378e5e",
+          "bytes": 4102
+        },
+        {
+          "path": "BeanStudio-V5.5/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.5/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.5/MuMu豆子计时器.exe",
+          "sha256": "c9fcfb93d98c964add36216f20fd338fe18e88606bc49c7e9536c2091f633b9d",
+          "bytes": 124928
+        },
+        {
+          "path": "BeanStudio-V5.5/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.5/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.5/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.5/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.5/clock-templates.txt",
+          "sha256": "e4397191e4e09c97ce1a8ec375c77a433cf96682f23ac1f997c7194d3485a378",
+          "bytes": 11568
+        },
+        {
+          "path": "BeanStudio-V5.5/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.5/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.5/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.6/ARCHIVE.md",
+          "sha256": "edcb1a64601ccd2f9334adb5873e5900b11c674559ed357ee538f3daf5cffd60",
+          "bytes": 1621
+        },
+        {
+          "path": "BeanStudio-V5.6/HISTORICAL-USAGE.md",
+          "sha256": "981d12f13b29eee61c744fd88bca9b1765fcc2eeceed739f759a0e3c216faaa6",
+          "bytes": 4040
+        },
+        {
+          "path": "BeanStudio-V5.6/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.6/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.6/MuMu豆子计时器.exe",
+          "sha256": "25394fba142098afc33973c15cfc383d25c0cbbd96f194deec21e507d2b9d6c0",
+          "bytes": 139776
+        },
+        {
+          "path": "BeanStudio-V5.6/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5.6/RestoreDependencies.ps1",
+          "sha256": "deb5e5e5e1fa43e94016e0ffe9090b10e45e556756b63702ca968d16fedd8904",
+          "bytes": 147
+        },
+        {
+          "path": "BeanStudio-V5.6/THIRD_PARTY.md",
+          "sha256": "5b20594d62d5012aa221fc6c70247b8459e550d40b671fa1452ee248c9521740",
+          "bytes": 1592
+        },
+        {
+          "path": "BeanStudio-V5.6/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.6/clock-templates.txt",
+          "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+          "bytes": 20244
+        },
+        {
+          "path": "BeanStudio-V5.6/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.6/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        },
+        {
+          "path": "BeanStudio-V5.6/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.7/ARCHIVE.md",
+          "sha256": "311725b45ed976db0c648525537ec47ee7e51d5f0b74c4cb1f581ac857ed997d",
+          "bytes": 1585
+        },
+        {
+          "path": "BeanStudio-V5.7/HISTORICAL-USAGE.md",
+          "sha256": "8e1ea8802c2c518a7d83af9d09ce58b9a1f2d0a180e2dd1a315d097a8aa1114a",
+          "bytes": 5107
+        },
+        {
+          "path": "BeanStudio-V5.7/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5.7/Leptonica-LICENSE.txt",
+          "sha256": "87829abb5bbb00b55a107365da89e9a33f86c4250169e5a1e5588505be7d5806",
+          "bytes": 1521
+        },
+        {
+          "path": "BeanStudio-V5.7/MuMu豆子计时器.exe",
+          "sha256": "9b4d553000a8a41c7765845312ab0e8f7b430ca50360ffa26a3e1f8298420bfc",
+          "bytes": 163328
+        },
+        {
+          "path": "BeanStudio-V5.7/RestoreDependencies.ps1",
+          "sha256": "7cecc6fae064922932fc1ec8e6446121d900cdff22e98c900cb50fef2a2ddd1d",
+          "bytes": 96
+        },
+        {
+          "path": "BeanStudio-V5.7/THIRD_PARTY.md",
+          "sha256": "87e6aa6bf0d3f1d820c2ca6b7bf20f9baa7ccec184edfb76180a9e8f1e68ab7c",
+          "bytes": 1106
+        },
+        {
+          "path": "BeanStudio-V5.7/Tesseract-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5.7/clock-templates.txt",
+          "sha256": "3a721ac669c646dec0e1694533819011606c09f718b246fe9e7fe5cc478e34be",
+          "bytes": 20244
+        },
+        {
+          "path": "BeanStudio-V5.7/scripts/fetch-dependencies.ps1",
+          "sha256": "814053fee60427d4bd5c0812170c710bd66975894564faf262e93a5093aa7c80",
+          "bytes": 3353
+        },
+        {
+          "path": "BeanStudio-V5.7/tessdata-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        },
+        {
+          "path": "BeanStudio-V5/ARCHIVE.md",
+          "sha256": "740de424e51aca08cb220aef34fd6ab7749ffe2e915bbb84fed427c597abc355",
+          "bytes": 1409
+        },
+        {
+          "path": "BeanStudio-V5/HISTORICAL-USAGE.md",
+          "sha256": "bb1efbf46f9e7927ebb404caa9e7579716a3b316355f578ca7a08bacfa0bdc39",
+          "bytes": 3267
+        },
+        {
+          "path": "BeanStudio-V5/LICENSE",
+          "sha256": "f834fe3a0a3521ee4607ec6a02d9d977d29fbf6f4d99b58879564eeffaa5ecc4",
+          "bytes": 1069
+        },
+        {
+          "path": "BeanStudio-V5/MuMu豆子计时器.exe",
+          "sha256": "01153b402466eea30e7fca805472f01a75bc841e2eab444fdcc3c0ffbbb403d0",
+          "bytes": 75264
+        },
+        {
+          "path": "BeanStudio-V5/ReaLTaiizor-LICENSE.txt",
+          "sha256": "52a0e662d6bcd2d43dd321f4bcf52360fd100754473b8c3444ae92ec21b9bb3d",
+          "bytes": 1083
+        },
+        {
+          "path": "BeanStudio-V5/ReaLTaiizor.dll",
+          "sha256": "6c81fe2db65ef256429ac3ad1c037c04ae6d8e1c48e21794458b3d873981689b",
+          "bytes": 10933248
+        },
+        {
+          "path": "BeanStudio-V5/RestoreDependencies.ps1",
+          "sha256": "63aa4e02409724e0853528afce6fec7ca927340239a7edc38e22d7bd8748b6f0",
+          "bytes": 86
+        },
+        {
+          "path": "BeanStudio-V5/THIRD_PARTY.md",
+          "sha256": "1a17c3d6bfb65cfea35b57a26d31662d0ffd3bcac3fb49e67c0ef9b2ae82ea59",
+          "bytes": 692
+        },
+        {
+          "path": "BeanStudio-V5/scripts/fetch-ui.ps1",
+          "sha256": "7f06872bc3848e1a0602e724ea890469f67387903516e8f4cb758a8d24dd1841",
+          "bytes": 1855
+        }
+      ]
+    }
+  ]
+}
