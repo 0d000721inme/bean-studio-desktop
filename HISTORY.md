@@ -1,6 +1,6 @@
 # Windows 桌面历史版本
 
-当前推荐 **V5.7.2**（[发布页](https://github.com/0d000721inme/bean-studio-desktop/releases/tag/v5.7.2)）。V5.7.2 / V5.7.3 各有独立发布，下面仍保留原 V1–V5.7 的历史归档。本页保存 12 个不同内容的历史版本（共找到 13 个目录，V4 玻璃界面副本与 V4 完全相同）。历史 EXE 是原来实际构建的文件，没有用当前代码重建冒充旧版。
+当前推荐 **V5.7.3**（[发布页](https://github.com/0d000721inme/bean-studio-desktop/releases/tag/v5.7.3)）。V5.7.2 / V5.7.3 各有独立发布，下面仍保留原 V1–V5.7 的历史归档。本页保存 12 个不同内容的历史版本（共找到 13 个目录，V4 玻璃界面副本与 V4 完全相同）。历史 EXE 是原来实际构建的文件，没有用当前代码重建冒充旧版。
 历史版用于查看演进和复现问题。每版源码、原 EXE 和 ZIP 的 SHA256 都在 [history-manifest.json](docs/history/history-manifest.json)。本次归档未重跑各版的实战识别；历史测试说明是当时的验证记录。
 ## 下载方式
 

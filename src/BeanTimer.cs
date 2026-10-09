@@ -22,6 +22,11 @@ namespace MuMuBeans
             Native.SetProcessDPIAware();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if(args.Length>0 && args[0]=="--sound-test"){SoundTests.Run(args);return;}
+            if(args.Length>0 && args[0]=="--sound-media-test"){SoundTests.Media(args);return;}
+            if(args.Length>0 && args[0]=="--sound-engine-test"){SoundTests.EngineAudio(args);return;}
+            if(args.Length>0 && args[0]=="--render-sounds"){SoundPanel.Render(args[1]);return;}
+            if(args.Length>0 && args[0]=="--sound-ui-test"){SoundPanel.Verify(args[1]);return;}
             if(args.Length>0 && args[0]=="--empty-bean-test"){EmptyBeanTests.Run(args);return;}
             if(args.Length>0 && args[0]=="--bean-relocation-test"){BeanRelocationTests.Run(args);return;}
             if(args.Length>0 && args[0]=="--pause-test"){try{PauseTests.Run(args[1]);}catch(Exception ex){Directory.CreateDirectory(args[1]);File.WriteAllText(Path.Combine(args[1],"pause-error.txt"),ex.ToString());Environment.ExitCode=1;}return;}
@@ -263,6 +268,8 @@ namespace MuMuBeans
         
         public double LocateMs;
         public double Remaining, ProcessMs, GapMs, MaxGapMs, ConfirmationMs;
+        public double ClockNow,CooldownDeadline;
+        public int ResetVersion;
         public int Triggers, SlowSamples;
         public long TriggerStamp;
         public string Status;
@@ -307,6 +314,7 @@ namespace MuMuBeans
         double processMs, gapMs, maxGapMs, previousSample=-1, nextFrame;
         int slowSamples;
         long triggerStamp;
+        int resetVersion;
         public Engine()
         { WindowCapture.SetPaused(false);preciseTimer=Native.timeBeginPeriod(1)==0;worker=new Thread(Loop) { IsBackground=true, Priority=ThreadPriority.AboveNormal, Name="MuMu ROI capture" }; worker.Start(); }
         public long Samples{get{return Interlocked.Read(ref samples);}}
@@ -332,13 +340,13 @@ namespace MuMuBeans
             gameClock.Configure(h);wake.Set();
         }
         public GameClockWorker Clock { get { return gameClock; } }
-        public void Reset() { lock(gate) {counter.Reset();recoveryPendingUntil=-1;recovery="等待少豆 · 自动读取游戏时间";} }
+        public void Reset() { lock(gate) {counter.Reset();resetVersion++;recoveryPendingUntil=-1;recovery="等待少豆 · 自动读取游戏时间";} }
         static RectangleF Normalize(Rectangle r,Size size)
         {return r.IsEmpty?RectangleF.Empty:new RectangleF(r.X/(float)size.Width,r.Y/(float)size.Height,r.Width/(float)size.Width,r.Height/(float)size.Height);}
 
         public Snapshot GetSnapshot()
         {
-            lock(gate) return new Snapshot { Recovery=recovery,ConfirmedReading=counter.Baseline.HasValue?confirmedReading:null,Side=selectedSide,CaptureSize=lockedSize,LeftRegion=leftRegion,RightRegion=rightRegion,LocateMs=locateMs,Reading=reading, Remaining=counter.Remaining(time.Elapsed.TotalSeconds), ProcessMs=processMs, GapMs=gapMs, MaxGapMs=maxGapMs, ConfirmationMs=counter.LastConfirmationMs, Triggers=counter.Triggers, SlowSamples=slowSamples, Status=paused?(PauseCompleted?"监测已暂停 · 捕获与识别已停止":WindowCapture.PauseCompleted.IsFaulted?WindowCapture.Status:"正在暂停 · 等待在途采集与识别结束"):status, Enabled=enabled, Paused=paused, Count=counter.Baseline, TriggerStamp=triggerStamp };
+            lock(gate){double now=time.Elapsed.TotalSeconds;return new Snapshot { ClockNow=now,CooldownDeadline=counter.Deadline,ResetVersion=resetVersion,Recovery=recovery,ConfirmedReading=counter.Baseline.HasValue?confirmedReading:null,Side=selectedSide,CaptureSize=lockedSize,LeftRegion=leftRegion,RightRegion=rightRegion,LocateMs=locateMs,Reading=reading, Remaining=counter.Remaining(now), ProcessMs=processMs, GapMs=gapMs, MaxGapMs=maxGapMs, ConfirmationMs=counter.LastConfirmationMs, Triggers=counter.Triggers, SlowSamples=slowSamples, Status=paused?(PauseCompleted?"监测已暂停 · 捕获与识别已停止":WindowCapture.PauseCompleted.IsFaulted?WindowCapture.Status:"正在暂停 · 等待在途采集与识别结束"):status, Enabled=enabled, Paused=paused, Count=counter.Baseline, TriggerStamp=triggerStamp };}
         }
         public Bitmap GetFrame()
         { lock(gate) { if(frames.Count==0) return null; Bitmap last=null; foreach(Bitmap b in frames) last=b; return (Bitmap)last.Clone(); } }
