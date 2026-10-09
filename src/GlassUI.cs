@@ -192,19 +192,19 @@ namespace MuMuBeans
         readonly GlassPanel source=new GlassPanel{Material=true,Radius=20},picture=new GlassPanel{Radius=28},timerPanel=new GlassPanel{Blue=true,Radius=28},live=new GlassPanel{Radius=24};
         readonly CooldownRail rail=new CooldownRail();readonly SessionBadge sessionBadge=new SessionBadge();
         readonly Label gameTitle=Theme.Label("游戏时间",10,true),gameValue=Theme.Label("—",28),gameState=Theme.Label("等待时间数字",9),duration=Theme.Label("15 秒",9);
-        readonly Label title=Theme.Label("豆子",26,true),subtitle=Theme.Label("Bean Studio   /   MuMu 对局助手",9),edition=Theme.Label("V5.7.1",9);
+        readonly Label title=Theme.Label("豆子",26,true),subtitle=Theme.Label("Bean Studio   /   MuMu 对局助手",9),edition=Theme.Label("V5.7.2",9);
         readonly Label sourceTitle=Theme.Label("画面来源",10,true),pictureTitle=Theme.Label("游戏画面",13,true),pictureHint=Theme.Label("扫描时的定位预览",9),previewNote=Theme.Label("静态定位预览  ·  下方选择监测方向",9);
         readonly Label timerTitle=Theme.Label("冷却剩余",11,true),clockLabel=Theme.Label("00.00",60,true),timerState=Theme.Label("等待下一次少豆",10),timerRule=Theme.Label("每次减少，重新开始完整 15 秒",9);
         readonly Label liveTitle=Theme.Label("豆子识别",11,true),countLabel=Theme.Label("待确认",11,true),metrics=Theme.Label("开始监测后显示采样状态",9),status=Theme.Label("选择 MuMu 窗口，然后扫描画面。",9);
         readonly GlassButton calibrate=new GlassButton{Text="校准",AccessibleName="游戏时间校准"};
         readonly GlassButton refresh=new GlassButton{Text="刷新列表"},scan=new GlassButton{Text="扫描画面",Icon="scan"},left=new GlassButton{Text="左侧"},right=new GlassButton{Text="右侧",Selected=true},run=new GlassButton{Text="开始监测",Primary=true,Icon="play"},floating=new GlassButton{Text="悬浮倒计时",Icon="float"},clear=new GlassButton{Text="清空冷却",Icon="reset"},save=new GlassButton{Text="保存诊断",Icon="save"},minimize=new GlassButton{Text="—"},close=new GlassButton{Text="×"};
-        bool monitoring,refreshing,released,demo,uiReady;int side=1,uiFrames;string transient="";double transientUntil;readonly Stopwatch uptime=Stopwatch.StartNew();
+        bool monitoring,refreshing,released,demo,uiReady,noBeansDisplay,clockFontIsNoBeans;int side=1,uiFrames;string transient="";double transientUntil;readonly Stopwatch uptime=Stopwatch.StartNew();
         readonly bool activateOnShow;
         protected override bool ShowWithoutActivation{get{return !activateOnShow;}}
         public MainForm(bool connectOnShow=true)
         {
             activateOnShow=connectOnShow;
-            AutoScaleMode=AutoScaleMode.None;Text="豆子 Bean Studio V5.7.1";Font=new Font("Microsoft YaHei UI",10);ForeColor=Theme.Ink;BackColor=Color.FromArgb(230,237,250);FormBorderStyle=FormBorderStyle.None;DoubleBuffered=true;SetStyle(ControlStyles.ResizeRedraw,true);ClientSize=new Size(1240,860);MinimumSize=new Size(1040,760);StartPosition=FormStartPosition.CenterScreen;
+            AutoScaleMode=AutoScaleMode.None;Text="豆子 Bean Studio V5.7.2";Font=new Font("Microsoft YaHei UI",10);ForeColor=Theme.Ink;BackColor=Color.FromArgb(230,237,250);FormBorderStyle=FormBorderStyle.None;DoubleBuffered=true;SetStyle(ControlStyles.ResizeRedraw,true);ClientSize=new Size(1240,860);MinimumSize=new Size(1040,760);StartPosition=FormStartPosition.CenterScreen;
             Controls.AddRange(new Control[]{title,subtitle,edition,sessionBadge,source,picture,timerPanel,live,run,floating,clear,save,minimize,close,status});
             source.Controls.AddRange(new Control[]{sourceTitle,windows,refresh,scan});picture.Controls.AddRange(new Control[]{pictureTitle,pictureHint,preview,previewNote,left,right});timerPanel.Controls.AddRange(new Control[]{timerTitle,duration,clockLabel,timerState,timerRule,rail});live.Controls.AddRange(new Control[]{liveTitle,crop,dots,countLabel,gameTitle,gameValue,gameState,calibrate});picture.Controls.Add(metrics);
             BackColor=Theme.Bg;sourceTitle.ForeColor=timerTitle.ForeColor=liveTitle.ForeColor=Theme.Ink;subtitle.ForeColor=edition.ForeColor=pictureHint.ForeColor=previewNote.ForeColor=timerRule.ForeColor=metrics.ForeColor=status.ForeColor=duration.ForeColor=gameState.ForeColor=Theme.Muted;
@@ -243,11 +243,21 @@ namespace MuMuBeans
             source.SetBounds(margin,102,w-margin*2,64);sourceTitle.SetBounds(22,17,86,30);windows.SetBounds(110,10,source.Width-390,44);refresh.SetBounds(source.Width-264,10,114,44);scan.SetBounds(source.Width-140,10,120,44);
             picture.SetBounds(margin,contentY,leftWidth,contentH);pictureTitle.SetBounds(22,18,leftWidth-225,28);pictureHint.SetBounds(leftWidth-198,21,174,24);preview.SetBounds(20,58,leftWidth-40,contentH-139);previewNote.SetBounds(24,contentH-72,leftWidth-225,27);metrics.SetBounds(24,contentH-40,leftWidth-48,23);left.SetBounds(leftWidth-185,contentH-76,74,39);right.SetBounds(leftWidth-103,contentH-76,79,39);
             timerPanel.SetBounds(margin+leftWidth+gap,contentY,rightWidth,timerH);timerTitle.SetBounds(22,17,200,27);duration.SetBounds(rightWidth-75,19,54,24);clockLabel.SetBounds(16,47,rightWidth-32,timerH-148);timerState.SetBounds(18,timerH-101,rightWidth-36,23);rail.SetBounds(22,timerH-71,rightWidth-44,17);timerRule.SetBounds(22,timerH-48,rightWidth-44,38);
-            float clockSize=SafeClockSize(timerH);if(Math.Abs(clockLabel.Font.Size-clockSize)>.1){Font old=clockLabel.Font;clockLabel.Font=new Font("Bahnschrift Light",clockSize,FontStyle.Regular);old.Dispose();}
+            ApplyClockFont(timerH);
             live.SetBounds(timerPanel.Left,contentY+timerH+gap,rightWidth,contentH-timerH-gap);liveTitle.SetBounds(22,14,rightWidth-44,25);crop.SetBounds(22,45,rightWidth-44,46);dots.SetBounds(22,96,160,31);countLabel.SetBounds(180,96,rightWidth-204,31);gameTitle.SetBounds(22,139,140,24);calibrate.SetBounds(rightWidth-100,134,78,34);gameValue.SetBounds(22,170,132,40);gameState.SetBounds(159,170,rightWidth-181,47);
             run.SetBounds(margin,h-94,174,50);floating.SetBounds(margin+186,h-94,160,50);clear.SetBounds(margin+358,h-94,134,50);save.SetBounds(w-margin-134,h-94,134,50);status.SetBounds(margin+4,h-34,w-margin*2-8,25);
         }
         internal static float SafeClockSize(int timerHeight){return Math.Max(32,Math.Min(64,(timerHeight-144)*.60f));}
+        void ApplyClockFont(int timerHeight)
+        {
+            float size=noBeansDisplay?Math.Max(22,Math.Min(26,(timerHeight-144)*.32f)):SafeClockSize(timerHeight);string family=noBeansDisplay?"Microsoft YaHei UI":"Bahnschrift Light";FontStyle style=noBeansDisplay?FontStyle.Bold:FontStyle.Regular;
+            if(Math.Abs(clockLabel.Font.Size-size)>.1||clockFontIsNoBeans!=noBeansDisplay||clockLabel.Font.Style!=style){Font old=clockLabel.Font;clockLabel.Font=new Font(family,size,style);clockFontIsNoBeans=noBeansDisplay;old.Dispose();}
+        }
+        internal void SetCountdownDisplay(bool noBeans,double remaining)
+        {
+            noBeansDisplay=noBeans;ApplyClockFont(timerPanel.Height);clockLabel.Text=noBeans?"对方已无豆":Theme.Clock(remaining);clockLabel.ForeColor=noBeans?Theme.Blue:Theme.Urgency(remaining);clockLabel.AccessibleName=noBeans?"对方已无豆，0 / 4 颗":"冷却剩余："+clockLabel.Text+" 秒";
+            timerState.Text=noBeans?"0 / 4 颗 · 等待豆子恢复":remaining>0&&remaining<3?"即将恢复 · 留意游戏时间":remaining>0?"计时中 · 再次减少即重置":"等待下一次少豆";rail.Remaining=noBeans?0:remaining;rail.Invalidate();
+        }
         WindowItem Selected{get{return windows.SelectedItem as WindowItem;}}
         void SelectSide(int value){if(value==side)return;side=value;left.Selected=side==0;right.Selected=side==1;left.Invalidate();right.Invalidate();preview.Side=side;preview.Invalidate();SyncEngine(true);}
         void SyncEngine(bool relocate){engine.ConfigureAuto(Selected==null?IntPtr.Zero:Selected.Handle,side,monitoring,relocate);}
@@ -279,7 +289,7 @@ namespace MuMuBeans
         static RectangleF Normalized(Rectangle r,Size size){return r.IsEmpty?RectangleF.Empty:new RectangleF(r.X/(float)size.Width,r.Y/(float)size.Height,r.Width/(float)size.Width,r.Height/(float)size.Height);}
         void Tick(object sender,EventArgs e)
         {
-            Snapshot s=engine.GetSnapshot();pulse.Interval=s.Paused?100:33;clockLabel.Text=Theme.Clock(s.Remaining);timerState.Text=s.Remaining>0?"计时中 · 再次减少即重置":"等待下一次少豆";clockLabel.ForeColor=Theme.Urgency(s.Remaining);timerState.Text=s.Remaining>0&&s.Remaining<3?"即将恢复 · 留意游戏时间":timerState.Text;timerRule.Text=s.Recovery;rail.Remaining=s.Remaining;rail.Invalidate();
+            Snapshot s=engine.GetSnapshot();pulse.Interval=s.Paused?100:33;SetCountdownDisplay(s.NoBeans,s.Remaining);timerRule.Text=s.NoBeans?"等待豆子恢复 · 增长不触发计时":s.Recovery;
             ClockState cs=engine.Clock.State();bool fresh=cs.Value.HasValue&&cs.Age<=.65;gameValue.Text=fresh?cs.Value.Value.ToString(cs.Value<10?"0.00":"0",CultureInfo.InvariantCulture):"—";gameState.Text=fresh?"已确认\r\n持续读取中":cs.Value.HasValue?"读数已过期\r\n可点校准检查":"等待时间数字\r\n可点校准检查";tips.SetToolTip(gameState,cs.Status+"\r\n"+cs.Backend+"\r\n识别方式："+cs.Method+"；本帧匹配分数："+cs.Confidence.ToString("0.00",CultureInfo.InvariantCulture));gameValue.AccessibleName="游戏时间："+(fresh?gameValue.Text:"未确认");sessionBadge.Caption=Selected==null?"尚未连接":s.Enabled?"正在监测":"预览模式";sessionBadge.Active=s.Enabled;sessionBadge.Invalidate();
             Reading display=s.Enabled?s.ConfirmedReading:s.Reading;
             dots.Reading=display;dots.Invalidate();countLabel.Text=display!=null&&display.Valid?display.Count+" / 4 颗":"待确认";
@@ -301,7 +311,12 @@ namespace MuMuBeans
             windows.Items.Clear();windows.SelectedIndex=-1;preview.SetFrame(null);crop.SetFrame(null);countLabel.Text="待确认";clockLabel.Text="00.00";gameValue.Text="—";gameState.Text="等待时间数字\r\n可点校准检查";timerState.Text="等待下一次少豆";timerRule.Text="少豆时计算恢复点";sessionBadge.Caption="尚未连接";status.Text="选择 MuMu 窗口，然后扫描画面。";run.Text="开始监测";run.Icon="play";rail.Remaining=0;SaveRender(Path.Combine(folder,"未连接.png"));
             windows.Items.Add(new WindowItem{Title="MuMu 安卓设备（演示）"});windows.SelectedIndex=0;preview.SetFrame((Bitmap)frame.Clone());sessionBadge.Caption="设计预览";clockLabel.Text="08.00";clockLabel.ForeColor=Theme.Blue;timerState.Text="计时中 · 再次减少即重置";timerRule.Text="恢复点：时间未确认（可点校准检查）";rail.Remaining=8;gameState.Text="等待时间数字\r\n可点校准检查";status.Text="设计预览 · 时间未确认时保持冷却计时";run.Text="暂停监测";run.Icon="pause";SaveRender(Path.Combine(folder,"时间未确认.png"));
             clockLabel.Text="02.00";clockLabel.ForeColor=Theme.Urgency(2);timerState.Text="即将恢复 · 留意游戏时间";timerRule.Text="恢复点≈3.50 秒（中途补算）";rail.Remaining=2;gameValue.Text="5.50";gameState.Text="演示读数\r\n未连接游戏";status.Text="设计预览 · 接近归零时使用紧急颜色";SaveRender(Path.Combine(folder,"接近恢复.png"));
-            run.Text="开始监测";run.Icon="play";sessionBadge.Caption="暂停监测";status.Text="监测暂停 · 已有冷却继续";SaveRender(Path.Combine(folder,"暂停监测.png"));Hide();using(ClockPanel panel=new ClockPanel(engine.Clock,frame))panel.SavePreview(folder);
+            run.Text="开始监测";run.Icon="play";sessionBadge.Caption="暂停监测";status.Text="监测暂停 · 已有冷却继续";SaveRender(Path.Combine(folder,"暂停监测.png"));
+            LocatedPair pair=AutoLocator.Find(frame);preview.LeftRegion=Normalized(pair.Left,frame.Size);preview.RightRegion=Normalized(pair.Right,frame.Size);preview.Side=0;side=0;left.Selected=true;right.Selected=false;previewNote.Text="监测左侧  ·  增长不触发";if(!pair.Left.IsEmpty)crop.SetFrame(frame.Clone(pair.Left,PixelFormat.Format32bppArgb));
+            dots.Reading=pair.LeftReading;countLabel.Text="0 / 4 颗";sessionBadge.Caption="设计预览";run.Text="暂停监测";run.Icon="pause";SetCountdownDisplay(true,8);timerRule.Text="等待豆子恢复 · 增长不触发计时";status.Text="设计预览 · 已确认四格全空，显示对方已无豆";SaveRender(Path.Combine(folder,"四空豆主界面.png"));ClientSize=new Size(1440,960);Application.DoEvents();SaveRender(Path.Combine(folder,"四空豆大尺寸界面.png"));ClientSize=new Size(1040,760);Application.DoEvents();
+            SetCountdownDisplay(false,8);timerRule.Text="恢复点：时间未确认（可点校准检查）";dots.Reading=new Reading{Lit=new bool[]{false,false,false,true},Reason="演示恢复一豆"};countLabel.Text="1 / 4 颗";timerState.Text="计时中 · 再次减少即重置";status.Text="设计预览 · 豆子恢复后还原数字字号，已有冷却继续";SaveRender(Path.Combine(folder,"豆子恢复数字界面.png"));Hide();
+            using(Overlay hud=new Overlay(delegate{})){hud.NoBeans=true;hud.ClockLabel.Text="08.00";hud.Detail.Text="0 / 4 颗";hud.Target.Text="等待豆子恢复";hud.SetSide(0);using(Bitmap b=hud.Surface())b.Save(Path.Combine(folder,"四空豆悬浮窗.png"));hud.NoBeans=false;hud.Detail.Text="1 / 4 颗";hud.Target.Text="恢复点：时间未确认";using(Bitmap b=hud.Surface())b.Save(Path.Combine(folder,"豆子恢复悬浮窗.png"));}
+            using(ClockPanel panel=new ClockPanel(engine.Clock,frame))panel.SavePreview(folder);
         }
         void SaveRender(string path){Refresh();Application.DoEvents();using(Bitmap b=new Bitmap(Width,Height)){DrawToBitmap(b,ClientRectangle);b.Save(path);}}
         internal void VerifyInteractions(string folder)

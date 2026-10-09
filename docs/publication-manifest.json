@@ -1,0 +1,32 @@
+{
+  "version": "5.7.2",
+  "publication_date": "2026-10-09",
+  "recompiled": false,
+  "original_zip_sha256": "54f8932fb5252d36a6f119e0fdff79252c2dadc7ce9f3073e6d98922e5ebe2e0",
+  "original_exe_sha256": "d9d78e74f72d26b3882db221e03a6b55492e8772af6300e019d6e8baf5845efd",
+  "source_cs_canonical_sha256": {
+    "AutoLocator.cs": "66491f66cd0aee0863b752bc6a35a066314e86567771add353f3fbab62ef84ae",
+    "AutoTests.cs": "ce78d81f5ebddeb8782eedf2d716063f222a31cf18f6dd235b6f6a6e3a3376f8",
+    "BeanRelocationTests.cs": "64b3b5957ba553a616aab166ec5c520d0cc9ec1f4c921aa13f0990246616dca6",
+    "BeanTimer.cs": "6bd43943c1ef68e39af5c56bfe12ee0b00226eb379a6159cea15ee9f77a6b3cd",
+    "Clock55Live.cs": "47e75f689e6a53686cb0bca10a989a988d4f019b1a92d11781309f4730c4d8e8",
+    "Clock55Tests.cs": "e7d7b71a67f4fdeb86073f483c9f0f3464e96cb79fbb4cbeb26c3c4ed022d96a",
+    "Clock57Live.cs": "7a62a525484917bcd303984cd4f5b86cc89906573871d67c8ac8fe34e8bc0b17",
+    "Clock57Tests.cs": "306e2a9be0dfe69d947915d90e0f5961101b6e1866ec4334b447db89d9345a42",
+    "ClockPanel.cs": "61eb53e84eec6f3c28a84e17aaa96251abea725e7539a5ab1cf19570c4e7e97a",
+    "ClockScreenTest.cs": "a1034c2750e31eea038d84c15935ded780ce28893c4e70077a8f0f457f81d559",
+    "ClockTests.cs": "1498841a7f2035088744a5b699ca5d4495963a6b9d9083c8adbe067429079dee",
+    "ClockWorker.cs": "c3a53e663f666de83a21b6d3cb10277dcc07bea177b9ad33b0b6c05e4372e1f2",
+    "DarkGemShape.cs": "058b519f2f0a2248745101fb500d80c11c32d73492b2c117770a9719ab28ea12",
+    "DarkScreenTests.cs": "2783bab764919ced1551673f6cde6119d9986dbe20bc67b445dc19c6bdb2d056",
+    "DarkTests.cs": "6cd0537ffc93c3a87e9caa487fe2b7f39dfcac25677837f005a3dec19c04a300",
+    "EmptyBeanTests.cs": "89472bc303c030bd55f37f5139cba12a2270da226511c1bbfd2501b6f4d09d14",
+    "GameClock.cs": "470deabb2eefda0a78ccb178a3a1a4d000896582066b83f0256a8cf0e661563c",
+    "GlassUI.cs": "602e51c39ffef3cd590b901302b96206a82efaa779d838f39e13adc0a4cefee3",
+    "Overlay.cs": "a85bbd8cf7c7d892503114a45edb88d13ef4d58609751a47b75e932511274fc2",
+    "PauseTests.cs": "8c5b0c2a280118114d10dba670e46749de09f5eca7c63f98957c7b5bd528b2c6",
+    "Version56Tests.cs": "7cf6b3d2bc59e5f890a3e2bd5ebcc8848896dff12f88433ccca201a0a51b3e7c",
+    "WindowCapture.cs": "324dc05c47bebc31f65f5c4d6a290ac08af653f7e6970bca8960b15af123a005",
+    "WindowFrames.cs": "8eaf45fed78715490204672094028e9f2cb1b00acd2fd9a9005ac94be9765eb8"
+  }
+}

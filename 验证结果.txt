@@ -1,18 +1,121 @@
-Bean Studio V5.7.1 本地验证 · 2026-10-05
-仅使用本程序自建动态窗口和状态检查，不操作 MuMu。
-暂停回归：20 PASS，FAILURES=0；时钟状态：12 PASS，FAILURES=0。
-尚未测量真实 MuMu 鼠标延迟，不据此保证全部游戏卡顿消失。
+﻿Bean Studio V5.7.2 本地验证 · 2026-10-06
+静态样本、状态检查和仅捕获程序自建窗口的实际 WGC 检查；未操作 MuMu，未量化多局实战准确率。
+静态本图确认左0右4；复现同尺寸旧框与新HUD位置不符可持续Invalid，安全重新定位已修复。
+默认隔离环境不提供有效窗口捕获；实际链路已在普通桌面会话单独执行通过。
 
+四空豆样本、状态及界面：82 PASS，FAILURES=0
+PASS 四空豆自动定位，scale=0.5
+PASS 同图右侧四亮豆，scale=0.5
+PASS 实际归一化裁剪确认0颗，scale=0.5
+PASS 整框/单格遮挡不猜0，scale=0.5,slot=-1
+PASS 遮挡不接受新位置，scale=0.5,slot=-1
+PASS 整框/单格遮挡不猜0，scale=0.5,slot=0
+PASS 遮挡不接受新位置，scale=0.5,slot=0
+PASS 整框/单格遮挡不猜0，scale=0.5,slot=1
+PASS 遮挡不接受新位置，scale=0.5,slot=1
+PASS 整框/单格遮挡不猜0，scale=0.5,slot=2
+PASS 遮挡不接受新位置，scale=0.5,slot=2
+PASS 整框/单格遮挡不猜0，scale=0.5,slot=3
+PASS 遮挡不接受新位置，scale=0.5,slot=3
+PASS 四空豆自动定位，scale=0.75
+PASS 同图右侧四亮豆，scale=0.75
+PASS 实际归一化裁剪确认0颗，scale=0.75
+PASS 整框/单格遮挡不猜0，scale=0.75,slot=-1
+PASS 遮挡不接受新位置，scale=0.75,slot=-1
+PASS 整框/单格遮挡不猜0，scale=0.75,slot=0
+PASS 遮挡不接受新位置，scale=0.75,slot=0
+PASS 整框/单格遮挡不猜0，scale=0.75,slot=1
+PASS 遮挡不接受新位置，scale=0.75,slot=1
+PASS 整框/单格遮挡不猜0，scale=0.75,slot=2
+PASS 遮挡不接受新位置，scale=0.75,slot=2
+PASS 整框/单格遮挡不猜0，scale=0.75,slot=3
+PASS 遮挡不接受新位置，scale=0.75,slot=3
+PASS 四空豆自动定位，scale=1
+PASS 同图右侧四亮豆，scale=1
+PASS 实际归一化裁剪确认0颗，scale=1
+PASS 整框/单格遮挡不猜0，scale=1,slot=-1
+PASS 遮挡不接受新位置，scale=1,slot=-1
+PASS 整框/单格遮挡不猜0，scale=1,slot=0
+PASS 遮挡不接受新位置，scale=1,slot=0
+PASS 整框/单格遮挡不猜0，scale=1,slot=1
+PASS 遮挡不接受新位置，scale=1,slot=1
+PASS 整框/单格遮挡不猜0，scale=1,slot=2
+PASS 遮挡不接受新位置，scale=1,slot=2
+PASS 整框/单格遮挡不猜0，scale=1,slot=3
+PASS 遮挡不接受新位置，scale=1,slot=3
+PASS 四空豆自动定位，scale=1.25
+PASS 同图右侧四亮豆，scale=1.25
+PASS 实际归一化裁剪确认0颗，scale=1.25
+PASS 整框/单格遮挡不猜0，scale=1.25,slot=-1
+PASS 遮挡不接受新位置，scale=1.25,slot=-1
+PASS 整框/单格遮挡不猜0，scale=1.25,slot=0
+PASS 遮挡不接受新位置，scale=1.25,slot=0
+PASS 整框/单格遮挡不猜0，scale=1.25,slot=1
+PASS 遮挡不接受新位置，scale=1.25,slot=1
+PASS 整框/单格遮挡不猜0，scale=1.25,slot=2
+PASS 遮挡不接受新位置，scale=1.25,slot=2
+PASS 整框/单格遮挡不猜0，scale=1.25,slot=3
+PASS 遮挡不接受新位置，scale=1.25,slot=3
+PASS 四空豆自动定位，scale=1.5
+PASS 同图右侧四亮豆，scale=1.5
+PASS 实际归一化裁剪确认0颗，scale=1.5
+PASS 整框/单格遮挡不猜0，scale=1.5,slot=-1
+PASS 遮挡不接受新位置，scale=1.5,slot=-1
+PASS 整框/单格遮挡不猜0，scale=1.5,slot=0
+PASS 遮挡不接受新位置，scale=1.5,slot=0
+PASS 整框/单格遮挡不猜0，scale=1.5,slot=1
+PASS 遮挡不接受新位置，scale=1.5,slot=1
+PASS 整框/单格遮挡不猜0，scale=1.5,slot=2
+PASS 遮挡不接受新位置，scale=1.5,slot=2
+PASS 整框/单格遮挡不猜0，scale=1.5,slot=3
+PASS 遮挡不接受新位置，scale=1.5,slot=3
+PASS 右侧镜像四空豆同样确认0颗
+PASS 监测时确认0颗进入对方已无豆状态
+PASS 原始零读数尚未连续确认不能显示已无豆
+PASS Invalid/无画面与确认零豆区分
+PASS 恢复一豆自动退出无豆状态
+PASS 暂停不继续宣称已确认无豆
+PASS 首次四空豆只建立0基准
+PASS 零豆恢复一豆不启动倒计时
+PASS 最后一豆消耗仍按原规则设置15秒截止时间
+PASS 持续0颗不重复触发或跳回15秒
+PASS 黑屏不清原截止时间，且失效后不冒充零豆
+PASS 生产HUD接线显示确认0颗与无豆提示
+PASS 恢复一豆后HUD还原数字计时
+PASS 真正未确认保留原未知提示
+PASS 主界面无豆文字与适配字号
+PASS 同一无豆状态连续刷新不反复分配字体
+PASS 退出无豆状态恢复数字字体和字号
+FAILURES=0
+
+真实引擎重新定位：17 PASS，FAILURES=0
+PASS 两张同尺寸真实暗豆样本具有不同且有效的左侧0豆位置
+PASS 旧框到新图与新框到旧图均复现锁定位置失效
+PASS 旧图右侧满豆用作测试的一颗亮豆
+PASS 合成1豆只用于建立实际消耗事件
+PASS Fixture实际客户区缩放后的合成1豆仍可自动定位确认
+PASS 自建半尺寸动态窗口：真实Engine确认1豆基准
+PASS 首次基准不启动倒计时
+PASS 真实Engine确认1→0产生一次15秒倒计时
+PASS 同尺寸切换HUD后旧锁定框实际产生Invalid
+PASS 持续失效触发自动校准并恢复新位置0豆确认
+PASS 换框只建立新基准，保留精确截止时间且不伪造消耗
+PASS 黑屏不伪装0豆，连续确认基准正常失效
+PASS 黑屏重定位失败保留锁定位置，原倒计时继续
+PASS 黑屏2.2秒重新定位次数限频，实际=1
+PASS 黑屏返回后再次确认0颗而不追加消耗事件
+PASS 单格遮挡不会确认无豆或清除/重启已有倒计时
+PASS 遮挡移除后恢复基准，截止时间仍原封不动
+FAILURES=0
+
+暂停及窗口采集：20 PASS，FAILURES=0
 PASS 真实少豆设置完整 15.000 秒 deadline
 PASS 暂停忘记豆数基准，已存在的冷却按现实时间继续
 PASS 恢复后较少豆数建立新基准，不把暂停期间变化误判为新消耗
-INFO 生产同样 MTA 线程的 WGC 构造/取帧/处置探针、完整异常栈及 HResult 已保存 wgc-probe.txt
 PASS 自建动态窗实际 WGC 完成 GPU 读回且 Capture 返回完整非空 Bitmap（WGC 窗口捕获）
-INFO initial 实际完成读回=5/3；fixture Tick=7 Paint=7；详细取帧诊断见 wgc-broker-initial.txt
 PASS 暂停完成任务等待 WGC 会话与初始化任务释放
 PASS 暂停拒绝 Capture/Available 重建，动态窗连续重绘 700 ms 读回计数不变
 PASS 恢复重新创建 WGC 会话，成功读回复增且 Capture 返回完整非空 Bitmap，无兼容截图代替
-INFO resume 实际完成读回=5/3；fixture Tick=9 Paint=9；详细取帧诊断见 wgc-broker-resume.txt
 PASS WGC 初始化与暂停竞态 8 轮，过期初始化不复活会话且无死锁
 PASS 真实动态窗驱动豆子与游戏时间两个识别线程采样
 PASS Engine 暂停等待捕获及两个识别线程真正空闲
@@ -28,7 +131,7 @@ PASS 暂停状态主界面在屏幕外无激活渲染并隐藏，未置顶或进
 PASS 真实开始按钮可恢复暂停状态
 FAILURES=0
 
-时钟状态检查：
+时钟状态：12 PASS，FAILURES=0
 PASS 基准需两帧
 PASS 单帧错读少一秒后恢复，不污染确认值
 PASS 真实整数减一秒在第二帧确认
@@ -42,3 +145,4 @@ PASS 单帧小数跳变被阻止
 PASS 失去时间后重获需两帧，不推算未读秒数
 PASS 恢复点计算及未知时间不猜60
 FAILURES=0
+

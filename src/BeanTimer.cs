@@ -22,6 +22,8 @@ namespace MuMuBeans
             Native.SetProcessDPIAware();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if(args.Length>0 && args[0]=="--empty-bean-test"){EmptyBeanTests.Run(args);return;}
+            if(args.Length>0 && args[0]=="--bean-relocation-test"){BeanRelocationTests.Run(args);return;}
             if(args.Length>0 && args[0]=="--pause-test"){try{PauseTests.Run(args[1]);}catch(Exception ex){Directory.CreateDirectory(args[1]);File.WriteAllText(Path.Combine(args[1],"pause-error.txt"),ex.ToString());Environment.ExitCode=1;}return;}
             if (args.Length > 0 && args[0] == "--self-test")
             {
@@ -267,6 +269,14 @@ namespace MuMuBeans
         public string Recovery;
         public bool Enabled,Paused;
         public int? Count;
+        public bool NoBeans
+        {
+            get
+            {
+                Reading display=Enabled?ConfirmedReading:Reading;
+                return !Paused && display!=null && display.Valid && display.Count==0;
+            }
+        }
     }
 
     sealed class Engine : IDisposable
@@ -351,8 +361,8 @@ namespace MuMuBeans
         {
             while(true)
             {
-                IntPtr h; RectangleF r; int t,v,side; bool run,auto,pause; Size size;
-                lock(gate) { if(stopped) return; h=window;r=region;t=threshold;v=version;run=enabled;auto=automatic;side=selectedSide;size=lockedSize;pause=paused;Interlocked.Exchange(ref idle,pause?1:0); }
+                IntPtr h; RectangleF r; int t,v,side; bool run,auto,pause; Size size;double invalid,nextSearch;
+                lock(gate) { if(stopped) return; h=window;r=region;t=threshold;v=version;run=enabled;auto=automatic;side=selectedSide;size=lockedSize;pause=paused;invalid=invalidSince;nextSearch=nextLocate;Interlocked.Exchange(ref idle,pause?1:0); }
                 if(pause){wake.WaitOne();continue;}
                 double start=time.Elapsed.TotalSeconds;
                 Reading current=null; Bitmap bitmap=null; string state;
@@ -361,16 +371,31 @@ namespace MuMuBeans
                     Rectangle client=Native.ClientBounds(h);
                     if(auto && h!=IntPtr.Zero && client.Width>320 && client.Height>150 && !Native.IsIconic(h))
                     {
-                        bool search=r.IsEmpty||client.Size!=size;
-                        if(search && start>=nextLocate && SystemInformation.VirtualScreen.Contains(client))
+                        bool revalidate=!r.IsEmpty&&client.Size==size&&invalid>=0&&start-invalid>=.45;
+                        bool search=r.IsEmpty||client.Size!=size||revalidate;
+                        if(search && start>=nextSearch && SystemInformation.VirtualScreen.Contains(client))
                         {
                             LocatedPair pair;double began=time.Elapsed.TotalSeconds;
                             using(Bitmap full=WindowCapture.Capture(h,client))pair=AutoLocator.Find(full,t);
                             if(!pair.Left.IsEmpty&&!WindowCapture.Available(h,new Rectangle(client.X+pair.Left.X,client.Y+pair.Left.Y,pair.Left.Width,pair.Left.Height)))pair.Left=Rectangle.Empty;
                             if(!pair.Right.IsEmpty&&!WindowCapture.Available(h,new Rectangle(client.X+pair.Right.X,client.Y+pair.Right.Y,pair.Right.Width,pair.Right.Height)))pair.Right=Rectangle.Empty;
                             RectangleF lr=Normalize(pair.Left,client.Size),rr=Normalize(pair.Right,client.Size);
-                            r=side==0?lr:rr;
-                            lock(gate)if(v==version){leftRegion=lr;rightRegion=rr;region=r;lockedSize=client.Size;locateMs=(time.Elapsed.TotalSeconds-began)*1000;counter.Forget();nextLocate=time.Elapsed.TotalSeconds+1;}
+                            RectangleF found=side==0?lr:rr;
+                            Reading located=side==0?pair.LeftReading:pair.RightReading;
+                            // A stale locked HUD may move between characters without resizing the
+                            // window. Revalidate it, but a black/occluded frame never erases a lock.
+                            bool accept=!revalidate||(!found.IsEmpty&&located!=null&&located.Valid);
+                            lock(gate)if(v==version)
+                            {
+                                locateMs=(time.Elapsed.TotalSeconds-began)*1000;nextLocate=time.Elapsed.TotalSeconds+1;
+                                if(accept)
+                                {
+                                    if(client.Size!=size||r!=found)counter.Forget();
+                                    if(!revalidate||!lr.IsEmpty)leftRegion=lr;
+                                    if(!revalidate||!rr.IsEmpty)rightRegion=rr;
+                                    region=r=found;lockedSize=client.Size;invalidSince=-1;
+                                }
+                            }
                         }
                         else if(client.Size!=size)r=RectangleF.Empty;
                     }
@@ -398,6 +423,7 @@ namespace MuMuBeans
                         if(run) { maxGapMs=Math.Max(maxGapMs,gapMs); if(gapMs>100) slowSamples++; }
                         bool trigger=run && counter.Observe(current!=null && current.Valid?(int?)current.Count:null,now);
                         if(run&&current!=null&&current.Valid&&counter.Baseline==current.Count)confirmedReading=current;
+                        if(run&&current!=null&&current.Valid&&counter.Baseline==0)state="对方已无豆 · 等待豆子恢复";
                         if(trigger) {triggerStamp=Stopwatch.GetTimestamp();recoveryTrigger=triggerStamp;recovery=gameClock.RecoveryAt(triggerStamp);recoveryPendingUntil=recovery.Contains("未确认")?now+.25:-1;if(recoveryPendingUntil>0){recovery="恢复点：读取中";gameClock.Refresh();}}
                         if(recoveryPendingUntil>0){string result=gameClock.RecoveryAt(recoveryTrigger);if(!result.Contains("未确认")){recovery=result;recoveryPendingUntil=-1;}else if(now>=recoveryPendingUntil){recovery="恢复点：时间未确认（见时间校准）";recoveryPendingUntil=-1;}}
                         if(recovery.Contains("未确认") && counter.Remaining(now)>0){
@@ -408,8 +434,8 @@ namespace MuMuBeans
                         if(auto && bitmap!=null && current!=null && !current.Valid)
                         {
                             if(invalidSince<0)invalidSince=now;
-                            // Only source changes, resizing, or an explicit scan invalidate the locked positions.
-                            if(now-invalidSince>.45)status="豆子暂不可确认 · 保留位置，原倒计时继续";
+                            // A failed rescan preserves both the old ROI and the active deadline.
+                            if(now-invalidSince>.45)status="豆子暂不可确认 · 自动校准位置，原倒计时继续";
                         }
                         else invalidSince=-1;
                         logs.Enqueue(string.Format(CultureInfo.InvariantCulture,"{0:F6},{1},{2},{3:F3},{4:F3},{5},{6:F6},\"{7}\"",now,current==null?"":current.Count.ToString(),current!=null&&current.Valid,processMs,gapMs,trigger,counter.Remaining(now),state.Replace("\"","\"\"")));
@@ -463,9 +489,7 @@ namespace MuMuBeans
                         timer.Tick+=delegate
                         {
                             Snapshot s=engine.GetSnapshot();displayedTrigger=s.Triggers;timer.Interval=s.Paused?100:16;
-                            hud.ClockLabel.Text=Theme.Clock(s.Remaining);hud.SetSide(s.Side);hud.ClockLabel.ForeColor=Theme.Urgency(s.Remaining);hud.Target.Text=s.Recovery;
-                            Reading display=s.Enabled?s.ConfirmedReading:s.Reading;
-                            hud.Detail.Text=(!s.Enabled?"已暂停 · ":"")+(display!=null&&display.Valid?display.Count+" / 4 颗":"画面待确认");hud.RefreshSurface();
+                            UpdateHud(hud,s);
                         };
                         IntPtr handle=hud.Handle;timer.Start();ready.Set();Application.Run();timer.Stop();
                     }
@@ -476,6 +500,12 @@ namespace MuMuBeans
             if(startupError!=null)throw new InvalidOperationException("悬浮窗启动失败",startupError);
         }
         public void ShowAt(Point p){form.BeginInvoke((Action)delegate{form.Location=p;form.Show();visible=true;});}
+        internal static void UpdateHud(Overlay hud,Snapshot s)
+        {
+            hud.NoBeans=s.NoBeans;hud.ClockLabel.Text=Theme.Clock(s.Remaining);hud.SetSide(s.Side);hud.ClockLabel.ForeColor=Theme.Urgency(s.Remaining);hud.Target.Text=s.NoBeans?"0 / 4 颗 · 等待豆子恢复":s.Recovery;
+            Reading display=s.Enabled?s.ConfirmedReading:s.Reading;
+            hud.Detail.Text=(!s.Enabled?"已暂停 · ":"")+(display!=null&&display.Valid?display.Count+" / 4 颗":"画面待确认");hud.RefreshSurface();
+        }
         public void Hide(){form.BeginInvoke((Action)delegate{form.Hide();visible=false;});}
         internal void SelectSideForTest(int side){form.BeginInvoke((Action)delegate{form.ClickSideForTest(side);});}
         internal bool TestTopMost{get{return (bool)form.Invoke(new Func<bool>(delegate{return form.TopMost;}));}}

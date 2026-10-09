@@ -2,6 +2,7 @@ using System;using System.Drawing;using System.Drawing.Drawing2D;using System.Dr
 namespace MuMuBeans {
 sealed class Overlay:Form {
  public Label ClockLabel=Theme.Label("00.00",30,true),Detail=Theme.Label("等待画面",8),Target=Theme.Label("等待少豆",8);
+ public bool NoBeans;
  public event EventHandler SurfacePresented;
  readonly Action restore;readonly Action<int> choose;int side=1;bool dragging;Point offset;
  readonly Rectangle leftButton=new Rectangle(122,8,38,21),rightButton=new Rectangle(165,8,38,21);
@@ -18,8 +19,8 @@ sealed class Overlay:Form {
  static void TextPath(Graphics g,string text,float size,RectangleF area,Color color,bool bold,bool outline){using(FontFamily family=new FontFamily("Microsoft YaHei UI"))using(GraphicsPath p=new GraphicsPath())using(StringFormat fmt=new StringFormat{Alignment=StringAlignment.Center,LineAlignment=StringAlignment.Center}){p.AddString(text??"",family,(int)(bold?FontStyle.Bold:FontStyle.Regular),size,area,fmt);if(outline)using(Pen pen=new Pen(Color.FromArgb(230,12,22,36),size>25?3:2){LineJoin=LineJoin.Round})g.DrawPath(pen,p);using(Brush b=new SolidBrush(color))g.FillPath(b,p);}}
  public Bitmap Surface(){Bitmap b=new Bitmap(Width,Height,PixelFormat.Format32bppPArgb);using(Graphics g=Graphics.FromImage(b)){g.SmoothingMode=SmoothingMode.AntiAlias;using(GraphicsPath p=Theme.Round(new RectangleF(1,1,Width-2,Height-2),17)){using(Brush brush=new SolidBrush(Color.FromArgb(45,15,27,42)))g.FillPath(brush,p);using(Pen pen=new Pen(Color.FromArgb(55,220,241,255)))g.DrawPath(pen,p);}
  TextPath(g,Detail.Text,10,new RectangleF(8,9,107,18),Color.White,false,true);
- Color accent=ClockLabel.ForeColor;if(accent==Theme.Blue)accent=Color.FromArgb(89,211,255);if(accent==Theme.Muted)accent=Color.FromArgb(214,229,242);
- TextPath(g,ClockLabel.Text,42,new RectangleF(6,28,204,53),accent,true,true);
+ Color accent=NoBeans?Color.FromArgb(214,229,242):ClockLabel.ForeColor;if(accent==Theme.Blue)accent=Color.FromArgb(89,211,255);if(accent==Theme.Muted)accent=Color.FromArgb(214,229,242);
+ TextPath(g,NoBeans?"对方已无豆":ClockLabel.Text,NoBeans?26:42,new RectangleF(6,28,204,53),accent,true,true);
  TextPath(g,Target.Text,10.5f,new RectangleF(5,83,206,21),Color.White,false,true);
  for(int i=0;i<2;i++){Rectangle rect=i==0?leftButton:rightButton;using(GraphicsPath p=Theme.Round(rect,8))using(Brush brush=new SolidBrush(i==side?Color.FromArgb(185,14,119,136):Color.FromArgb(65,18,35,49)))g.FillPath(brush,p);TextPath(g,i==0?"左":"右",11,rect,Color.White,i==side,false);}}
  return b;}
