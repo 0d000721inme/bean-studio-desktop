@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -13,6 +13,9 @@ namespace MuMuBeans
     }
     static class AutoLocator
     {
+        static readonly double[][] PurpleBarOffsets={new double[]{0,1,2,3,5},new double[]{0,1,2,3,-2}};
+        static readonly double[] BloodBarOffsets={.4,1,1.7,2.4,3.3};
+        static readonly Point[] DiamondCross={Point.Empty,new Point(-1,0),new Point(1,0),new Point(0,-1),new Point(0,1)};
         sealed class Candidate{public int X,Y;public double Pitch,Score;public bool Purple;}
         sealed class Map
         {
@@ -86,7 +89,7 @@ namespace MuMuBeans
         static bool PurpleBar(Map m,int x,int y,double p,int side){
             // Require a long violet bar above the gems, including outside the four slots.
             for(double up=.65;up<1.65;up+=.12){int yy=y-(int)(up*p),n=0;
-                foreach(double dx in new double[]{0,1,2,3,side==0?5:-2})if(m.P(x+(int)(dx*p),yy))n++;
+                foreach(double dx in PurpleBarOffsets[side])if(m.P(x+(int)(dx*p),yy))n++;
                 if(n==5)return true;
             }return false;
         }
@@ -95,7 +98,7 @@ namespace MuMuBeans
             for(double up=.65;up<1.85;up+=.12)
             {
                 int yy=y-(int)Math.Round(up*p),count=0;
-                foreach(double dx in new double[]{.4,1,1.7,2.4,3.3})if(m.R(x+(int)Math.Round(dx*p),yy))count++;
+                foreach(double dx in BloodBarOffsets)if(m.R(x+(int)Math.Round(dx*p),yy))count++;
                 // Probe outside the four gems so their gold glow cannot impersonate the bar.
                 if(count>=4&&m.R(x+(int)Math.Round((side==0?6:-1.2)*p),yy)&&(side==0||m.R(x+(int)Math.Round(3.3*p),yy)))return true;
             }
@@ -105,7 +108,7 @@ namespace MuMuBeans
         {
             int inner=(int)Math.Round(p*.13),cx=(int)Math.Round(p*.40),cy=(int)Math.Round(p*.47),gap=(int)Math.Round(p*.49),vertical=(int)Math.Round(p*.25);
             int colored=0,dark=0;double core=0;
-            foreach(Point d in new Point[]{Point.Empty,new Point(-inner,0),new Point(inner,0),new Point(0,-inner),new Point(0,inner)}){core+=m.E(x+d.X,y+d.Y);if(m.C(x+d.X,y+d.Y))colored++;if(m.D(x+d.X,y+d.Y))dark++;}
+            foreach(Point d in DiamondCross){core+=m.E(x+d.X*inner,y+d.Y*inner);if(m.C(x+d.X*inner,y+d.Y*inner))colored++;if(m.D(x+d.X*inner,y+d.Y*inner))dark++;}
             if(colored<4)return -1;core/=5;
             double[] corner={m.E(x-cx,y-cy),m.E(x+cx,y-cy),m.E(x-cx,y+cy),m.E(x+cx,y+cy)};Array.Sort(corner);
             double contrast=core-(corner[1]+corner[2])/2,valley=core-(m.E(x-gap,y)+m.E(x+gap,y))/2;

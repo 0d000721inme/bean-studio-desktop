@@ -1,0 +1,50 @@
+﻿PASS 确认恢复点使用原游戏数字，不减现实秒
+PASS 恢复点小数位保持原值
+PASS 中途补算保留约算符和明确状态
+PASS 时间未确认不显示编造数字
+PASS 读取中保留专门状态
+PASS 回合不足15秒不造恢复点
+PASS 中途补算不足冷却时间明确提示
+PASS 空值和未触发状态安全展示
+PASS 越界或非数字恢复点不被当作确认值
+PASS Focus 小数默认显示不中途取整
+PASS Focus 现实冷却与游戏恢复点使用等宽等高同字号主信息列
+PASS Focus 双主数字区域完全在窗口内
+PASS Focus 完整五位数恢复点能按等字号显示而不省略
+PASS Focus 无豆提示不覆盖已保存的恢复点
+PASS Focus HudHost真实零豆接线保留原恢复点
+PASS Focus 80% 左右命中坐标适配新布局
+PASS Focus 140% 左右命中坐标适配新布局
+PASS Digits 小数默认显示不中途取整
+PASS Digits 现实冷却与游戏恢复点使用等宽等高同字号主信息列
+PASS Digits 双主数字区域完全在窗口内
+PASS Digits 完整五位数恢复点能按等字号显示而不省略
+PASS Digits 无豆提示不覆盖已保存的恢复点
+PASS Digits HudHost真实零豆接线保留原恢复点
+PASS Digits 80% 左右命中坐标适配新布局
+PASS Digits 140% 左右命中坐标适配新布局
+PASS 纯数字样式没有背景表面
+PASS Ribbon 小数默认显示不中途取整
+PASS Ribbon 现实冷却与游戏恢复点使用等宽等高同字号主信息列
+PASS Ribbon 双主数字区域完全在窗口内
+PASS Ribbon 完整五位数恢复点能按等字号显示而不省略
+PASS Ribbon 无豆提示不覆盖已保存的恢复点
+PASS Ribbon HudHost真实零豆接线保留原恢复点
+PASS Ribbon 80% 左右命中坐标适配新布局
+PASS Ribbon 140% 左右命中坐标适配新布局
+PASS Classic 小数默认显示不中途取整
+PASS Classic 现实冷却与游戏恢复点使用等宽等高同字号主信息列
+PASS Classic 双主数字区域完全在窗口内
+PASS Classic 完整五位数恢复点能按等字号显示而不省略
+PASS Classic 无豆提示不覆盖已保存的恢复点
+PASS Classic HudHost真实零豆接线保留原恢复点
+PASS Classic 80% 左右命中坐标适配新布局
+PASS Classic 140% 左右命中坐标适配新布局
+PASS 50次位置变化复用Windows表面，无Bitmap重建
+PASS 拖动100ms内30次小数更新不重新分配/提交表面
+PASS 松手立即补交最新小数读数
+PASS 停止拖动后正常小数帧不受100ms节流限制
+PASS 鼠标Capture意外丢失立即取消拖动并补最新帧
+PASS 丢失Capture后不遗留永久节流
+PASS_COUNT=48
+FAILURES=0

@@ -1,4 +1,4 @@
-﻿using System;using System.Drawing;using System.Drawing.Imaging;using System.Drawing.Drawing2D;using System.IO;using System.Collections.Generic;using System.Diagnostics;
+using System;using System.Drawing;using System.Drawing.Imaging;using System.Drawing.Drawing2D;using System.IO;using System.Collections.Generic;using System.Diagnostics;
 namespace MuMuBeans {
 static class DarkTests {
  static List<string> report;static int failed;static void Check(bool pass,string name){report.Add((pass?"PASS ":"FAIL ")+name);if(!pass)failed++;}

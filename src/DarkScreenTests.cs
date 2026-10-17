@@ -1,4 +1,4 @@
-﻿using System;using System.Drawing;using System.Drawing.Drawing2D;using System.Diagnostics;using System.IO;using System.Threading;using System.Collections.Generic;using System.Windows.Forms;
+using System;using System.Drawing;using System.Drawing.Drawing2D;using System.Diagnostics;using System.IO;using System.Threading;using System.Collections.Generic;using System.Windows.Forms;
 namespace MuMuBeans {static class DarkScreenTests {
  sealed class Fixture:Form {public Bitmap Frame;public Fixture(){FormBorderStyle=FormBorderStyle.None;StartPosition=FormStartPosition.Manual;Location=new Point(50,500);ClientSize=new Size(930,523);TopMost=true;DoubleBuffered=true;}protected override void OnPaint(PaintEventArgs e){e.Graphics.InterpolationMode=InterpolationMode.HighQualityBilinear;e.Graphics.DrawImage(Frame,ClientRectangle);}}
  static bool Wait(Func<bool> condition,int ms){Stopwatch t=Stopwatch.StartNew();while(t.ElapsedMilliseconds<ms){Application.DoEvents();if(condition())return true;Thread.Sleep(5);}return false;}

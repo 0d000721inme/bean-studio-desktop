@@ -1,0 +1,7 @@
+﻿PASS 旧锁式状态读取确实等候模拟的慢截图锁
+PASS 新状态getter连续1000次读取不等待截图锁，低于100ms预算
+PASS 无锁快照保持原状态文字，不伪造捕获就绪
+PASS 状态检查没有启动WGC或获取任何画面
+BENCH legacy_locked_one_read_ms=248.504 revised_1000_reads_ms=0.000
+SCOPE Simulated 250 ms lock contention only, not measured MuMu drag responsiveness.
+FAILURES=0

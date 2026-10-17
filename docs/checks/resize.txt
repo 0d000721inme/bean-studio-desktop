@@ -1,0 +1,36 @@
+﻿PASS 合成HUD静态前检 {Width=960, Height=540} 右侧 4 豆，独立定位/分类正确
+PASS 合成HUD静态前检 {Width=960, Height=540} 右侧 3 豆，独立定位/分类正确
+PASS 合成HUD静态前检 {Width=1280, Height=720} 右侧 4 豆，独立定位/分类正确
+PASS 合成HUD静态前检 {Width=1280, Height=720} 右侧 3 豆，独立定位/分类正确
+PASS 合成测试窗不激活、不置顶、不抢前台
+INFO source_handle=1903406 valid=True visible=True iconic=False client={X=24,Y=47,Width=960,Height=540}
+PASS 实际WGC完成回读并确认960级合成HUD为4豆基准
+INFO baseline count=4 reading=True/4 size={Width=960, Height=540} triggers=0 deadline=0.000000000 remaining=0.000 reads=55 samples=61 reuse=52 state=监测中 · 少豆立即重置 15 秒 capture=WGC 窗口捕获
+PASS 真实WGC合成4→3豆仅触发一次完整15秒deadline
+INFO drop count=3 reading=True/3 size={Width=960, Height=540} triggers=1 deadline=16.326923600 remaining=14.996 reads=60 samples=66 reuse=56 state=监测中 · 少豆立即重置 15 秒 capture=WGC 窗口捕获
+TIMING synthetic_count_change command_to_paint_ms=2.13 paint_to_trigger_ms=78.81 trigger_to_test_observed_ms=3.66 confirmation_ms=52.02
+PASS RequestScan异步请求立即返回（<100ms），不在调用线程扫描
+PASS 后台重新扫描移交一次完整Client区域预览
+PASS TryTakeScanPreview消费后不重复返回同一预览
+PASS 手动重扫重新确认3豆基准，保持已有deadline，不产生假消费
+TIMING request_scan_api_ms=0.418
+INFO manual-rescan count=3 reading=True/3 size={Width=960, Height=540} triggers=1 deadline=16.326923600 remaining=14.890 reads=66 samples=70 reuse=59 state=监测中 · 少豆立即重置 15 秒 capture=WGC 窗口捕获
+PASS 真实ClientSize改变后无需按键自动重新定位、恢复有效3豆和WGC回读
+PASS 分辨率重定位不产生假消费，不清除或重置原deadline
+PASS 自动尺寸校准提供新分辨率完整预览
+TIMING synthetic_resize command_to_paint_ms=4.38 paint_to_valid_relocated_observed_ms=132.20
+INFO resized count=3 reading=True/3 size={Width=1280, Height=720} triggers=1 deadline=16.326923600 remaining=14.748 reads=73 samples=74 reuse=62 state=监测中 · 少豆立即重置 15 秒 capture=WGC 窗口捕获
+PASS 暂停实际关闭WGC/两识别线程并释放WinMM精度申请
+PASS 暂停状态接受显式单次重新扫描请求
+PASS 暂停单次兼容截图正向定位完成，并移交一次新预览
+PASS 暂停单次扫描结束仍不创建WGC/OCR会话、不申请WinMM精度
+PASS 暂停单次扫描保留已有deadline与触发次数
+PASS 继续监测重新确认基准，未沿用暂停豆数
+PASS 合成源窗口关闭完成
+INFO source-closed count= reading=null size={Width=0, Height=0} triggers=1 deadline=16.326923600 remaining=14.012 reads=74 samples=80 reuse=66 state=画面来源已关闭 · 原倒计时继续，请重新选择 MuMu 窗口 capture=窗口捕获已暂停
+PASS 源窗口关闭后清除基准/Clock来源、拒绝重扫、停WGC并释放WinMM，deadline仍保持
+PASS 无来源即使run=true也拒绝扫描、释放计时请求和旧捕获会话
+PASS 全程测试源未抢前台
+PASS Dispose释放测试源捕获与计时请求
+NOTICE 所有图像为代码绘制的合成HUD。分段耗时不代表真实MuMu/游戏延迟、OCR准确率或用户环境性能。暂停单次截图需要源窗口露出。没有使用用户截图、模拟器或wgcprobe.exe。
+FAILURES=0

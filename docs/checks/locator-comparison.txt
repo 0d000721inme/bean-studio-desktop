@@ -1,0 +1,15 @@
+PASS dark shape exact score equality over 12000 deterministic probes, positive=68
+PASS old/new locator exact rectangles, readings, scores: 640 color=-10496 left={X=62,Y=36,Width=41,Height=13} right={X=526,Y=36,Width=41,Height=13}
+PASS old/new locator exact rectangles, readings, scores: 640 color=-16711681 left={X=62,Y=36,Width=41,Height=13} right={X=526,Y=36,Width=41,Height=13}
+PASS old/new locator exact rectangles, readings, scores: 640 color=-3068683 left={X=62,Y=36,Width=41,Height=13} right={X=526,Y=36,Width=41,Height=13}
+PASS old/new locator exact rectangles, readings, scores: 1024 color=-10496 left={X=101,Y=59,Width=65,Height=20} right={X=840,Y=54,Width=65,Height=20}
+PASS old/new locator exact rectangles, readings, scores: 1024 color=-16711681 left={X=101,Y=59,Width=65,Height=20} right={X=842,Y=54,Width=65,Height=20}
+PASS old/new locator exact rectangles, readings, scores: 1024 color=-3068683 left={X=98,Y=55,Width=65,Height=20} right={X=841,Y=56,Width=65,Height=20}
+PASS old/new locator exact rectangles, readings, scores: 1280 color=-10496 left={X=125,Y=71,Width=82,Height=26} right={X=1054,Y=71,Width=82,Height=26}
+PASS old/new locator exact rectangles, readings, scores: 1280 color=-16711681 left={X=126,Y=70,Width=82,Height=26} right={X=1054,Y=71,Width=82,Height=26}
+PASS old/new locator exact rectangles, readings, scores: 1280 color=-3068683 left={X=126,Y=71,Width=82,Height=26} right={X=1052,Y=70,Width=82,Height=26}
+PASS blank screen remains unknown, never becomes four empty slots
+PASS allocation decreases in controlled blank rescan
+BENCH blank_1280x720 old_allocated_bytes=521059608 new_allocated_bytes=2646160 old_ms=160.21 new_ms=136.20
+BENCH measures one synthetic scan only; it does not establish MuMu CPU use, GPU use, end-to-end latency or recognition accuracy.
+FAILURES=0

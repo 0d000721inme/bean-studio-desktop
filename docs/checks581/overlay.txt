@@ -1,0 +1,56 @@
+﻿PASS 直接构造保持 Classic/小数显示并采用双主信息布局
+PASS Focus 默认尺寸和整秒显示
+PASS Focus 零豆状态明确而不显示 00.00
+PASS Focus 关闭恢复点收紧高度
+PASS Focus 80% 尺寸一致缩放
+PASS Focus 80% 左按钮命中与绘制一致
+PASS Focus 80% 右按钮命中与绘制一致
+PASS Focus 140% 尺寸一致缩放
+PASS Focus 140% 左按钮命中与绘制一致
+PASS Focus 140% 右按钮命中与绘制一致
+PASS Digits 默认尺寸和整秒显示
+PASS Digits 零豆状态明确而不显示 00.00
+PASS Digits 关闭恢复点收紧高度
+PASS Digits 80% 尺寸一致缩放
+PASS Digits 80% 左按钮命中与绘制一致
+PASS Digits 80% 右按钮命中与绘制一致
+PASS Digits 140% 尺寸一致缩放
+PASS Digits 140% 左按钮命中与绘制一致
+PASS Digits 140% 右按钮命中与绘制一致
+PASS Ribbon 默认尺寸和整秒显示
+PASS Ribbon 零豆状态明确而不显示 00.00
+PASS Ribbon 关闭恢复点收紧高度
+PASS Ribbon 80% 尺寸一致缩放
+PASS Ribbon 80% 左按钮命中与绘制一致
+PASS Ribbon 80% 右按钮命中与绘制一致
+PASS Ribbon 140% 尺寸一致缩放
+PASS Ribbon 140% 左按钮命中与绘制一致
+PASS Ribbon 140% 右按钮命中与绘制一致
+PASS Classic 默认尺寸和整秒显示
+PASS Classic 零豆状态明确而不显示 00.00
+PASS Classic 关闭恢复点收紧高度
+PASS Classic 80% 尺寸一致缩放
+PASS Classic 80% 左按钮命中与绘制一致
+PASS Classic 80% 右按钮命中与绘制一致
+PASS Classic 140% 尺寸一致缩放
+PASS Classic 140% 左按钮命中与绘制一致
+PASS Classic 140% 右按钮命中与绘制一致
+PASS 整秒 Ceiling：14.999 显示 15，绝不早跳至 14
+PASS 真实经过 1 秒才进入 14
+PASS 到期整秒显示 00
+PASS 最后 5 秒已使用紧急红色，无闪烁动画
+PASS 超过最后 5 秒没有提前红色提示
+PASS Show 实际提交一次，Shown/VisibleChanged 不重复提交
+PASS 整秒内原始读数/颜色 30 次变化不再分配 Bitmap/GDI/提交 layered surface
+PASS 显示秒变化立即成功提交并发事件
+PASS 豆数文字变化及时提交
+PASS 切换监测侧及时提交
+PASS 恢复点文字变化及时提交
+PASS 拖动由 Windows 移动已有表面，不为位置变化重绘 Bitmap
+PASS 隐藏窗口不提交表面
+PASS 同内容重新显示仍正确提交一次
+PASS 关闭恢复点时其变化不触发无意义重绘
+PASS 可见窗口缩放立即提交正确尺寸表面
+PASS 背景 0% 真实透明，文字和按钮保持独立透明度
+PASS_COUNT=54
+FAILURES=0

@@ -1,5 +1,5 @@
 {
-  "scope": "BeanStudio Windows x64 V5.7.1 official pinned OCR runtime; versions read from packaged native DLL exports",
+  "scope": "BeanStudio Windows x64 V5.8.1 retains the official pinned OCR runtime from V5.7.1; versions read from packaged native DLL exports",
   "nuget_package": {
     "id": "Tesseract",
     "version": "5.2.0",

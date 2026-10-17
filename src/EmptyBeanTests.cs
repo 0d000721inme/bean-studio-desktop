@@ -67,7 +67,7 @@ namespace MuMuBeans
 
                 using(Overlay hud=new Overlay(delegate{}))
                 {
-                    HudHost.UpdateHud(hud,Confirmed(zero));Check(hud.NoBeans&&hud.Detail.Text=="0 / 4 颗"&&hud.Target.Text.Contains("等待豆子恢复"),"生产HUD接线显示确认0颗与无豆提示");
+                    HudHost.UpdateHud(hud,Confirmed(zero));Check(hud.NoBeans&&hud.Detail.Text=="0 / 4 颗"&&hud.DisplayClock()=="对方已无豆"&&hud.Target.Text==Confirmed(zero).Recovery,"生产HUD接线显示确认0颗且保留原恢复点");
                     using(Bitmap image=hud.Surface())image.Save(Path.Combine(folder,"实际状态四空豆浮窗.png"));
                     HudHost.UpdateHud(hud,Confirmed(one));Check(!hud.NoBeans&&hud.ClockLabel.Text=="08.00"&&hud.Detail.Text=="1 / 4 颗","恢复一豆后HUD还原数字计时");
                     HudHost.UpdateHud(hud,new Snapshot{Enabled=true,Remaining=7,Recovery="未知"});Check(!hud.NoBeans&&hud.Detail.Text=="画面待确认","真正未确认保留原未知提示");

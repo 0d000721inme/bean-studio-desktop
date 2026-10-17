@@ -1,244 +1,69 @@
-﻿Bean Studio V5.7.3 本地验证 · 2026-10-06
-确认少豆会重置完整15秒并播放开始提示，实际截止时间自然到期只播放一次结束提示。
-MP3、WAV、FLAC、M4A及带视频与音轨的MP4样本，经过生产音效后端实际打开、推进和完成。
-支持0–100%音量；试听中0/100切换直接改变播放器音量，草稿不影响已保存自动提示设置。
-媒体测试使用0%音量；未进行人工听感或声卡端到端延迟测量，不保证所有编码文件可播放。
-计时链路经过真实Counter、Engine快照、后台提示监视器和MediaPlayer；未操作或捕获MuMu。
-暂停与实际绘制检查仅捕获程序自行创建的测试窗口。没有量化多局实战准确率。
+# V5.8.1 构建与验证
 
-音效事件与配置：33 PASS
-PASS 首次读数没有启动或结束音
-PASS 确认少一豆启动一次开始音
-PASS 连续100次保持同一计时不重复播放
-PASS 未知/黑屏不启动或撤销原完成音
-PASS 增长不触发音效
-PASS 15秒截止前不提前结束
-PASS 暂停时原计时到期仍结束一次
-PASS 结束后不重复播放完成音
-PASS 再次少豆启动新提示音
-PASS 计时中再次少豆重置开始音与完成时刻
-PASS 被替换的旧截止时刻没有结束音
-PASS 仅新截止时刻结束
-PASS 最后一豆变0仍是一次少豆事件
-PASS 无豆文字不重复触发音效
-PASS 手动清除静默取消完成提示
-PASS 清除后的旧15秒不再响
-PASS 清除后下一次少豆恢复提示
-PASS 截止时间为0静默取消
-PASS 服务初始不补响已存在的历史事件
-PASS 完成提示始终跟随权威截止时间
-PASS 允许音频/视频扩展名，拒绝可执行文件
-PASS 无配置使用默认启用及70%音量
-PASS 原子写入与全部字段读取，包含0%静音
-PASS 原子替换已存在配置支持100%音量
-PASS 配置提交不遗留临时文件
-PASS 非法音量不覆盖已有配置
-PASS 损坏配置回退默认值，异常非致命
-PASS 配置禁止DTD及外部实体读取
-PASS 限制配置大小，拒绝超大文件
-PASS 已删除的自定义文件保留选择供UI提示，解码阶段非致命
-PASS 保存时拒绝不存在的自定义文件
-PASS 只记录明确的绝对文件路径
-PASS 保存失败可见并不伪称成功
+日期：2026-10-17。Windows x64，`.NET Framework` 系统 C# 编译器，`build.ps1 -SkipDependencies` 完整构建成功，无警告。最终 `BeanStudio.exe` SHA-256：
 
-音频格式和实时音量：36 PASS
-PASS wav：生产后端读取音轨并开始播放（自动开关关闭仍可试听）
-PASS wav：0%音量且禁用媒体键/SMTC
-PASS wav：播放时间实际前进
-PASS wav：生产播放器收到实际完成事件
-PASS wav：试听完成释放且没有视频窗口
-PASS mp3：生产后端读取音轨并开始播放（自动开关关闭仍可试听）
-PASS mp3：0%音量且禁用媒体键/SMTC
-PASS mp3：播放时间实际前进
-PASS mp3：生产播放器收到实际完成事件
-PASS mp3：试听完成释放且没有视频窗口
-PASS flac：生产后端读取音轨并开始播放（自动开关关闭仍可试听）
-PASS flac：0%音量且禁用媒体键/SMTC
-PASS flac：播放时间实际前进
-PASS flac：生产播放器收到实际完成事件
-PASS flac：试听完成释放且没有视频窗口
-PASS m4a：生产后端读取音轨并开始播放（自动开关关闭仍可试听）
-PASS m4a：0%音量且禁用媒体键/SMTC
-PASS m4a：播放时间实际前进
-PASS m4a：生产播放器收到实际完成事件
-PASS m4a：试听完成释放且没有视频窗口
-PASS mp4：生产后端读取音轨并开始播放（自动开关关闭仍可试听）
-PASS mp4：0%音量且禁用媒体键/SMTC
-PASS mp4：播放时间实际前进
-PASS mp4：生产播放器收到实际完成事件
-PASS mp4：试听完成释放且没有视频窗口
-PASS 损坏MP3显示非致命解码错误
-PASS 无音轨MP4明确提示，不能假装成功
-PASS 无音轨视频没有成功播放提示
-PASS 解码错误后重新选择有效文件可恢复
-PASS 试听采用草稿1%音量
-PASS 试听中调到100%立即生效，不改已保存音量
-PASS 试听中调到0%立即静音
-PASS 停止试听释放播放器与媒体源
-PASS 删除的音效文件及时提示重新选择，不使程序退出
-PASS Settings返回副本，草稿/试听不偷偷保存设置
-PASS 媒体播放不遗留配置/音频临时文件
+```text
+7e98c0ae25dd7091da5dc7b126b848c115e3cb81f324c5126dac5ea210ef5650
+```
 
-生产计时到播放器：12 PASS
-PASS 生产开始/结束音完成预加载（测试音量0）
-PASS Engine首次基准没有音效
-PASS 真实Counter少豆经Engine快照启动生产提示音
-PASS 真实增长没有新提示，也不改截止时间
-PASS 计时中再次消耗重新播放，替换完成时间
-PASS 等待真实单调时钟经过旧截止点
-PASS 旧截止点不播放结束音，后台暂停不影响当前15秒
-PASS 新15秒自然到期实际播放结束音
-PASS 生产结束事件发生在权威截止后250ms以内（内部链路）
-PASS 到期多次轮询仍只有一个结束提示
-PASS 暂停保留计时逻辑，下一次Counter消耗可测试开始提示
-PASS 手动清空保留reset标识并取消完成提示
+本次没有启动或操作 MuMu，也未关闭用户仍在运行的旧 V5.8。测试只使用程序自己的窗口、代码合成图、状态机与显式锁等待；没有把实际游戏识别率或真实拖动帧率写成已验证。
 
-音效设置交互：10 PASS
-PASS 音效设置 700×680：文件、按钮、反馈不重叠；保存取消及键盘焦点入口保留
-PASS 总开关关闭再开启，独立提示开关保留
-PASS 少豆与计时结束开关独立写入草稿
-PASS 音量0–100百分比即时更新，试听草稿读取当前音量
-PASS 长中文文件名省略显示，工具提示及无障碍描述保留完整路径
-PASS 恢复默认只改当前草稿，未更改另一音效和原设置
-PASS 保存为Enter默认按钮，取消支持Esc，不用隐藏快捷操作
-PASS 取消丢弃草稿，输入设置未改变，设计测试未访问真实配置
-PASS 最小主界面音效设置入口可见，位于清空冷却与保存诊断之间
-PASS 音效按钮打开独立设置面板，取消后主界面与刷新计时保持运行
+## 最终 EXE 实际检查
 
-音效界面尺寸：4 PASS
-PASS 音效设置 740×680：文件、按钮、反馈不重叠；保存取消及键盘焦点入口保留
-PASS 音效设置 700×680：文件、按钮、反馈不重叠；保存取消及键盘焦点入口保留
-PASS 自动提示关闭保留独立开关，音量0显示静音百分比
-PASS 音效设置 1050×1020：文件、按钮、反馈不重叠；保存取消及键盘焦点入口保留
+| 范围 | 通过 | 证据 |
+| --- | ---: | --- |
+| 设置与快捷键，包括 V1→V2 显示迁移 | 34 | [settings](checks581/settings.txt) |
+| 原浮窗回归，按新尺寸更新预期、显式启用整秒用例 | 54 | [overlay](checks581/overlay.txt) |
+| 双主数字、解析、四风格、零豆恢复点与拖动表面 | 48 | [overlay581](checks581/overlay581.txt) |
+| 捕获状态读锁隔离 | 4 | [capture-status](checks581/capture-status.txt) |
+| 主窗双数字、移动消息、计时与取消/捕获丢失 | 26 | [drag](checks581/drag.txt) |
+| 主窗布局、真实资源曲线、实际快捷键注册/路由 | 197 | [studio](checks581/studio.txt) |
+| 设置窗口及草稿交互 | 8 | [settings-ui](checks581/settings-ui.txt) |
+| 暂停、恢复、真实 WGC 与 WinMM 生命周期 | 28 | [pause](checks581/pause.txt) |
+| 游戏时钟状态机与恢复点 | 12 | [clock](checks581/clock.txt) |
+| 真实 WGC 合成窗放大、重新定位与源关闭 | 25 | [resize](checks581/resize.txt) |
+| 原菜单、浮窗左右、缩放与实际界面绘制 | 8 | [ui](checks581/ui.txt) |
 
-四空豆回归：82 PASS
-PASS 四空豆自动定位，scale=0.5
-PASS 同图右侧四亮豆，scale=0.5
-PASS 实际归一化裁剪确认0颗，scale=0.5
-PASS 整框/单格遮挡不猜0，scale=0.5,slot=-1
-PASS 遮挡不接受新位置，scale=0.5,slot=-1
-PASS 整框/单格遮挡不猜0，scale=0.5,slot=0
-PASS 遮挡不接受新位置，scale=0.5,slot=0
-PASS 整框/单格遮挡不猜0，scale=0.5,slot=1
-PASS 遮挡不接受新位置，scale=0.5,slot=1
-PASS 整框/单格遮挡不猜0，scale=0.5,slot=2
-PASS 遮挡不接受新位置，scale=0.5,slot=2
-PASS 整框/单格遮挡不猜0，scale=0.5,slot=3
-PASS 遮挡不接受新位置，scale=0.5,slot=3
-PASS 四空豆自动定位，scale=0.75
-PASS 同图右侧四亮豆，scale=0.75
-PASS 实际归一化裁剪确认0颗，scale=0.75
-PASS 整框/单格遮挡不猜0，scale=0.75,slot=-1
-PASS 遮挡不接受新位置，scale=0.75,slot=-1
-PASS 整框/单格遮挡不猜0，scale=0.75,slot=0
-PASS 遮挡不接受新位置，scale=0.75,slot=0
-PASS 整框/单格遮挡不猜0，scale=0.75,slot=1
-PASS 遮挡不接受新位置，scale=0.75,slot=1
-PASS 整框/单格遮挡不猜0，scale=0.75,slot=2
-PASS 遮挡不接受新位置，scale=0.75,slot=2
-PASS 整框/单格遮挡不猜0，scale=0.75,slot=3
-PASS 遮挡不接受新位置，scale=0.75,slot=3
-PASS 四空豆自动定位，scale=1
-PASS 同图右侧四亮豆，scale=1
-PASS 实际归一化裁剪确认0颗，scale=1
-PASS 整框/单格遮挡不猜0，scale=1,slot=-1
-PASS 遮挡不接受新位置，scale=1,slot=-1
-PASS 整框/单格遮挡不猜0，scale=1,slot=0
-PASS 遮挡不接受新位置，scale=1,slot=0
-PASS 整框/单格遮挡不猜0，scale=1,slot=1
-PASS 遮挡不接受新位置，scale=1,slot=1
-PASS 整框/单格遮挡不猜0，scale=1,slot=2
-PASS 遮挡不接受新位置，scale=1,slot=2
-PASS 整框/单格遮挡不猜0，scale=1,slot=3
-PASS 遮挡不接受新位置，scale=1,slot=3
-PASS 四空豆自动定位，scale=1.25
-PASS 同图右侧四亮豆，scale=1.25
-PASS 实际归一化裁剪确认0颗，scale=1.25
-PASS 整框/单格遮挡不猜0，scale=1.25,slot=-1
-PASS 遮挡不接受新位置，scale=1.25,slot=-1
-PASS 整框/单格遮挡不猜0，scale=1.25,slot=0
-PASS 遮挡不接受新位置，scale=1.25,slot=0
-PASS 整框/单格遮挡不猜0，scale=1.25,slot=1
-PASS 遮挡不接受新位置，scale=1.25,slot=1
-PASS 整框/单格遮挡不猜0，scale=1.25,slot=2
-PASS 遮挡不接受新位置，scale=1.25,slot=2
-PASS 整框/单格遮挡不猜0，scale=1.25,slot=3
-PASS 遮挡不接受新位置，scale=1.25,slot=3
-PASS 四空豆自动定位，scale=1.5
-PASS 同图右侧四亮豆，scale=1.5
-PASS 实际归一化裁剪确认0颗，scale=1.5
-PASS 整框/单格遮挡不猜0，scale=1.5,slot=-1
-PASS 遮挡不接受新位置，scale=1.5,slot=-1
-PASS 整框/单格遮挡不猜0，scale=1.5,slot=0
-PASS 遮挡不接受新位置，scale=1.5,slot=0
-PASS 整框/单格遮挡不猜0，scale=1.5,slot=1
-PASS 遮挡不接受新位置，scale=1.5,slot=1
-PASS 整框/单格遮挡不猜0，scale=1.5,slot=2
-PASS 遮挡不接受新位置，scale=1.5,slot=2
-PASS 整框/单格遮挡不猜0，scale=1.5,slot=3
-PASS 遮挡不接受新位置，scale=1.5,slot=3
-PASS 右侧镜像四空豆同样确认0颗
-PASS 监测时确认0颗进入对方已无豆状态
-PASS 原始零读数尚未连续确认不能显示已无豆
-PASS Invalid/无画面与确认零豆区分
-PASS 恢复一豆自动退出无豆状态
-PASS 暂停不继续宣称已确认无豆
-PASS 首次四空豆只建立0基准
-PASS 零豆恢复一豆不启动倒计时
-PASS 最后一豆消耗仍按原规则设置15秒截止时间
-PASS 持续0颗不重复触发或跳回15秒
-PASS 黑屏不清原截止时间，且失效后不冒充零豆
-PASS 生产HUD接线显示确认0颗与无豆提示
-PASS 恢复一豆后HUD还原数字计时
-PASS 真正未确认保留原未知提示
-PASS 主界面无豆文字与适配字号
-PASS 同一无豆状态连续刷新不反复分配字体
-PASS 退出无豆状态恢复数字字体和字号
+上述 CLI 都在最终 EXE 上运行。GUI/WGC 检查分段串行执行。所有实际用例通过，无产品断言失败；汇总脚本首次分别把 drag 数量预填为 27、Studio 预填为 195，实际报告为 26 和 197，均为 `FAILURES=0`。已按实际数量修正脚本，没有删除用例或把脚本的数量不匹配当成产品修复。Studio 数增加是新增两个主要标签在四次布局遍历中产生的检查。
 
-实际暂停和窗口捕获回归：20 PASS
-PASS 真实少豆设置完整 15.000 秒 deadline
-PASS 暂停忘记豆数基准，已存在的冷却按现实时间继续
-PASS 恢复后较少豆数建立新基准，不把暂停期间变化误判为新消耗
-PASS 自建动态窗实际 WGC 完成 GPU 读回且 Capture 返回完整非空 Bitmap（WGC 窗口捕获）
-PASS 暂停完成任务等待 WGC 会话与初始化任务释放
-PASS 暂停拒绝 Capture/Available 重建，动态窗连续重绘 700 ms 读回计数不变
-PASS 恢复重新创建 WGC 会话，成功读回复增且 Capture 返回完整非空 Bitmap，无兼容截图代替
-PASS WGC 初始化与暂停竞态 8 轮，过期初始化不复活会话且无死锁
-PASS 真实动态窗驱动豆子与游戏时间两个识别线程采样
-PASS Engine 暂停等待捕获及两个识别线程真正空闲
-PASS 暂停时切左右、改区域、Configure(run=true)、Refresh 均不启动捕获或两识别线程
-PASS Engine 暂停保留既有 deadline，浮窗剩余时间继续下降而不清零/重置
-PASS 暂停清除已确认豆数，恢复不会沿用陈旧基准
-PASS Engine 恢复后两个识别线程重新采样，WGC 成功读回且返回完整 Bitmap
-PASS 重复暂停/恢复各 8 轮保持幂等，无死锁，最终采样归零
-PASS Dispose 释放暂停中的捕获会话
-PASS 真实开始按钮 Click 接通监测
-PASS 真实暂停按钮及左侧按钮 Click：保持暂停，两识别线程与捕获停止，主窗未显示
-PASS 暂停状态主界面在屏幕外无激活渲染并隐藏，未置顶或进入任务栏
-PASS 真实开始按钮可恢复暂停状态
+没有重复执行未受本次改动影响的 GPU 采样算法、OCR 图片准确率、所有音频编码兼容检查。V5.8 的相关历史证据仍在 [历史验证](V58_VERIFICATION.md)，不能将其哈希与本版混用。
 
-主界面实际绘制与交互：8 PASS
-PASS 最小化/恢复/缩放12轮，无负数字号异常；零/负高度字号保护有效
-PASS 点击悬浮倒计时先打开二级菜单，主窗体保持可见
-PASS 菜单打开悬浮窗，默认置顶，主窗体不自动隐藏
-PASS 悬浮窗左右快捷键同步主界面与识别引擎，未增加触发
-PASS 重复点击当前侧不重新定位，不中断识别基准
-PASS 来源选择可使用上下键/Enter/Space，菜单可关闭
-PASS 最小尺寸下关键控件均在容器内，音效入口独立可见，进度条不覆盖状态
-PASS 实际主按钮与预览画布可见，已保存悬停/恢复后的实际绘制（WGC 窗口捕获，非 DrawToBitmap）
+## 已查明的拖动问题
 
-游戏时钟状态回归：12 PASS
-PASS 基准需两帧
-PASS 单帧错读少一秒后恢复，不污染确认值
-PASS 真实整数减一秒在第二帧确认
-PASS 大跳变前两帧保持旧值
-PASS 持续大跳变第三帧重新确认
-PASS 空帧保留历史但不刷新时效
-PASS 游戏暂停不扣现实时间
-PASS 新回合需三帧确认
-PASS 整数到小数连续下降两帧确认
-PASS 单帧小数跳变被阻止
-PASS 失去时间后重获需两帧，不推算未读秒数
-PASS 恢复点计算及未知时间不猜60
+旧主窗每约 50 ms 无条件使 Badge、豆点、冷却轨道失效，每四个 Tick 克隆/重画 ROI。若可见数据未变，这些工作仍然发生。对原 V5.8 和本版分别编译后，以同样 100 次稳定状态 Tick 比较：
 
-所有上述检查通过；未重新执行所有历史版本或历史样本集。
+| 非必要失效次数 | V5.8 | V5.8.1 |
+| --- | ---: | ---: |
+| Badge | 100 | 0 |
+| 豆点 | 100 | 0 |
+| 冷却轨道 | 100 | 0 |
+| ROI 预览 | 25 | 0 |
+
+旧版本机平均 Tick 调用约 0.101 ms，本版最终测试约 0.021 ms。**这只是稳定状态的 UI 调用耗时，实际绘制/游戏/硬件竞争不全在这一计时内，不能换算成实战帧率改善。** [旧对照报告](checks581/drag-baseline.txt)
+
+第二条确定的阻塞链为 `GlassUI.Tick → WindowCapture.Status → capture gate → 兼容截图 CopyFromScreen`。原界面只读状态也必须等截图锁。修复仅把不可变状态文字以 `volatile string` 发布，状态 getter 不再拿该锁；捕获和暂停生命周期保护不变。
+
+同一探针人为持锁 250 ms，原编译版 getter 读取约 **250.264 ms**；最终版约 **0.002 ms**，文字保持一致。另一个内置回归连续读 1000 次也不等锁，且捕获读回计数为 0。探针没有调用 Main、WGC 或任何用户窗口。它证明锁隔离，不能说明用户显卡实际发生截图阻塞的频率。[旧探针](checks581/capture-status-before.txt) · [新探针](checks581/capture-status-after.txt)
+
+主窗移动模式仅延后预览克隆与曲线绘制，主要数字仍由 WinForms Timer 更新。最终自身窗口 40 次实际 `SetWindowPos` 消息加消息循环持续约 597 ms，最大单次移动调用约 1.090 ms；原 deadline 差值 0，触发次数不增、Pause 不变，退出后 150 ms 检查到图表更新恢复。监测源在此 UI 测试中故意缺席，不能说这是 MuMu 连续监测下的拖动压力测试。
+
+## 展示检查
+
+主窗 1040×760、1240×860、1440×960 的双主数字区域与字号一致、互不重叠。近零红色、小数、`≈59.99` 极值、未知、回合不足和零豆恢复点都进入专项断言。主窗近似符号放在标题而不是挤占数字宽度；引擎原恢复点不改值。
+
+浮窗四风格在 80% 和 140% 下命中区域一致。50 次位置变化不重建 Bitmap；只在正在拖动时限约 10 Hz 表面提交，松手或丢失鼠标捕获立即补最新数字，常态刷新不被节流。真实 `HudHost.UpdateHud` 零豆接线仍保留恢复点。
+
+已查看最终主窗/紧凑主窗、主窗估算与紧急状态，以及实际浮窗 Focus、Classic、未知、零豆、回合不足 PNG。独立测试也检查四种风格及 80% 极值。所有画面是合成 UI 预览，不是实战截图或占用率承诺。
+
+## 复现与边界
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1 -SkipDependencies
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test58.ps1 -SkipBuild
+# 只检查本次路径时，在 PowerShell 内：
+.\scripts\test58.ps1 -SkipBuild -Suite settings,overlay581,capture-status,drag
+```
+
+沿用旧脚本文件名以保留入口，本版默认选择与本次改动相关的检查。源码包首次构建需不加 `-SkipDependencies` 以恢复固定依赖。WGC 检查需要能呈现自身合成窗口的 Windows 桌面；不要并行运行 GUI 检查，也不要因环境不支持就伪造通过。
+
+WGC 整窗 GPU 读回与 MuMu 渲染仍可能争用硬件资源，本版没有改读回率或降低识别采样来掩盖卡顿。真实游戏体感、鼠标输入到屏幕延迟、长期内存泄漏及所有驱动组合仍未测量。原 15 秒现实期限、增长不触发、黑屏不清零、游戏暂停不外推、估算保留标记等规则不变。运行新版前请自行退出旧版，避免两份监测程序同时消耗资源。

@@ -1,0 +1,32 @@
+﻿PASS 真实少豆设置完整 15.000 秒 deadline
+PASS 暂停忘记豆数基准，已存在的冷却按现实时间继续
+PASS 恢复后较少豆数建立新基准，不把暂停期间变化误判为新消耗
+INFO 生产同样 MTA 线程的 WGC 构造/取帧/处置探针、完整异常栈及 HResult 已保存 wgc-probe.txt
+PASS 自建动态窗实际 WGC 完成 GPU 读回且 Capture 返回完整非空 Bitmap（WGC 窗口捕获）
+INFO initial 实际完成读回=4/3；fixture Tick=4 Paint=3；详细取帧诊断见 wgc-broker-initial.txt
+PASS 暂停完成任务等待 WGC 会话与初始化任务释放
+PASS 暂停拒绝 Capture/Available 重建，动态窗连续重绘 700 ms 读回计数不变
+PASS 恢复重新创建 WGC 会话，成功读回复增且 Capture 返回完整非空 Bitmap，无兼容截图代替
+INFO resume 实际完成读回=3/3；fixture Tick=5 Paint=5；详细取帧诊断见 wgc-broker-resume.txt
+PASS WGC 初始化与暂停竞态 8 轮，过期初始化不复活会话且无死锁
+PASS Engine 初始预览状态未申请系统 1 ms 计时精度
+PASS 实际监测申请成功的 WinMM 1 ms 精度，WGC 回读预算 60 Hz
+PASS 真实动态窗驱动豆子与游戏时间两个识别线程采样
+PASS 切换静态预览释放 WinMM 申请，回读预算降为 20 Hz
+PASS Engine 暂停等待捕获及两个识别线程真正空闲
+PASS 暂停期间多次 Configure(run=true) 不重新申请系统高精度计时
+PASS 暂停时切左右、改区域、Configure(run=true)、Refresh 均不启动捕获或两识别线程
+PASS Engine 暂停保留既有 deadline，浮窗剩余时间继续下降而不清零/重置
+PASS 暂停清除已确认豆数，恢复不会沿用陈旧基准
+PASS 恢复实际监测重新申请成功的 WinMM 1 ms 精度
+PASS Engine 恢复后两个识别线程重新采样，WGC 成功读回且返回完整 Bitmap
+PASS 重复暂停/恢复各 8 轮保持幂等，无死锁，最终采样归零
+PASS 8 轮重复暂停/恢复的 WinMM 申请释放保持幂等，最终未持有高精度请求
+PASS 清空来源即使 run=true 也释放 WinMM 申请并停止旧 WGC 会话
+PASS Dispose 释放暂停中的捕获会话
+PASS Dispose 未残留本 Engine 的系统高精度计时申请
+PASS 真实开始按钮 Click 接通监测
+PASS 真实暂停按钮及左侧按钮 Click：保持暂停，两识别线程与捕获停止，主窗未显示
+PASS 暂停状态主界面在屏幕外无激活渲染并隐藏，未置顶或进入任务栏
+PASS 真实开始按钮可恢复暂停状态
+FAILURES=0

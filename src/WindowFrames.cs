@@ -1,4 +1,4 @@
-﻿using System;using System.Drawing;using System.Drawing.Imaging;using System.Diagnostics;using System.Runtime.InteropServices;using System.Runtime.InteropServices.WindowsRuntime;using Windows.Graphics.Capture;using Windows.Graphics.DirectX;using Windows.Graphics.DirectX.Direct3D11;using Windows.Graphics.Imaging;
+using System;using System.Drawing;using System.Drawing.Imaging;using System.Diagnostics;using System.Runtime.InteropServices;using System.Runtime.InteropServices.WindowsRuntime;using Windows.Graphics.Capture;using Windows.Graphics.DirectX;using Windows.Graphics.DirectX.Direct3D11;using Windows.Graphics.Imaging;
 namespace MuMuBeans {
 // Optional WGC backend. A failed or stale frame is never treated as a valid observation.
 sealed class WindowFrames:IDisposable {
@@ -9,7 +9,7 @@ sealed class WindowFrames:IDisposable {
  [DllImport("d3d11.dll")]static extern int D3D11CreateDevice(IntPtr a,int type,IntPtr software,uint flags,IntPtr levels,int count,uint sdk,out IntPtr device,out int level,out IntPtr context);
  [DllImport("d3d11.dll")]static extern int CreateDirect3D11DeviceFromDXGIDevice(IntPtr d,out IntPtr p);
  [DllImport("dwmapi.dll")]static extern int DwmGetWindowAttribute(IntPtr h,int attr,out Native.Rect r,int size);
- readonly object gate=new object();IDirect3DDevice device;Direct3D11CaptureFramePool pool;GraphicsCaptureSession session;Bitmap latest;byte[] pixels;Windows.Storage.Streams.Buffer buffer;long stamp;bool stopped;readonly IntPtr hwnd;public string Error="等待窗口帧";
+ readonly object gate=new object();IDirect3DDevice device;Direct3D11CaptureFramePool pool;GraphicsCaptureSession session;Bitmap latest;byte[] pixels;Windows.Storage.Streams.Buffer buffer;long stamp,sequence,readbackStarted;Size clientSize,expectedClientSize;Windows.Graphics.SizeInt32 poolSize;bool stopped;readonly IntPtr hwnd;public string Error="等待窗口帧";
  string initializing="检查 WGC 支持";
  public WindowFrames(IntPtr h){hwnd=h;try{Initialize();}catch(Exception ex){Dispose();throw new InvalidOperationException(initializing+"："+ex.Message,ex);}}
  void Initialize(){
@@ -22,21 +22,38 @@ sealed class WindowFrames:IDisposable {
   initializing="创建图形设备";
   try{Marshal.ThrowExceptionForHR(D3D11CreateDevice(IntPtr.Zero,1,IntPtr.Zero,0x20,IntPtr.Zero,0,7,out d,out level,out context));Guid iid=new Guid("54EC77FA-1377-44E6-8C32-88FD5F44C84C");Marshal.ThrowExceptionForHR(Marshal.QueryInterface(d,ref iid,out dxgi));Marshal.ThrowExceptionForHR(CreateDirect3D11DeviceFromDXGIDevice(dxgi,out inspectable));device=(IDirect3DDevice)Marshal.GetObjectForIUnknown(inspectable);}
   finally{if(inspectable!=IntPtr.Zero)Marshal.Release(inspectable);if(dxgi!=IntPtr.Zero)Marshal.Release(dxgi);if(context!=IntPtr.Zero)Marshal.Release(context);if(d!=IntPtr.Zero)Marshal.Release(d);}
-  initializing="创建帧池";pool=Direct3D11CaptureFramePool.CreateFreeThreaded(device,DirectXPixelFormat.B8G8R8A8UIntNormalized,2,capture.Size);pool.FrameArrived+=Arrived;initializing="创建捕获会话";session=pool.CreateCaptureSession(capture);initializing="启动捕获会话";session.StartCapture();
+  initializing="创建帧池";poolSize=capture.Size;expectedClientSize=Native.ClientBounds(hwnd).Size;pool=Direct3D11CaptureFramePool.CreateFreeThreaded(device,DirectXPixelFormat.B8G8R8A8UIntNormalized,2,poolSize);pool.FrameArrived+=Arrived;initializing="创建捕获会话";session=pool.CreateCaptureSession(capture);initializing="启动捕获会话";session.StartCapture();
  }
  int busy,pending;
+ volatile int maximumFrames=60;
+ public void SetReadbackRate(int value){maximumFrames=Math.Max(1,Math.Min(60,value));}
  static long readbacks;public static long Readbacks{get{return System.Threading.Interlocked.Read(ref readbacks);}}
  // Remember notifications received during readback; a full frame pool must not lose its consumer.
  void Arrived(Direct3D11CaptureFramePool source,object args){System.Threading.Interlocked.Exchange(ref pending,1);Schedule(source);}
  void Schedule(Direct3D11CaptureFramePool source){if(System.Threading.Interlocked.CompareExchange(ref busy,1,0)!=0)return;System.Threading.Tasks.Task.Run(()=>{try{do{System.Threading.Interlocked.Exchange(ref pending,0);ReadFrame(source);}while(System.Threading.Interlocked.CompareExchange(ref pending,0,0)!=0);}finally{System.Threading.Interlocked.Exchange(ref busy,0);if(System.Threading.Interlocked.CompareExchange(ref pending,0,0)!=0)Schedule(source);}});}
- void ReadFrame(Direct3D11CaptureFramePool source){lock(gate){if(stopped)return;Direct3D11CaptureFrame f=null;try{Direct3D11CaptureFrame next;while((next=source.TryGetNextFrame())!=null){if(f!=null)f.Dispose();f=next;}if(f==null)return;var size=f.ContentSize;if(size.Width<1||size.Height<1)return;
+ void ReadFrame(Direct3D11CaptureFramePool source){
+  // A 144/240 Hz emulator does not need 144/240 complete GPU readbacks. Wait
+  // outside the bitmap lock, then drain the pool to its newest available frame.
+  // Classification still receives fresh frames at up to 60 Hz; a captured frame
+  // must not become several independent confirmations merely through polling.
+  int wait;lock(gate){if(stopped)return;wait=(int)Math.Ceiling(Math.Max(0,readbackStarted+Stopwatch.Frequency/(double)maximumFrames-Stopwatch.GetTimestamp())*1000/Stopwatch.Frequency);}
+  if(wait>0)System.Threading.Thread.Sleep(wait);
+  lock(gate){if(stopped)return;Direct3D11CaptureFrame f=null;try{Direct3D11CaptureFrame next;while((next=source.TryGetNextFrame())!=null){if(f!=null)f.Dispose();f=next;}if(f==null)return;var size=f.ContentSize;if(size.Width<1||size.Height<1)return;
+   Size receivedClientSize=Native.ClientBounds(hwnd).Size;
+   if(size.Width!=poolSize.Width||size.Height!=poolSize.Height){poolSize=size;stamp=0;clientSize=Size.Empty;expectedClientSize=receivedClientSize;source.Recreate(device,DirectXPixelFormat.B8G8R8A8UIntNormalized,2,size);Error="窗口尺寸变化，等待新帧";return;}
+   // Non-client chrome can change the client size without changing WGC's outer
+   // ContentSize. Invalidate once and adopt the new client size; otherwise such
+   // a change would wait forever for a ContentSize change that never arrives.
+   if(receivedClientSize!=expectedClientSize){expectedClientSize=receivedClientSize;stamp=0;Error="窗口尺寸变化，等待新帧";return;}
+   readbackStarted=Stopwatch.GetTimestamp();
    using(SoftwareBitmap sb=ReadSurface(f.Surface)){
-    if(sb.PixelWidth!=size.Width||sb.PixelHeight!=size.Height){source.Recreate(device,DirectXPixelFormat.B8G8R8A8UIntNormalized,2,size);return;}
-    int length=sb.PixelWidth*sb.PixelHeight*4;if(pixels==null||pixels.Length!=length){pixels=new byte[length];buffer=new Windows.Storage.Streams.Buffer((uint)length);}byte[] bytes=pixels;sb.CopyToBuffer(buffer);using(var dataReader=Windows.Storage.Streams.DataReader.FromBuffer(buffer))dataReader.ReadBytes(bytes);if(latest==null||latest.Width!=sb.PixelWidth||latest.Height!=sb.PixelHeight){if(latest!=null)latest.Dispose();latest=new Bitmap(sb.PixelWidth,sb.PixelHeight,PixelFormat.Format32bppArgb);}Bitmap b=latest;var data=b.LockBits(new Rectangle(Point.Empty,b.Size),ImageLockMode.WriteOnly,PixelFormat.Format32bppArgb);try{for(int y=0;y<b.Height;y++)Marshal.Copy(bytes,y*b.Width*4,IntPtr.Add(data.Scan0,y*data.Stride),b.Width*4);}finally{b.UnlockBits(data);}stamp=Stopwatch.GetTimestamp();System.Threading.Interlocked.Increment(ref readbacks);Error="WGC 窗口捕获";
+    if(sb.PixelWidth!=size.Width||sb.PixelHeight!=size.Height){stamp=0;source.Recreate(device,DirectXPixelFormat.B8G8R8A8UIntNormalized,2,size);return;}
+    int length=sb.PixelWidth*sb.PixelHeight*4;if(pixels==null||pixels.Length!=length){pixels=new byte[length];buffer=new Windows.Storage.Streams.Buffer((uint)length);}byte[] bytes=pixels;sb.CopyToBuffer(buffer);using(var dataReader=Windows.Storage.Streams.DataReader.FromBuffer(buffer))dataReader.ReadBytes(bytes);if(latest==null||latest.Width!=sb.PixelWidth||latest.Height!=sb.PixelHeight){if(latest!=null)latest.Dispose();latest=new Bitmap(sb.PixelWidth,sb.PixelHeight,PixelFormat.Format32bppArgb);}Bitmap b=latest;var data=b.LockBits(new Rectangle(Point.Empty,b.Size),ImageLockMode.WriteOnly,PixelFormat.Format32bppArgb);try{for(int y=0;y<b.Height;y++)Marshal.Copy(bytes,y*b.Width*4,IntPtr.Add(data.Scan0,y*data.Stride),b.Width*4);}finally{b.UnlockBits(data);}stamp=Stopwatch.GetTimestamp();clientSize=receivedClientSize;sequence=System.Threading.Interlocked.Increment(ref readbacks);Error="WGC 窗口捕获";
    }
   }catch(Exception e){Error="WGC: "+e.Message;}finally{if(f!=null)f.Dispose();}}}
  static SoftwareBitmap ReadSurface(IDirect3DSurface surface){var op=SoftwareBitmap.CreateCopyFromSurfaceAsync(surface);try{Stopwatch sw=Stopwatch.StartNew();while(op.Status==Windows.Foundation.AsyncStatus.Started){if(sw.ElapsedMilliseconds>1000){op.Cancel();throw new TimeoutException("GPU readback timeout");}System.Threading.Thread.Sleep(1);}return op.GetResults();}finally{op.Close();}}
- public Bitmap Crop(Rectangle screenArea){lock(gate){if(stopped||latest==null||(Stopwatch.GetTimestamp()-stamp)/(double)Stopwatch.Frequency>.3)throw new InvalidOperationException(Error+" · 等待新帧");Native.Rect r;Marshal.ThrowExceptionForHR(DwmGetWindowAttribute(hwnd,9,out r,Marshal.SizeOf(typeof(Native.Rect))));Rectangle crop=new Rectangle(screenArea.X-r.Left,screenArea.Y-r.Top,screenArea.Width,screenArea.Height);if(!new Rectangle(Point.Empty,latest.Size).Contains(crop))throw new InvalidOperationException("窗口尺寸变化，等待新帧");return latest.Clone(crop,PixelFormat.Format32bppArgb);}}
+ public Bitmap Crop(Rectangle screenArea){long id,at;return CropSince(screenArea,-1,out id,out at);}
+ public Bitmap CropSince(Rectangle screenArea,long previous,out long id,out long at){lock(gate){id=sequence;at=stamp;if(stopped||latest==null||stamp==0||(Stopwatch.GetTimestamp()-stamp)/(double)Stopwatch.Frequency>.3)throw new InvalidOperationException(Error+" · 等待新帧");if(clientSize!=Native.ClientBounds(hwnd).Size)throw new InvalidOperationException("窗口尺寸变化，等待新帧");Native.Rect r;Marshal.ThrowExceptionForHR(DwmGetWindowAttribute(hwnd,9,out r,Marshal.SizeOf(typeof(Native.Rect))));Rectangle crop=new Rectangle(screenArea.X-r.Left,screenArea.Y-r.Top,screenArea.Width,screenArea.Height);if(!new Rectangle(Point.Empty,latest.Size).Contains(crop))throw new InvalidOperationException("窗口尺寸变化，等待新帧");if(previous==sequence)return null;return latest.Clone(crop,PixelFormat.Format32bppArgb);}}
  public void Dispose(){lock(gate){if(stopped)return;stopped=true;if(pool!=null)pool.FrameArrived-=Arrived;if(latest!=null){latest.Dispose();latest=null;}pixels=null;buffer=null;}try{if(session!=null)session.Dispose();}finally{try{if(pool!=null)pool.Dispose();}finally{if(device!=null)device.Dispose();}}}
 }
 }

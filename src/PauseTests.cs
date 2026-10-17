@@ -243,16 +243,21 @@ namespace MuMuBeans
 
         static void EngineChecks(TestWindowHost host)
         {
+            Engine disposedEngine=null;
             using (Engine e = new Engine())
             {
+                disposedEngine=e;
+                Check(!e.TimerPrecisionActive,"Engine 初始预览状态未申请系统 1 ms 计时精度");
                 RectangleF roi = new RectangleF(.08f, .20f, .40f, .18f);
                 e.SetPaused(false); e.Configure(host.Handle, roi, 150, true);
+                Check(e.TimerPrecisionActive&&WindowCapture.MaximumReadbacks==60,"实际监测申请成功的 WinMM 1 ms 精度，WGC 回读预算 60 Hz");
                 long beanStart = e.Samples, clockStart = e.Clock.Samples;
                 Check(Until(delegate { return e.Samples > beanStart + 2 && e.Clock.Samples > clockStart; }, 10000),
                     "真实动态窗驱动豆子与游戏时间两个识别线程采样");
 
                 // Switch off observation before seeding a genuine Counter decrease under Engine's lock.
                 e.Configure(host.Handle, roi, 150, false);
+                Check(!e.TimerPrecisionActive&&WindowCapture.MaximumReadbacks==20,"切换静态预览释放 WinMM 申请，回读预算降为 20 Hz");
                 object gate = typeof(Engine).GetField("gate", Private).GetValue(e);
                 Counter counter = (Counter)typeof(Engine).GetField("counter", Private).GetValue(e);
                 Stopwatch time = (Stopwatch)typeof(Engine).GetField("time", Private).GetValue(e);
@@ -275,6 +280,7 @@ namespace MuMuBeans
                 e.Clock.Refresh();
                 Thread.Sleep(700);
                 Snapshot paused = e.GetSnapshot();
+                Check(!e.TimerPrecisionActive,"暂停期间多次 Configure(run=true) 不重新申请系统高精度计时");
                 double expectedRemaining = Math.Max(0, remaining - pausedWallTime.Elapsed.TotalSeconds);
                 Check(paused.Paused && e.Samples == beans && e.Clock.Samples == clocks && WindowCapture.Readbacks == reads,
                     "暂停时切左右、改区域、Configure(run=true)、Refresh 均不启动捕获或两识别线程");
@@ -282,16 +288,20 @@ namespace MuMuBeans
                     "Engine 暂停保留既有 deadline，浮窗剩余时间继续下降而不清零/重置");
                 Check(!paused.Count.HasValue, "暂停清除已确认豆数，恢复不会沿用陈旧基准");
                 e.SetPaused(false); e.Configure(host.Handle, roi, 150, true);
+                Check(e.TimerPrecisionActive,"恢复实际监测重新申请成功的 WinMM 1 ms 精度");
                 Check(Until(delegate { return e.Samples > beans && e.Clock.Samples > clocks && BrokerFrame(host, reads + 1); }, 10000),
                     "Engine 恢复后两个识别线程重新采样，WGC 成功读回且返回完整 Bitmap");
-                bool cyclesSafe = true;
+                bool cyclesSafe = true,precisionSafe=true;
                 for (int i = 0; i < 8; i++)
                 {
                     e.SetPaused(true); e.SetPaused(true);
+                    if(e.TimerPrecisionActive)precisionSafe=false;
                     if (!Stopped(e)) cyclesSafe = false;
                     e.ConfigureAuto(host.Handle, i % 2, false, true);
                     e.SetPaused(false); e.SetPaused(false);
+                    if(e.TimerPrecisionActive)precisionSafe=false;
                     e.Configure(host.Handle, roi, 150, true);
+                    if(!e.TimerPrecisionActive)precisionSafe=false;
                     Thread.Sleep(35);
                 }
                 e.SetPaused(true); if (!Stopped(e)) cyclesSafe = false;
@@ -299,8 +309,14 @@ namespace MuMuBeans
                 Thread.Sleep(250);
                 Check(cyclesSafe && e.Samples == lastBeans && e.Clock.Samples == lastClocks,
                     "重复暂停/恢复各 8 轮保持幂等，无死锁，最终采样归零");
+                Check(precisionSafe&&!e.TimerPrecisionActive,"8 轮重复暂停/恢复的 WinMM 申请释放保持幂等，最终未持有高精度请求");
+                e.SetPaused(false);e.Configure(host.Handle,roi,150,true);
+                e.Configure(IntPtr.Zero,roi,150,true);
+                Check(!e.TimerPrecisionActive&&Stopped(),"清空来源即使 run=true 也释放 WinMM 申请并停止旧 WGC 会话");
+                e.SetPaused(true);Stopped(e);
             }
             Check(Stopped(), "Dispose 释放暂停中的捕获会话");
+            Check(disposedEngine!=null&&!disposedEngine.TimerPrecisionActive,"Dispose 未残留本 Engine 的系统高精度计时申请");
         }
 
         static void Click(Control control)

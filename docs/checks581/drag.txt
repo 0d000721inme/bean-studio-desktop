@@ -1,0 +1,30 @@
+MEASURE 100 unchanged idle ticks: badge=0, beans=0, rail=0, crop=0; UI call mean=0.021 ms, max=0.090 ms
+PASS unchanged samples do not redraw badge, bean dots, rail or clone/repaint crop
+PASS decimal cooldown and fixed game recovery point appear together
+PASS equal priority, font and number area at 1040x760
+PASS both numbers remain separate and inside timer at 1040x760
+PASS full insufficient-round explanation fits at 1040x760
+PASS equal priority, font and number area at 1240x860
+PASS both numbers remain separate and inside timer at 1240x860
+PASS full insufficient-round explanation fits at 1240x860
+PASS equal priority, font and number area at 1440x960
+PASS both numbers remain separate and inside timer at 1440x960
+PASS full insufficient-round explanation fits at 1440x960
+PASS estimated recovery retains approximation and its explanation
+PASS approximate decimal recovery is not clipped in minimum window
+PASS largest two-decimal recovery fits; approximation is explicit in caption
+PASS unknown recovery stays explicitly unknown without fabricated numeric point
+PASS insufficient round time remains an explicit status
+PASS last bean consumption preserves its recovery point beside no-beans state
+PASS native enter-size-move activates only presentation throttling
+PASS real WinForms timer messages keep updating decimal cooldown during movement
+PASS moving window defers noncritical crop and resource chart redraws
+PASS moving window neither resets deadline nor adds a trigger
+PASS drag path never pauses the engine
+PASS authoritative countdown continues over elapsed movement time
+PASS deferred chart refresh resumes on first post-drag tick
+PASS canceling native drag clears presentation throttle
+PASS losing native mouse capture clears presentation throttle
+MEASURE 40 actual own-window SetWindowPos messages over 597.3 ms; maximum native move call=1.090 ms; deadline difference=0.000000; monitoring source deliberately absent
+FAILURES=0
+Own-window synthetic UI/counter verification only. No MuMu launch, game accuracy or hardware gameplay latency claim.

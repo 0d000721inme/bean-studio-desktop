@@ -10,6 +10,7 @@ bin/
 obj/
 test-results/
 artifacts/
+validation/
 
 # Local calibration, crash reports and manually saved diagnostics
 clock-region.txt

@@ -1,0 +1,20 @@
+PASS identical fresh ROI may reuse classification
+PASS one changed bean pixel invalidates exact cache
+PASS even an edge pixel invalidates exact cache
+PASS different ROI dimensions cannot reuse cache
+PASS bitmap and cached-pixel detector agree for -16711681
+PASS bitmap and cached-pixel detector agree for -10496
+PASS bitmap and cached-pixel detector agree for -3068683
+PASS bitmap and cached-pixel detector agree for -14530447
+PASS initial three fresh observations establish baseline only
+PASS two fresh observations do not prematurely confirm decrease
+PASS third fresh observation after 40 ms starts complete 15 seconds
+PASS confirmed growth does not restart deadline
+PASS later real decrease restarts full 15 seconds
+PASS unknown/black frames forget baseline without clearing active deadline
+PASS four confirmed empty slots retain explicit no-beans state
+PASS pause does not present a live no-beans confirmation
+PASS GPU readback budget has a 60 Hz ceiling
+PASS preview uses reduced readback budget
+PASS failed paused one-shot never opens WGC or resumes monitoring
+FAILURES=0

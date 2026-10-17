@@ -1,0 +1,7 @@
+Capture status contention probe: V5.8.1 volatile status
+No capture session, game window, UI, or frame readback was started.
+The shared capture-state gate is intentionally held for 250 ms to model a slow fallback screenshot.
+Old-style locking status getter: 250.402 ms
+Actual compiled app Status getter: 0.002 ms
+Status preserved: True (屏幕兼容捕获)
+Interpretation: this isolates lock coupling; it does not establish the frequency/duration of real driver stalls or gameplay latency.

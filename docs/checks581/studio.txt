@@ -1,0 +1,199 @@
+PASS 性能区域接收真实检查进程样本，非固定演示数字
+PASS 检查模式在创建窗口前关闭默认快捷键，不抢占用户 F8/F9
+PASS 实际 RegisterHotKey 检测同一组合被其他窗口占用
+PASS 真实 WM_HOTKEY 通过主界面接线打开非激活置顶浮窗
+PASS 第二次快捷键关闭浮窗，主界面不隐藏
+PASS 重新扫描快捷键走扫描动作，未选源时给出提示
+PASS 关闭绑定后 Win32 组合立即可由另一窗口注册
+PASS MainForm / Label 豆子 Studio 保持容器内
+PASS MainForm / Label 替身计时助手 保持容器内
+PASS MainForm / Label V5.8.1 保持容器内
+PASS MainForm / SessionBadge  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 画面来源 保持容器内
+PASS GlassPanel / WindowPicker  保持容器内
+PASS GlassPanel / GlassButton 刷新列表 保持容器内
+PASS GlassPanel / GlassButton 重新扫描 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 游戏画面 保持容器内
+PASS GlassPanel / Label 扫描时的定位预览 保持容器内
+PASS GlassPanel / PreviewBox  保持容器内
+PASS GlassPanel / Label 监测右侧  ·  增长不触发 保持容器内
+PASS GlassPanel / GlassButton 左侧 保持容器内
+PASS GlassPanel / GlassButton 右侧 保持容器内
+PASS GlassPanel / Label 开始监测后显示采样状态 保持容器内
+PASS GlassPanel / Label 游戏时间 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待时间数字  可点校准检查 保持容器内
+PASS GlassPanel / GlassButton 校准 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 冷却剩余 保持容器内
+PASS GlassPanel / Label 现实时间 · 15 秒 保持容器内
+PASS GlassPanel / Label 00.00 保持容器内
+PASS GlassPanel / Label 游戏恢复点 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待下一次少豆 保持容器内
+PASS GlassPanel / Label 等待少豆 保持容器内
+PASS GlassPanel / CooldownRail  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 豆子识别 保持容器内
+PASS GlassPanel / CropBox  保持容器内
+PASS GlassPanel / BeanDots  保持容器内
+PASS GlassPanel / Label 待确认 保持容器内
+PASS MainForm / GlassButton 开始监测 保持容器内
+PASS MainForm / GlassButton 悬浮倒计时 ▾ 保持容器内
+PASS MainForm / GlassButton 清空冷却 保持容器内
+PASS MainForm / GlassButton 音效设置 保持容器内
+PASS MainForm / GlassButton 保存诊断 保持容器内
+PASS MainForm / GlassButton — 保持容器内
+PASS MainForm / GlassButton × 保持容器内
+PASS MainForm / Label 请选择 MuMu 窗口 保持容器内
+PASS MainForm / GlassButton 快捷键与浮窗 保持容器内
+PASS MainForm / Label 本程序资源 保持容器内
+PASS MainForm / PerformancePanel  保持容器内
+PASS MainForm / Label 快捷键已关闭 保持容器内
+PASS MainForm / Label 豆子 Studio 保持容器内
+PASS MainForm / Label 替身计时助手 保持容器内
+PASS MainForm / Label V5.8.1 保持容器内
+PASS MainForm / SessionBadge  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 画面来源 保持容器内
+PASS GlassPanel / WindowPicker  保持容器内
+PASS GlassPanel / GlassButton 刷新列表 保持容器内
+PASS GlassPanel / GlassButton 重新扫描 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 游戏画面 保持容器内
+PASS GlassPanel / Label 扫描时的定位预览 保持容器内
+PASS GlassPanel / PreviewBox  保持容器内
+PASS GlassPanel / Label 监测右侧  ·  增长不触发 保持容器内
+PASS GlassPanel / GlassButton 左侧 保持容器内
+PASS GlassPanel / GlassButton 右侧 保持容器内
+PASS GlassPanel / Label 开始监测后显示采样状态 保持容器内
+PASS GlassPanel / Label 游戏时间 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待时间数字  可点校准检查 保持容器内
+PASS GlassPanel / GlassButton 校准 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 冷却剩余 保持容器内
+PASS GlassPanel / Label 现实时间 · 15 秒 保持容器内
+PASS GlassPanel / Label 00.00 保持容器内
+PASS GlassPanel / Label 游戏恢复点 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待下一次少豆 保持容器内
+PASS GlassPanel / Label 等待少豆 保持容器内
+PASS GlassPanel / CooldownRail  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 豆子识别 保持容器内
+PASS GlassPanel / CropBox  保持容器内
+PASS GlassPanel / BeanDots  保持容器内
+PASS GlassPanel / Label 待确认 保持容器内
+PASS MainForm / GlassButton 开始监测 保持容器内
+PASS MainForm / GlassButton 悬浮倒计时 ▾ 保持容器内
+PASS MainForm / GlassButton 清空冷却 保持容器内
+PASS MainForm / GlassButton 音效设置 保持容器内
+PASS MainForm / GlassButton 保存诊断 保持容器内
+PASS MainForm / GlassButton — 保持容器内
+PASS MainForm / GlassButton × 保持容器内
+PASS MainForm / Label 请选择 MuMu 窗口 保持容器内
+PASS MainForm / GlassButton 快捷键与浮窗 保持容器内
+PASS MainForm / Label 本程序资源 保持容器内
+PASS MainForm / PerformancePanel  保持容器内
+PASS MainForm / Label 快捷键已关闭 保持容器内
+PASS MainForm / Label 豆子 Studio 保持容器内
+PASS MainForm / Label 替身计时助手 保持容器内
+PASS MainForm / Label V5.8.1 保持容器内
+PASS MainForm / SessionBadge  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 画面来源 保持容器内
+PASS GlassPanel / WindowPicker  保持容器内
+PASS GlassPanel / GlassButton 刷新列表 保持容器内
+PASS GlassPanel / GlassButton 重新扫描 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 游戏画面 保持容器内
+PASS GlassPanel / Label 扫描时的定位预览 保持容器内
+PASS GlassPanel / PreviewBox  保持容器内
+PASS GlassPanel / Label 监测右侧  ·  增长不触发 保持容器内
+PASS GlassPanel / GlassButton 左侧 保持容器内
+PASS GlassPanel / GlassButton 右侧 保持容器内
+PASS GlassPanel / Label 开始监测后显示采样状态 保持容器内
+PASS GlassPanel / Label 游戏时间 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待时间数字  可点校准检查 保持容器内
+PASS GlassPanel / GlassButton 校准 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 冷却剩余 保持容器内
+PASS GlassPanel / Label 现实时间 · 15 秒 保持容器内
+PASS GlassPanel / Label 00.00 保持容器内
+PASS GlassPanel / Label 游戏恢复点 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待下一次少豆 保持容器内
+PASS GlassPanel / Label 等待少豆 保持容器内
+PASS GlassPanel / CooldownRail  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 豆子识别 保持容器内
+PASS GlassPanel / CropBox  保持容器内
+PASS GlassPanel / BeanDots  保持容器内
+PASS GlassPanel / Label 待确认 保持容器内
+PASS MainForm / GlassButton 开始监测 保持容器内
+PASS MainForm / GlassButton 悬浮倒计时 ▾ 保持容器内
+PASS MainForm / GlassButton 清空冷却 保持容器内
+PASS MainForm / GlassButton 音效设置 保持容器内
+PASS MainForm / GlassButton 保存诊断 保持容器内
+PASS MainForm / GlassButton — 保持容器内
+PASS MainForm / GlassButton × 保持容器内
+PASS MainForm / Label 请选择 MuMu 窗口 保持容器内
+PASS MainForm / GlassButton 快捷键与浮窗 保持容器内
+PASS MainForm / Label 本程序资源 保持容器内
+PASS MainForm / PerformancePanel  保持容器内
+PASS MainForm / Label 快捷键已关闭 保持容器内
+PASS 最小化恢复后的计时字号保持正数
+PASS 隐藏性能区域同时收回布局空间
+PASS 隐藏静态预览仍保留操作入口与状态
+PASS MainForm / Label 豆子 Studio 保持容器内
+PASS MainForm / Label 替身计时助手 保持容器内
+PASS MainForm / Label V5.8.1 保持容器内
+PASS MainForm / SessionBadge  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 画面来源 保持容器内
+PASS GlassPanel / WindowPicker  保持容器内
+PASS GlassPanel / GlassButton 刷新列表 保持容器内
+PASS GlassPanel / GlassButton 重新扫描 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 游戏画面 保持容器内
+PASS GlassPanel / Label 扫描时的定位预览 保持容器内
+PASS GlassPanel / PreviewBox  保持容器内
+PASS GlassPanel / Label 监测右侧  ·  增长不触发 保持容器内
+PASS GlassPanel / GlassButton 左侧 保持容器内
+PASS GlassPanel / GlassButton 右侧 保持容器内
+PASS GlassPanel / Label 开始监测后显示采样状态 保持容器内
+PASS GlassPanel / Label 游戏时间 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待时间数字  可点校准检查 保持容器内
+PASS GlassPanel / GlassButton 校准 保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 冷却剩余 保持容器内
+PASS GlassPanel / Label 现实时间 · 15 秒 保持容器内
+PASS GlassPanel / Label 00.00 保持容器内
+PASS GlassPanel / Label 游戏恢复点 保持容器内
+PASS GlassPanel / Label — 保持容器内
+PASS GlassPanel / Label 等待下一次少豆 保持容器内
+PASS GlassPanel / Label 等待少豆 保持容器内
+PASS GlassPanel / CooldownRail  保持容器内
+PASS MainForm / GlassPanel  保持容器内
+PASS GlassPanel / Label 豆子识别 保持容器内
+PASS GlassPanel / CropBox  保持容器内
+PASS GlassPanel / BeanDots  保持容器内
+PASS GlassPanel / Label 待确认 保持容器内
+PASS MainForm / GlassButton 开始监测 保持容器内
+PASS MainForm / GlassButton 悬浮倒计时 ▾ 保持容器内
+PASS MainForm / GlassButton 清空冷却 保持容器内
+PASS MainForm / GlassButton 音效设置 保持容器内
+PASS MainForm / GlassButton 保存诊断 保持容器内
+PASS MainForm / GlassButton — 保持容器内
+PASS MainForm / GlassButton × 保持容器内
+PASS MainForm / Label 请选择 MuMu 窗口 保持容器内
+PASS MainForm / GlassButton 快捷键与浮窗 保持容器内
+PASS MainForm / Label 快捷键已关闭 保持容器内
+PASS 设置面板实际生成默认和最小尺寸预览
+FAILURES=0
+检查只创建程序自身窗口和合成图，不操作 MuMu，不把 UI 检查计为实战准确率。

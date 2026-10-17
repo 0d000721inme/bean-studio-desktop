@@ -3,3 +3,6 @@
 *.ps1 text eol=crlf
 *.md text eol=lf
 *.txt text eol=lf
+
+# Preserve upstream notice bytes and their recorded SHA-256 values.
+licenses/** -text

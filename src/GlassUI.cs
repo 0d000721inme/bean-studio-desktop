@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Timer=System.Windows.Forms.Timer;
@@ -14,7 +15,7 @@ namespace MuMuBeans
 {
     static class Theme
     {
-        public static readonly Color Ink=Color.FromArgb(22,36,52), Muted=Color.FromArgb(79,98,116), Blue=Color.FromArgb(0,105,117), Cyan=Color.FromArgb(0,118,127), Red=Color.FromArgb(185,53,69);
+        public static readonly Color Ink=Color.FromArgb(36,46,52), Muted=Color.FromArgb(96,108,115), Blue=Color.FromArgb(41,118,111), Cyan=Color.FromArgb(41,118,111), Red=Color.FromArgb(183,67,61);
         public static Color Urgency(double remaining)
         {
             if(remaining<=0)return Muted;
@@ -28,16 +29,14 @@ namespace MuMuBeans
             float d=Math.Max(1,Math.Min(radius*2,Math.Min(r.Width,r.Height)));GraphicsPath p=new GraphicsPath();
             p.AddArc(r.X,r.Y,d,d,180,90);p.AddArc(r.Right-d,r.Y,d,d,270,90);p.AddArc(r.Right-d,r.Bottom-d,d,d,0,90);p.AddArc(r.X,r.Bottom-d,d,d,90,90);p.CloseFigure();return p;
         }
-        public static readonly Color Bg=Color.FromArgb(238,243,247);
+        public static readonly Color Bg=Color.FromArgb(245,246,245);
         public static void Glass(Graphics g,RectangleF r,float radius,bool blue=false)
         {
             if(r.Width<2||r.Height<2)return;g.SmoothingMode=SmoothingMode.AntiAlias;
             using(GraphicsPath p=Round(r,radius))
-            {using(Brush b=new LinearGradientBrush(r,Color.White,blue?Color.FromArgb(230,235,255):Color.FromArgb(243,249,252),65))g.FillPath(b,p);using(Pen pen=new Pen(Color.FromArgb(213,225,241),1))g.DrawPath(pen,p);}
+            {using(Brush b=new SolidBrush(Color.White))g.FillPath(b,p);using(Pen pen=new Pen(Color.FromArgb(224,230,226),1))g.DrawPath(pen,p);}
         }
-        public static void Background(Graphics g,Size size){g.Clear(Bg);if(size.Width>0&&size.Height>0){Glow(g,new RectangleF(size.Width*.56f,-size.Height*.28f,size.Width*.66f,size.Height*.7f),Color.FromArgb(52,170,207,217));Glow(g,new RectangleF(-size.Width*.18f,size.Height*.42f,size.Width*.55f,size.Height*.75f),Color.FromArgb(30,167,187,214));}}
-        static void Glow(Graphics g,RectangleF r,Color color)
-        {using(GraphicsPath p=new GraphicsPath()){p.AddEllipse(r);using(PathGradientBrush b=new PathGradientBrush(p)){b.CenterColor=color;b.SurroundColors=new Color[]{Color.FromArgb(0,color)};g.FillPath(b,p);}}}
+        public static void Background(Graphics g,Size size){g.Clear(Bg);}
         public static void RoundedWindow(Form form,int radius)
         {if(form.Width<1||form.Height<1)return;Region old=form.Region;using(GraphicsPath p=Round(new RectangleF(0,0,form.Width,form.Height),radius))form.Region=new Region(p);if(old!=null)old.Dispose();}
         public static Label Label(string text,int size=10,bool bold=false)
@@ -48,10 +47,8 @@ namespace MuMuBeans
         public bool Blue,Material;public int Radius=24;
         public GlassPanel(){SetStyle(ControlStyles.SupportsTransparentBackColor|ControlStyles.OptimizedDoubleBuffer|ControlStyles.ResizeRedraw|ControlStyles.UserPaint,true);BackColor=Color.Transparent;}
         protected override void OnPaintBackground(PaintEventArgs e){base.OnPaintBackground(e);if(Width<2||Height<2)return;Graphics g=e.Graphics;g.SmoothingMode=SmoothingMode.AntiAlias;RectangleF rect=new RectangleF(1,1,Width-3,Height-3);using(GraphicsPath p=Theme.Round(rect,Radius)){
-            Color a=Material?Color.FromArgb(245,255,255,255):Color.White,b=Blue?Color.FromArgb(230,243,245):Color.FromArgb(249,251,253);
-            using(Brush brush=new LinearGradientBrush(rect,a,b,100))g.FillPath(brush,p);
-            using(Pen pen=new Pen(Color.FromArgb(205,216,226),1))g.DrawPath(pen,p);
-            using(GraphicsPath rim=Theme.Round(new RectangleF(2,2,Width-5,Height-5),Radius-1))using(Pen pen=new Pen(Color.FromArgb(230,255,255,255),1))g.DrawPath(pen,rim);
+            using(Brush brush=new SolidBrush(Blue?Color.FromArgb(238,244,241):Color.White))g.FillPath(brush,p);
+            using(Pen pen=new Pen(Color.FromArgb(224,230,226),1))g.DrawPath(pen,p);
         }}
     }
     sealed class GlassButton:Button
@@ -63,12 +60,12 @@ namespace MuMuBeans
         protected override void OnMouseEnter(EventArgs e){base.OnMouseEnter(e);hover=true;Invalidate();}protected override void OnMouseLeave(EventArgs e){base.OnMouseLeave(e);hover=pressed=false;Invalidate();}
         protected override void OnMouseDown(MouseEventArgs e){base.OnMouseDown(e);pressed=true;Invalidate();}protected override void OnMouseUp(MouseEventArgs e){base.OnMouseUp(e);pressed=false;Invalidate();}
         protected override void OnGotFocus(EventArgs e){base.OnGotFocus(e);Invalidate();}protected override void OnLostFocus(EventArgs e){base.OnLostFocus(e);Invalidate();}
-        protected override void OnPaint(PaintEventArgs e){if(Width<4||Height<4)return;Graphics g=e.Graphics;g.SmoothingMode=SmoothingMode.AntiAlias;Color fill=primary?Color.FromArgb(22,61,76):selected?Theme.Blue:Color.FromArgb(249,252,254);if(hover)fill=primary||selected?Color.FromArgb(11,83,96):Color.FromArgb(228,240,244);if(pressed)fill=Color.FromArgb(200,224,231);if(!Enabled)fill=Color.FromArgb(229,235,239);
-            using(GraphicsPath p=Theme.Round(new RectangleF(2,2,Width-5,Height-5),Math.Min(21,Height/2f-2))){using(Brush b=new SolidBrush(fill))g.FillPath(b,p);using(Pen border=new Pen(primary||selected?Color.FromArgb(22,85,100):Color.FromArgb(202,216,225),1))g.DrawPath(border,p);if(!primary&&!selected)using(Pen rim=new Pen(Color.White,1))g.DrawArc(rim,3,3,Height-7,Height-7,180,95);}
-            Color ink=!Enabled?Theme.Muted:(primary||selected)&&!pressed?Color.White:Theme.Ink;Rectangle label=new Rectangle(8,1,Width-16,Height-2);
+        protected override void OnPaint(PaintEventArgs e){if(Width<4||Height<4)return;Graphics g=e.Graphics;g.SmoothingMode=SmoothingMode.AntiAlias;Color fill=primary?Theme.Ink:selected?Theme.Blue:Color.White;if(hover)fill=primary||selected?Color.FromArgb(54,85,78):Color.FromArgb(238,243,239);if(pressed)fill=Color.FromArgb(220,231,224);if(!Enabled)fill=Color.FromArgb(234,237,234);
+            using(GraphicsPath p=Theme.Round(new RectangleF(2,2,Width-5,Height-5),7)){using(Brush b=new SolidBrush(fill))g.FillPath(b,p);using(Pen border=new Pen(primary||selected?fill:Color.FromArgb(219,227,222),1))g.DrawPath(border,p);}
+            Color ink=!Enabled?Theme.Muted:(primary||selected)&&!pressed?Color.White:Theme.Ink;int padding=Width<45?2:8;Rectangle label=new Rectangle(padding,1,Width-padding*2,Height-2);
             if(Icon.Length>0){Glyphs.Draw(g,Icon,new Rectangle(15,(Height-18)/2,18,18),ink);label=new Rectangle(36,1,Width-43,Height-2);}
             TextRenderer.DrawText(g,Text,Font,label,ink,TextFormatFlags.HorizontalCenter|TextFormatFlags.VerticalCenter|TextFormatFlags.EndEllipsis);
-            if(Focused)using(GraphicsPath p=Theme.Round(new RectangleF(.8f,.8f,Width-2,Height-2),Math.Min(22,Height/2f)))using(Pen focus=new Pen(Theme.Blue,2))g.DrawPath(focus,p);
+            if(Focused)using(GraphicsPath p=Theme.Round(new RectangleF(.8f,.8f,Width-2,Height-2),8))using(Pen focus=new Pen(Theme.Blue,2))g.DrawPath(focus,p);
         }
     }
     static class Glyphs {
@@ -83,16 +80,18 @@ namespace MuMuBeans
         }}
     }
     sealed class CooldownRail:Control {
-        public double Remaining;public CooldownRail(){DoubleBuffered=true;SetStyle(ControlStyles.SupportsTransparentBackColor,true);BackColor=Color.Transparent;}
+        double remaining;int lastSegments=-1,lastColor;
+        public double Remaining{get{return remaining;}set{remaining=value;int segments=(int)Math.Max(0,Math.Min(15,Math.Ceiling(value))),color=Theme.Urgency(value).ToArgb();if(segments!=lastSegments||color!=lastColor){lastSegments=segments;lastColor=color;Invalidate();}}}public CooldownRail(){DoubleBuffered=true;SetStyle(ControlStyles.SupportsTransparentBackColor,true);BackColor=Color.Transparent;}
         protected override void OnPaint(PaintEventArgs e){base.OnPaint(e);Graphics g=e.Graphics;g.SmoothingMode=SmoothingMode.AntiAlias;float pitch=Width/15f;for(int i=0;i<15;i++){RectangleF r=new RectangleF(i*pitch+1,6,pitch-4,5);using(GraphicsPath p=Theme.Round(r,2.5f))using(Brush b=new SolidBrush(i<Math.Ceiling(Remaining)?Theme.Urgency(Remaining):Color.FromArgb(213,226,233)))g.FillPath(b,p);}}
     }
     sealed class SessionBadge:Control {
-        string caption="尚未连接";public string Caption{get{return caption;}set{caption=value;AccessibleName=value;}}public bool Active;public SessionBadge(){DoubleBuffered=true;SetStyle(ControlStyles.SupportsTransparentBackColor,true);BackColor=Color.Transparent;}
+        string caption="尚未连接";bool active;public string Caption{get{return caption;}set{if(caption==value)return;caption=value;AccessibleName=value;Invalidate();}}public bool Active{get{return active;}set{if(active==value)return;active=value;Invalidate();}}public SessionBadge(){DoubleBuffered=true;SetStyle(ControlStyles.SupportsTransparentBackColor,true);BackColor=Color.Transparent;}
         protected override void OnPaint(PaintEventArgs e){base.OnPaint(e);Graphics g=e.Graphics;g.SmoothingMode=SmoothingMode.AntiAlias;using(GraphicsPath p=Theme.Round(new RectangleF(1,1,Width-3,Height-3),16))using(Brush b=new SolidBrush(Color.FromArgb(230,255,255,255)))g.FillPath(b,p);using(Brush b=new SolidBrush(Active?Theme.Blue:Theme.Muted))g.FillEllipse(b,14,Height/2-3,6,6);TextRenderer.DrawText(g,Caption,Font,new Rectangle(29,0,Width-36,Height),Theme.Ink,TextFormatFlags.VerticalCenter|TextFormatFlags.Left);}
     }
     sealed class PreviewBox:Control
     {
-        Bitmap frame;public RectangleF LeftRegion,RightRegion;public int Side=1;
+        Bitmap frame;public RectangleF LeftRegion,RightRegion;public int Side=1;bool suppressed;
+        public bool Suppressed{get{return suppressed;}set{if(suppressed!=value){suppressed=value;Invalidate();}}}
         public PreviewBox(){SetStyle(ControlStyles.SupportsTransparentBackColor|ControlStyles.OptimizedDoubleBuffer|ControlStyles.ResizeRedraw,true);BackColor=Color.Transparent;}
         public Bitmap CopyFrame(){return frame==null?null:(Bitmap)frame.Clone();}
         public void SetFrame(Bitmap b){if(frame!=null)frame.Dispose();frame=b;Invalidate();}
@@ -102,7 +101,7 @@ namespace MuMuBeans
             RectangleF bounds=new RectangleF(0,0,Width-1,Height-1);using(GraphicsPath path=Theme.Round(bounds,18))
             {
                 using(Brush b=new SolidBrush(Color.FromArgb(17,33,45)))g.FillPath(b,path);
-                if(frame==null){TextRenderer.DrawText(g,"画面会在这里出现\n选择 MuMu 后，点击「扫描画面」",Font,ClientRectangle,Color.FromArgb(208,225,234),TextFormatFlags.HorizontalCenter|TextFormatFlags.VerticalCenter);return;}
+                if(frame==null||suppressed){TextRenderer.DrawText(g,suppressed?"静态预览已隐藏\n识别与快捷键照常工作":"选择 MuMu 窗口\n点击重新扫描，定位左右豆子",Font,ClientRectangle,Color.FromArgb(208,225,234),TextFormatFlags.HorizontalCenter|TextFormatFlags.VerticalCenter);return;}
                 GraphicsState state=g.Save();g.SetClip(path);float scale=Math.Min(Width/(float)frame.Width,Height/(float)frame.Height);RectangleF r=new RectangleF((Width-frame.Width*scale)/2,(Height-frame.Height*scale)/2,frame.Width*scale,frame.Height*scale);
                 g.InterpolationMode=InterpolationMode.HighQualityBilinear;g.DrawImage(frame,r);
                 RectangleF[] regions={LeftRegion,RightRegion};for(int i=0;i<2;i++)if(!regions[i].IsEmpty)
@@ -171,7 +170,8 @@ namespace MuMuBeans
     }
     sealed class BeanDots:Control
     {
-        public Reading Reading;
+        Reading reading;int visualState=int.MinValue;
+        public Reading Reading{get{return reading;}set{int state=value!=null&&value.Valid?16:0;if(value!=null&&value.Valid)for(int i=0;i<4;i++)if(value.Lit[i])state|=1<<i;reading=value;if(state!=visualState){visualState=state;Invalidate();}}}
         public BeanDots(){SetStyle(ControlStyles.SupportsTransparentBackColor|ControlStyles.OptimizedDoubleBuffer,true);BackColor=Color.Transparent;}
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -187,80 +187,111 @@ namespace MuMuBeans
     sealed class MainForm:Form
     {
         readonly ToolTip tips=new ToolTip{InitialDelay=350,AutoPopDelay=8000};readonly ContextMenuStrip floatingMenu=new ContextMenuStrip();
-        readonly Engine engine=new Engine();readonly HudHost overlay;readonly Timer pulse=new Timer{Interval=33};readonly SoundAlerts soundAlerts;
+        readonly Engine engine=new Engine();readonly HudHost overlay;readonly Timer pulse=new Timer{Interval=50};readonly SoundAlerts soundAlerts;
+        readonly ProcessPerformance performance=new ProcessPerformance();readonly PerformancePanel performancePanel=new PerformancePanel();
+        readonly Label performanceTitle=Theme.Label("本程序资源",10,true),shortcutHint=Theme.Label("",9);
+        readonly GlassButton settingsButton=new GlassButton{Text="快捷键与浮窗",AccessibleName="设置全局快捷键、浮窗风格、大小和透明度"};
+        DesktopSettings settings;readonly HotkeyManager hotkeys;double lastPerformance=-1;
         readonly WindowPicker windows=new WindowPicker();readonly PreviewBox preview=new PreviewBox();readonly CropBox crop=new CropBox();readonly BeanDots dots=new BeanDots();
-        readonly GlassPanel source=new GlassPanel{Material=true,Radius=20},picture=new GlassPanel{Radius=28},timerPanel=new GlassPanel{Blue=true,Radius=28},live=new GlassPanel{Radius=24};
+        readonly GlassPanel source=new GlassPanel{Material=true,Radius=10},picture=new GlassPanel{Radius=12},timerPanel=new GlassPanel{Blue=true,Radius=12},live=new GlassPanel{Radius=12};
         readonly CooldownRail rail=new CooldownRail();readonly SessionBadge sessionBadge=new SessionBadge();
         readonly Label gameTitle=Theme.Label("游戏时间",10,true),gameValue=Theme.Label("—",28),gameState=Theme.Label("等待时间数字",9),duration=Theme.Label("15 秒",9);
-        readonly Label title=Theme.Label("豆子",26,true),subtitle=Theme.Label("Bean Studio   /   MuMu 对局助手",9),edition=Theme.Label("V5.7.3",9);
+        readonly Label title=Theme.Label("豆子 Studio",24,true),subtitle=Theme.Label("替身计时助手",9),edition=Theme.Label("V5.8.1",9);
         readonly Label sourceTitle=Theme.Label("画面来源",10,true),pictureTitle=Theme.Label("游戏画面",13,true),pictureHint=Theme.Label("扫描时的定位预览",9),previewNote=Theme.Label("静态定位预览  ·  下方选择监测方向",9);
-        readonly Label timerTitle=Theme.Label("冷却剩余",11,true),clockLabel=Theme.Label("00.00",60,true),timerState=Theme.Label("等待下一次少豆",10),timerRule=Theme.Label("每次减少，重新开始完整 15 秒",9);
+        readonly Label timerTitle=Theme.Label("冷却剩余",11,true),clockLabel=Theme.Label("00.00",32),timerState=Theme.Label("等待下一次少豆",9),timerRule=Theme.Label("等待少豆",9);
+        readonly Label recoveryTitle=Theme.Label("游戏恢复点",11,true),recoveryValue=Theme.Label("—",32);
         readonly Label liveTitle=Theme.Label("豆子识别",11,true),countLabel=Theme.Label("待确认",11,true),metrics=Theme.Label("开始监测后显示采样状态",9),status=Theme.Label("选择 MuMu 窗口，然后扫描画面。",9);
         readonly GlassButton calibrate=new GlassButton{Text="校准",AccessibleName="游戏时间校准"};
         readonly GlassButton sound=new GlassButton{Text="音效设置",AccessibleName="音效设置：少豆、计时结束及音量"};
-        readonly GlassButton refresh=new GlassButton{Text="刷新列表"},scan=new GlassButton{Text="扫描画面",Icon="scan"},left=new GlassButton{Text="左侧"},right=new GlassButton{Text="右侧",Selected=true},run=new GlassButton{Text="开始监测",Primary=true,Icon="play"},floating=new GlassButton{Text="悬浮倒计时",Icon="float"},clear=new GlassButton{Text="清空冷却",Icon="reset"},save=new GlassButton{Text="保存诊断",Icon="save"},minimize=new GlassButton{Text="—"},close=new GlassButton{Text="×"};
-        bool monitoring,refreshing,released,demo,uiReady,noBeansDisplay,clockFontIsNoBeans;int side=1,uiFrames;string transient="";double transientUntil;readonly Stopwatch uptime=Stopwatch.StartNew();
+        readonly GlassButton refresh=new GlassButton{Text="刷新列表"},scan=new GlassButton{Text="重新扫描",Icon="scan"},left=new GlassButton{Text="左侧"},right=new GlassButton{Text="右侧",Selected=true},run=new GlassButton{Text="开始监测",Primary=true,Icon="play"},floating=new GlassButton{Text="悬浮倒计时",Icon="float"},clear=new GlassButton{Text="清空冷却",Icon="reset"},save=new GlassButton{Text="保存诊断",Icon="save"},minimize=new GlassButton{Text="—"},close=new GlassButton{Text="×"};
+        bool monitoring,released,demo,uiReady,noBeansDisplay,clockFontIsNoBeans,waitingScan,interactiveMoving;int side=1,uiFrames;long lastCropFrame=-1;bool lastCropHasReading;int lastCropSide=-1;string lastClockTip="",lastRecoveryText;RecoveryDisplay lastRecoveryDisplay;string transient="";double transientUntil;readonly Stopwatch uptime=Stopwatch.StartNew();
         readonly bool activateOnShow;
         protected override bool ShowWithoutActivation{get{return !activateOnShow;}}
         public MainForm(bool connectOnShow=true)
         {
             activateOnShow=connectOnShow;
-            AutoScaleMode=AutoScaleMode.None;Text="豆子 Bean Studio V5.7.3";Font=new Font("Microsoft YaHei UI",10);ForeColor=Theme.Ink;BackColor=Color.FromArgb(230,237,250);FormBorderStyle=FormBorderStyle.None;DoubleBuffered=true;SetStyle(ControlStyles.ResizeRedraw,true);ClientSize=new Size(1240,860);MinimumSize=new Size(1040,760);StartPosition=FormStartPosition.CenterScreen;
+            string settingsError="";settings=connectOnShow?DesktopSettingsStore.Load(DesktopSettingsStore.DefaultPath,out settingsError):new DesktopSettings();
+            AutoScaleMode=AutoScaleMode.None;Text="豆子 Bean Studio V5.8.1";Font=new Font("Microsoft YaHei UI",10);ForeColor=Theme.Ink;BackColor=Theme.Bg;FormBorderStyle=FormBorderStyle.None;DoubleBuffered=true;SetStyle(ControlStyles.ResizeRedraw,true);ClientSize=new Size(1240,860);MinimumSize=new Size(1040,760);StartPosition=FormStartPosition.CenterScreen;
             Controls.AddRange(new Control[]{title,subtitle,edition,sessionBadge,source,picture,timerPanel,live,run,floating,clear,sound,save,minimize,close,status});
-            source.Controls.AddRange(new Control[]{sourceTitle,windows,refresh,scan});picture.Controls.AddRange(new Control[]{pictureTitle,pictureHint,preview,previewNote,left,right});timerPanel.Controls.AddRange(new Control[]{timerTitle,duration,clockLabel,timerState,timerRule,rail});live.Controls.AddRange(new Control[]{liveTitle,crop,dots,countLabel,gameTitle,gameValue,gameState,calibrate});picture.Controls.Add(metrics);
+            Controls.AddRange(new Control[]{settingsButton,performanceTitle,performancePanel,shortcutHint});
+            source.Controls.AddRange(new Control[]{sourceTitle,windows,refresh,scan});picture.Controls.AddRange(new Control[]{pictureTitle,pictureHint,preview,previewNote,left,right});timerPanel.Controls.AddRange(new Control[]{timerTitle,duration,clockLabel,recoveryTitle,recoveryValue,timerState,timerRule,rail});live.Controls.AddRange(new Control[]{liveTitle,crop,dots,countLabel,gameTitle,gameValue,gameState,calibrate});picture.Controls.Add(metrics);
+            picture.Controls.AddRange(new Control[]{gameTitle,gameValue,gameState,calibrate});
             BackColor=Theme.Bg;sourceTitle.ForeColor=timerTitle.ForeColor=liveTitle.ForeColor=Theme.Ink;subtitle.ForeColor=edition.ForeColor=pictureHint.ForeColor=previewNote.ForeColor=timerRule.ForeColor=metrics.ForeColor=status.ForeColor=duration.ForeColor=gameState.ForeColor=Theme.Muted;
-            clockLabel.Font=new Font("Bahnschrift Light",62,FontStyle.Regular);clockLabel.ForeColor=Theme.Blue;clockLabel.TextAlign=ContentAlignment.MiddleCenter;timerState.TextAlign=ContentAlignment.MiddleCenter;timerRule.TextAlign=ContentAlignment.MiddleLeft;countLabel.TextAlign=ContentAlignment.MiddleRight;gameValue.Font=new Font("Bahnschrift",28);gameValue.ForeColor=Theme.Ink;sessionBadge.Font=Font;
+            clockLabel.Font=new Font("Bahnschrift",32,FontStyle.Regular);recoveryValue.Font=new Font("Bahnschrift",32,FontStyle.Regular);clockLabel.ForeColor=recoveryValue.ForeColor=Theme.Blue;clockLabel.TextAlign=recoveryValue.TextAlign=ContentAlignment.MiddleCenter;recoveryTitle.TextAlign=timerTitle.TextAlign=ContentAlignment.MiddleCenter;duration.Text="现实时间 · 15 秒";duration.TextAlign=ContentAlignment.MiddleCenter;timerState.TextAlign=ContentAlignment.MiddleCenter;timerRule.TextAlign=ContentAlignment.MiddleCenter;countLabel.TextAlign=ContentAlignment.MiddleRight;gameValue.Font=new Font("Bahnschrift",28);gameValue.ForeColor=Theme.Ink;sessionBadge.Font=Font;
             foreach(GlassButton b in new GlassButton[]{run,floating,clear,sound,save,scan,refresh,left,right,calibrate,minimize,close}){b.AccessibleName=b.AccessibleName??b.Text;b.TabStop=true;}
             source.TabIndex=0;windows.TabIndex=0;refresh.TabIndex=1;scan.TabIndex=2;picture.TabIndex=1;left.TabIndex=0;right.TabIndex=1;live.TabIndex=2;calibrate.TabIndex=0;run.TabIndex=3;floating.TabIndex=4;clear.TabIndex=5;sound.TabIndex=6;save.TabIndex=7;minimize.TabIndex=8;close.TabIndex=9;minimize.AccessibleName="最小化窗口";close.AccessibleName="关闭窗口";
             windows.Font=Font;
             calibrate.Click+=delegate{using(Bitmap b=preview.CopyFrame())using(ClockPanel panel=new ClockPanel(engine.Clock,b)){panel.ShowDialog(this);}};
             tips.SetToolTip(calibrate,"查看实际时间区域、失败原因；在扫描预览上手动框选中间数字。");
             refresh.Click+=delegate{RefreshWindows();};scan.Click+=delegate{RequestPreview();};left.Click+=delegate{SelectSide(0);};right.Click+=delegate{SelectSide(1);};
-            run.Click+=delegate{if(Selected==null){Notice("请先打开并选择 MuMu 窗口。");return;}monitoring=!monitoring;run.Text=monitoring?"暂停监测":"开始监测";run.Icon=monitoring?"pause":"play";engine.SetPaused(!monitoring);SyncEngine(false);};
+            run.Click+=delegate{if(Selected==null||!Native.IsWindow(Selected.Handle)){Notice("请先打开并选择有效的 MuMu 窗口。");return;}monitoring=!monitoring;run.Text=monitoring?"暂停监测":"开始监测";run.Icon=monitoring?"pause":"play";engine.SetPaused(!monitoring);SyncEngine(false);};
             floating.Text="悬浮倒计时 ▾";floating.Click+=delegate{floatingMenu.Show(floating,new Point(0,-floatingMenu.PreferredSize.Height-6));};clear.Click+=delegate{engine.Reset();};
             sound.Click+=delegate{using(SoundPanel panel=new SoundPanel(soundAlerts)){if(panel.ShowDialog(this)==DialogResult.OK)Notice("音效设置已保存。");}};
+            settingsButton.Click+=delegate{OpenDesktopSettings();};
             save.Click+=delegate{try{string folder=engine.Export(AppDomain.CurrentDomain.BaseDirectory);Notice("诊断已保存："+Path.GetFileName(folder));}catch(Exception ex){Notice("保存失败："+ex.Message);}};
             minimize.Click+=delegate{WindowState=FormWindowState.Minimized;};close.Click+=delegate{Close();};
             overlay=new HudHost(engine,delegate{if(!IsDisposed)BeginInvoke((Action)delegate{Show();WindowState=FormWindowState.Normal;Activate();overlay.Hide();});},delegate(int selected){if(!IsDisposed)BeginInvoke((Action)delegate{SelectSide(selected);});});
+            hotkeys=new HotkeyManager(this,delegate(DesktopHotkeyAction action){if(action==DesktopHotkeyAction.ToggleOverlay)ToggleOverlay();else if(action==DesktopHotkeyAction.Rescan)RequestPreview();});
+            if(!connectOnShow)settings.HotkeysEnabled=false;
+            hotkeys.StatusChanged+=delegate(string message){if(message.IndexOf("失败",StringComparison.Ordinal)>=0)Notice(message);};
+            string initialHotkeyError;if(!hotkeys.TryApply(settings,out initialHotkeyError))settingsError=initialHotkeyError;
+            ApplyVisualSettings();
+            settingsButton.TabIndex=8;performancePanel.TabIndex=9;minimize.TabIndex=10;close.TabIndex=11;calibrate.TabIndex=2;
             windows.SelectedIndexChanged+=delegate{if(!demo){SyncEngine(true);if(Visible)RequestPreview();}};
-            Point offset=Point.Empty;bool dragging=false;foreach(Control c in new Control[]{this,title,subtitle,edition})
-            {c.MouseDown+=delegate(object sender,MouseEventArgs e){if(e.Button==MouseButtons.Left&&Cursor.Position.Y<Top+95){dragging=true;offset=new Point(Cursor.Position.X-Left,Cursor.Position.Y-Top);((Control)sender).Capture=true;}};c.MouseMove+=delegate{if(dragging)Location=new Point(Cursor.Position.X-offset.X,Cursor.Position.Y-offset.Y);};c.MouseUp+=delegate(object sender,MouseEventArgs e){dragging=false;((Control)sender).Capture=false;};}
+            foreach(Control c in new Control[]{this,title,subtitle,edition})
+            {c.MouseDown+=delegate(object sender,MouseEventArgs e){if(e.Button==MouseButtons.Left&&Cursor.Position.Y<Top+95){ReleaseCapture();try{SendMessage(Handle,0xA1,(IntPtr)2,IntPtr.Zero);}finally{EndInteractiveMove();}}};}
             floatingMenu.Font=Font;floatingMenu.Items.Add("打开悬浮窗 · 默认置顶",null,delegate{overlay.ShowAt(new Point(Left+24,Top+120));});floatingMenu.Items.Add("关闭悬浮窗",null,delegate{overlay.Hide();});floatingMenu.Items.Add(new ToolStripSeparator());floatingMenu.Items.Add(new ToolStripMenuItem("悬浮窗内可直接切换左右；主界面保持打开"){Enabled=false});
+            floatingMenu.Items.Add(new ToolStripSeparator());
+            foreach(OverlayStyle style in new OverlayStyle[]{OverlayStyle.Focus,OverlayStyle.Digits,OverlayStyle.Ribbon,OverlayStyle.Classic})
+            {OverlayStyle picked=style;floatingMenu.Items.Add(OverlayName(style),null,delegate{DesktopSettings draft=settings.Copy();draft.OverlayStyle=picked;string error=SaveDesktopSettings(draft);if(error.Length>0)Notice(error);});}
             tips.SetToolTip(floating,"先打开菜单，再选择显示悬浮窗。默认置顶，主界面不会自动隐藏。");tips.SetToolTip(left,"监测左侧；切换时重新建立豆数基准，不触发计时。");tips.SetToolTip(right,"监测右侧；增长不触发，减少重置完整15秒。");tips.SetToolTip(scan,"截取定位预览时主界面短暂收起。请露出顶部血条和豆子。");tips.SetToolTip(run,"暂停会停止后台窗口捕获、豆子识别和游戏时间识别；已有倒计时继续。");
             if(connectOnShow){soundAlerts=new SoundAlerts(engine);soundAlerts.StatusChanged+=SoundStatus;}
             tips.SetToolTip(sound,"设置少豆与计时结束的提示音、独立开关和音量；可选择音频或视频文件。");
-            Shown+=delegate{MinimumSize=new Size(1040,760);if(connectOnShow)RefreshWindows();};pulse.Tick+=Tick;pulse.Start();uiReady=true;LayoutUI();
+            Shown+=delegate{MinimumSize=new Size(1040,760);if(connectOnShow){string error;if(!hotkeys.TryApply(settings,out error))Notice(error);performance.SetEnabled(settings.PerformanceVisible);RefreshWindows();}if(settingsError.Length>0)Notice(settingsError);};pulse.Tick+=Tick;pulse.Start();uiReady=true;ApplyVisualSettings();
         }
-        protected override void OnResize(EventArgs e){base.OnResize(e);if(uiReady&&WindowState!=FormWindowState.Minimized&&ClientSize.Width>0&&ClientSize.Height>0){LayoutUI();Theme.RoundedWindow(this,16);}}
+        protected override void OnResize(EventArgs e){base.OnResize(e);if(uiReady){performance.SetEnabled(activateOnShow&&settings.PerformanceVisible&&WindowState!=FormWindowState.Minimized&&Visible);if(WindowState!=FormWindowState.Minimized&&ClientSize.Width>0&&ClientSize.Height>0){LayoutUI();Theme.RoundedWindow(this,12);}}}
         protected override void OnPaintBackground(PaintEventArgs e){Theme.Background(e.Graphics,ClientSize);}
         protected override void OnPaint(PaintEventArgs e){base.OnPaint(e);Graphics g=e.Graphics;g.SmoothingMode=SmoothingMode.AntiAlias;for(int i=0;i<4;i++){float x=30+(i%2)*18,y=30+(i/2)*21;PointF[] points={new PointF(x+7,y),new PointF(x+14,y+10),new PointF(x+7,y+20),new PointF(x,y+10)};using(Brush b=new SolidBrush(i==3?Color.FromArgb(140,196,204):Theme.Blue))g.FillPolygon(b,points);}}
         protected override void WndProc(ref Message m)
         {
+            if(hotkeys!=null&&hotkeys.ProcessMessage(ref m))return;
+            if(m.Msg==0x231)interactiveMoving=true; // WM_ENTERSIZEMOVE: presentation only; workers continue.
+            if(m.Msg==0x232||m.Msg==0x1F||(m.Msg==0x215&&m.LParam==IntPtr.Zero))EndInteractiveMove(); // Exit, cancel or lost capture.
             base.WndProc(ref m);if(m.Msg==0x84&&(int)m.Result==1)
             {Point p=PointToClient(new Point(unchecked((short)(long)m.LParam),unchecked((short)((long)m.LParam>>16))));bool l=p.X<8,r=p.X>Width-9,t=p.Y<8,b=p.Y>Height-9;m.Result=(IntPtr)(t?(l?13:r?14:12):b?(l?16:r?17:15):l?10:r?11:1);}
         }
+        void EndInteractiveMove(){interactiveMoving=false;lastPerformance=-1;}
         void LayoutUI()
         {
             if(!uiReady||WindowState==FormWindowState.Minimized||ClientSize.Width<900||ClientSize.Height<700)return;
-            int w=ClientSize.Width,h=ClientSize.Height,margin=24,gap=18,rightWidth=334,leftWidth=w-margin*2-gap-rightWidth,contentY=184,contentH=h-292,timerH=Math.Min(244,contentH-246);
-            title.SetBounds(82,21,220,42);subtitle.SetBounds(84,62,360,25);sessionBadge.SetBounds(w-336,31,146,34);edition.SetBounds(w-178,34,48,27);minimize.SetBounds(w-120,26,44,44);close.SetBounds(w-69,26,44,44);
-            source.SetBounds(margin,102,w-margin*2,64);sourceTitle.SetBounds(22,17,86,30);windows.SetBounds(110,10,source.Width-390,44);refresh.SetBounds(source.Width-264,10,114,44);scan.SetBounds(source.Width-140,10,120,44);
-            picture.SetBounds(margin,contentY,leftWidth,contentH);pictureTitle.SetBounds(22,18,leftWidth-225,28);pictureHint.SetBounds(leftWidth-198,21,174,24);preview.SetBounds(20,58,leftWidth-40,contentH-139);previewNote.SetBounds(24,contentH-72,leftWidth-225,27);metrics.SetBounds(24,contentH-40,leftWidth-48,23);left.SetBounds(leftWidth-185,contentH-76,74,39);right.SetBounds(leftWidth-103,contentH-76,79,39);
-            timerPanel.SetBounds(margin+leftWidth+gap,contentY,rightWidth,timerH);timerTitle.SetBounds(22,17,200,27);duration.SetBounds(rightWidth-75,19,54,24);clockLabel.SetBounds(16,47,rightWidth-32,timerH-148);timerState.SetBounds(18,timerH-101,rightWidth-36,23);rail.SetBounds(22,timerH-71,rightWidth-44,17);timerRule.SetBounds(22,timerH-48,rightWidth-44,38);
+            int w=ClientSize.Width,h=ClientSize.Height,margin=24,gap=18,rightWidth=302,leftWidth=w-margin*2-gap-rightWidth,contentY=172;
+            int contentH=settings.PerformanceVisible?h-460:h-287,timerH=Math.Min(218,Math.Max(160,(int)((contentH-gap)*.54)));
+            title.SetBounds(65,18,280,38);subtitle.SetBounds(67,59,340,23);sessionBadge.SetBounds(w-392,27,145,32);edition.SetBounds(w-454,30,60,25);settingsButton.SetBounds(w-238,22,158,42);minimize.SetBounds(w-70,22,31,38);close.SetBounds(w-37,22,30,38);
+            source.SetBounds(margin,96,w-margin*2,60);sourceTitle.SetBounds(18,15,86,28);windows.SetBounds(102,9,source.Width-382,42);refresh.SetBounds(source.Width-264,9,112,42);scan.SetBounds(source.Width-144,9,126,42);
+            picture.SetBounds(margin,contentY,leftWidth,contentH);pictureTitle.SetBounds(20,14,188,28);pictureHint.SetBounds(211,17,Math.Max(20,leftWidth-392),22);preview.SetBounds(18,54,leftWidth-36,contentH-142);left.SetBounds(leftWidth-162,12,66,34);right.SetBounds(leftWidth-88,12,68,34);
+            gameTitle.SetBounds(22,contentH-81,89,26);gameValue.SetBounds(111,contentH-89,94,38);gameState.SetBounds(212,contentH-88,Math.Max(50,leftWidth-329),40);calibrate.SetBounds(leftWidth-101,contentH-86,79,34);previewNote.SetBounds(22,contentH-45,leftWidth-44,22);metrics.SetBounds(22,contentH-24,leftWidth-44,19);
+            timerPanel.SetBounds(margin+leftWidth+gap,contentY,rightWidth,timerH);
+            int valueWidth=(rightWidth-42)/2,valueHeight=Math.Max(44,timerH-112);
+            timerTitle.SetBounds(14,13,valueWidth,25);recoveryTitle.SetBounds(28+valueWidth,13,valueWidth,25);
+            clockLabel.SetBounds(14,39,valueWidth,valueHeight);recoveryValue.SetBounds(28+valueWidth,39,valueWidth,valueHeight);
+            duration.SetBounds(14,timerH-73,valueWidth,23);timerRule.SetBounds(28+valueWidth,timerH-73,valueWidth,23);
+            timerState.SetBounds(18,timerH-47,rightWidth-36,22);rail.SetBounds(22,timerH-22,rightWidth-44,12);
             ApplyClockFont(timerH);
-            live.SetBounds(timerPanel.Left,contentY+timerH+gap,rightWidth,contentH-timerH-gap);liveTitle.SetBounds(22,14,rightWidth-44,25);crop.SetBounds(22,45,rightWidth-44,46);dots.SetBounds(22,96,160,31);countLabel.SetBounds(180,96,rightWidth-204,31);gameTitle.SetBounds(22,139,140,24);calibrate.SetBounds(rightWidth-100,134,78,34);gameValue.SetBounds(22,170,132,40);gameState.SetBounds(159,170,rightWidth-181,47);
-            run.SetBounds(margin,h-94,174,50);floating.SetBounds(margin+186,h-94,160,50);clear.SetBounds(margin+358,h-94,134,50);sound.SetBounds(margin+504,h-94,136,50);save.SetBounds(w-margin-134,h-94,134,50);status.SetBounds(margin+4,h-34,w-margin*2-8,25);
+            live.SetBounds(timerPanel.Left,contentY+timerH+gap,rightWidth,contentH-timerH-gap);liveTitle.SetBounds(20,10,rightWidth-40,24);crop.SetBounds(20,38,rightWidth-40,40);dots.SetBounds(20,87,160,31);countLabel.SetBounds(180,87,rightWidth-200,31);
+            performanceTitle.Visible=performancePanel.Visible=settings.PerformanceVisible;performanceTitle.SetBounds(margin+3,h-274,w-margin*2,22);performancePanel.SetBounds(margin,h-250,w-margin*2,138);
+            run.SetBounds(margin,h-91,170,46);floating.SetBounds(margin+180,h-91,158,46);clear.SetBounds(margin+348,h-91,128,46);sound.SetBounds(margin+486,h-91,126,46);save.SetBounds(w-margin-128,h-91,128,46);status.SetBounds(margin+3,h-31,Math.Max(100,w-margin*2-422),23);shortcutHint.SetBounds(w-margin-411,h-31,411,23);shortcutHint.TextAlign=ContentAlignment.MiddleRight;
         }
-        internal static float SafeClockSize(int timerHeight){return Math.Max(32,Math.Min(64,(timerHeight-144)*.60f));}
+        internal static float SafeClockSize(int timerHeight){return Math.Max(28,Math.Min(32,(timerHeight-112)*.67f));}
         void ApplyClockFont(int timerHeight)
         {
-            float size=noBeansDisplay?Math.Max(22,Math.Min(26,(timerHeight-144)*.32f)):SafeClockSize(timerHeight);string family=noBeansDisplay?"Microsoft YaHei UI":"Bahnschrift Light";FontStyle style=noBeansDisplay?FontStyle.Bold:FontStyle.Regular;
+            float size=noBeansDisplay?15:SafeClockSize(timerHeight);string family=noBeansDisplay?"Microsoft YaHei UI":"Bahnschrift";FontStyle style=noBeansDisplay?FontStyle.Bold:FontStyle.Regular;
             if(Math.Abs(clockLabel.Font.Size-size)>.1||clockFontIsNoBeans!=noBeansDisplay||clockLabel.Font.Style!=style){Font old=clockLabel.Font;clockLabel.Font=new Font(family,size,style);clockFontIsNoBeans=noBeansDisplay;old.Dispose();}
+            float recoverySize=SafeClockSize(timerHeight);if(Math.Abs(recoveryValue.Font.Size-recoverySize)>.1){Font old=recoveryValue.Font;recoveryValue.Font=new Font("Bahnschrift",recoverySize,FontStyle.Regular);old.Dispose();}
         }
         internal void SetCountdownDisplay(bool noBeans,double remaining)
         {
             noBeansDisplay=noBeans;ApplyClockFont(timerPanel.Height);clockLabel.Text=noBeans?"对方已无豆":Theme.Clock(remaining);clockLabel.ForeColor=noBeans?Theme.Blue:Theme.Urgency(remaining);clockLabel.AccessibleName=noBeans?"对方已无豆，0 / 4 颗":"冷却剩余："+clockLabel.Text+" 秒";
-            timerState.Text=noBeans?"0 / 4 颗 · 等待豆子恢复":remaining>0&&remaining<3?"即将恢复 · 留意游戏时间":remaining>0?"计时中 · 再次减少即重置":"等待下一次少豆";rail.Remaining=noBeans?0:remaining;rail.Invalidate();
+            timerState.Text=noBeans?"0 / 4 颗 · 等待豆子恢复":remaining>0&&remaining<3?"即将恢复 · 留意游戏时间":remaining>0?"计时中 · 再次减少即重置":"等待下一次少豆";rail.Remaining=noBeans?0:remaining;
         }
         WindowItem Selected{get{return windows.SelectedItem as WindowItem;}}
         void SelectSide(int value){if(value==side)return;side=value;left.Selected=side==0;right.Selected=side==1;left.Invalidate();right.Invalidate();preview.Side=side;preview.Invalidate();SyncEngine(true);}
@@ -271,6 +302,37 @@ namespace MuMuBeans
             if(released||IsDisposed||!IsHandleCreated)return;
             try{BeginInvoke((Action)delegate{if(!released&&!IsDisposed)Notice(message);});}catch(InvalidOperationException){}
         }
+        static string OverlayName(OverlayStyle style)
+        {return style==OverlayStyle.Focus?"专注 · 精简计时":style==OverlayStyle.Digits?"纯数字 · 无背景":style==OverlayStyle.Ribbon?"横条 · 贴边查看":"经典 · 完整信息";}
+        void ToggleOverlay(){overlay.ToggleAt(new Point(Left+24,Top+120));}
+        void ApplyVisualSettings()
+        {
+            overlay.ApplySettings(settings);performance.SetEnabled(activateOnShow&&settings.PerformanceVisible&&Visible&&WindowState!=FormWindowState.Minimized);
+            preview.Suppressed=!settings.PreviewVisible;
+            shortcutHint.Text=settings.HotkeysEnabled?settings.ToggleOverlayHotkey+" 浮窗   "+settings.RescanHotkey+" 重扫":"快捷键已关闭";
+            tips.SetToolTip(floating,"可在菜单选择风格；快捷开关："+settings.ToggleOverlayHotkey);
+            tips.SetToolTip(scan,"后台重新定位当前窗口，保留冷却。快捷键："+settings.RescanHotkey+"。暂停时只扫描一次，请先让游戏画面可见。");
+            if(uiReady)LayoutUI();
+        }
+        string SaveDesktopSettings(DesktopSettings draft)
+        {
+            DesktopSettings previous=settings.Copy();string error;
+            try
+            {
+                DesktopSettingsStore.Validate(draft);
+                if(!hotkeys.TryApply(draft,out error))return error;
+                try{DesktopSettingsStore.Save(DesktopSettingsStore.DefaultPath,draft);}
+                catch(Exception ex){string rollback;hotkeys.TryApply(previous,out rollback);return "设置未保存："+ex.Message+(rollback.Length>0?"；"+rollback:"");}
+                settings=draft.Copy();ApplyVisualSettings();Notice("设置已保存。");return "";
+            }
+            catch(ArgumentException ex){return ex.Message;}
+        }
+        void OpenDesktopSettings()
+        {
+            hotkeys.Suspend();
+            try{using(DesktopSettingsPanel panel=new DesktopSettingsPanel(settings,SaveDesktopSettings))panel.ShowDialog(this);}
+            finally{string error;if(!hotkeys.Resume(out error))Notice(error);}
+        }
         void RefreshWindows()
         {
             IntPtr previous=Selected==null?IntPtr.Zero:Selected.Handle;List<WindowItem> list=new List<WindowItem>();uint own=(uint)Process.GetCurrentProcess().Id;
@@ -279,51 +341,67 @@ namespace MuMuBeans
         }
         void RequestPreview()
         {
-            WindowItem selected=Selected;if(selected==null||refreshing)return;if(Native.IsIconic(selected.Handle)){Notice("请先恢复 MuMu 窗口。");return;}
-            refreshing=true;bool wasOverlay=overlay.Visible;overlay.Hide();Hide();Native.SetForegroundWindow(selected.Handle);Timer shot=new Timer{Interval=250};
-            shot.Tick+=delegate
-            {
-                shot.Stop();shot.Dispose();
-                try
-                {
-                    Rectangle bounds=Native.ClientBounds(selected.Handle);if(bounds.Width<320||!SystemInformation.VirtualScreen.Contains(bounds))throw new InvalidOperationException("请把 MuMu 窗口完整移到屏幕内。");
-                    if(WindowCapture.Paused&&!Native.Uncovered(selected.Handle,bounds))throw new InvalidOperationException("暂停时扫描只截取一次屏幕，请移开遮挡窗口。");
-                    using(Bitmap image=WindowCapture.Paused?Native.Capture(bounds):WindowCapture.Capture(selected.Handle,bounds)){LocatedPair pair=AutoLocator.Find(image);preview.LeftRegion=Normalized(pair.Left,image.Size);preview.RightRegion=Normalized(pair.Right,image.Size);preview.SetFrame((Bitmap)image.Clone());}
-                    SyncEngine(true);
-                }
-                catch(Exception ex){Notice("扫描失败："+ex.Message);}
-                finally{refreshing=false;Show();Activate();if(wasOverlay)overlay.ShowAt(new Point(Left+24,Top+24));}
-            };shot.Start();
+            WindowItem selected=Selected;if(selected==null){Notice("请先选择 MuMu 窗口。");return;}
+            if(!Native.IsWindow(selected.Handle)){Notice("来源窗口已关闭，请刷新列表后重新选择。");return;}
+            if(Native.IsIconic(selected.Handle)){Notice("请先恢复 MuMu 窗口。");return;}
+            if(engine.RequestScan()){waitingScan=true;Notice("正在按当前窗口尺寸重新定位，原冷却继续。");}
         }
         static RectangleF Normalized(Rectangle r,Size size){return r.IsEmpty?RectangleF.Empty:new RectangleF(r.X/(float)size.Width,r.Y/(float)size.Height,r.Width/(float)size.Width,r.Height/(float)size.Height);}
         void Tick(object sender,EventArgs e)
         {
-            Snapshot s=engine.GetSnapshot();pulse.Interval=s.Paused?100:33;SetCountdownDisplay(s.NoBeans,s.Remaining);timerRule.Text=s.NoBeans?"等待豆子恢复 · 增长不触发计时":s.Recovery;
-            ClockState cs=engine.Clock.State();bool fresh=cs.Value.HasValue&&cs.Age<=.65;gameValue.Text=fresh?cs.Value.Value.ToString(cs.Value<10?"0.00":"0",CultureInfo.InvariantCulture):"—";gameState.Text=fresh?"已确认\r\n持续读取中":cs.Value.HasValue?"读数已过期\r\n可点校准检查":"等待时间数字\r\n可点校准检查";tips.SetToolTip(gameState,cs.Status+"\r\n"+cs.Backend+"\r\n识别方式："+cs.Method+"；本帧匹配分数："+cs.Confidence.ToString("0.00",CultureInfo.InvariantCulture));gameValue.AccessibleName="游戏时间："+(fresh?gameValue.Text:"未确认");sessionBadge.Caption=Selected==null?"尚未连接":s.Enabled?"正在监测":"预览模式";sessionBadge.Active=s.Enabled;sessionBadge.Invalidate();
-            Reading display=s.Enabled?s.ConfirmedReading:s.Reading;
-            dots.Reading=display;dots.Invalidate();countLabel.Text=display!=null&&display.Valid?display.Count+" / 4 颗":"待确认";
-            if(s.Paused){gameValue.Text="—";gameState.Text="已暂停\r\n停止读取时间";sessionBadge.Caption="监测已暂停";}
-            metrics.Text=s.Paused?s.Status : !s.Enabled?"开始监测后显示采样状态":string.Format("采样 {0:0} ms    确认 {1:0} ms    {2}",s.GapMs,s.ConfirmationMs,WindowCapture.Status=="WGC 窗口捕获"?"窗口捕获":"兼容 / 等待帧");metrics.ForeColor=s.Enabled&&s.GapMs>100?Theme.Red:Theme.Muted;
-            status.Text=uptime.Elapsed.TotalSeconds<transientUntil?transient:s.Status;previewNote.Text=(side==0?"监测左侧":"监测右侧")+"  ·  增长不触发";
-            if(++uiFrames%4==0&&WindowState!=FormWindowState.Minimized){Bitmap b=engine.GetFrame();crop.SetFrame(s.Reading==null?null:b);if(s.Reading==null&&b!=null)b.Dispose();preview.LeftRegion=s.LeftRegion;preview.RightRegion=s.RightRegion;preview.Invalidate();}
+            Snapshot s=engine.GetSnapshot();pulse.Interval=s.Paused||WindowState==FormWindowState.Minimized?100:50;
+            ApplySnapshot(s,engine.Clock.State());
+            if(waitingScan&&!s.ScanPending){waitingScan=false;transientUntil=0;}
+            // Keep timing and recovery above current. Dragging only defers noncritical bitmap/chart work.
+            if(interactiveMoving||WindowState==FormWindowState.Minimized)return;
+            Bitmap scanned;if(engine.TryTakeScanPreview(out scanned)){preview.SetFrame(scanned);preview.LeftRegion=s.LeftRegion;preview.RightRegion=s.RightRegion;preview.Invalidate();}
+            if(uptime.Elapsed.TotalSeconds-lastPerformance>=1){lastPerformance=uptime.Elapsed.TotalSeconds;if(settings.PerformanceVisible)performancePanel.SetSnapshot(performance.GetSnapshot());}
+            if(++uiFrames%4==0&&(lastCropFrame!=s.UniqueFrames||lastCropHasReading!=(s.Reading!=null)||lastCropSide!=s.Side))
+            {
+                lastCropFrame=s.UniqueFrames;lastCropHasReading=s.Reading!=null;lastCropSide=s.Side;Bitmap b=s.Reading==null?null:engine.GetFrame();crop.SetFrame(b);
+            }
+            if(preview.LeftRegion!=s.LeftRegion||preview.RightRegion!=s.RightRegion){preview.LeftRegion=s.LeftRegion;preview.RightRegion=s.RightRegion;preview.Invalidate();}
         }
+        internal void ApplySnapshot(Snapshot s,ClockState cs)
+        {
+            SetCountdownDisplay(s.NoBeans,s.Remaining);if(lastRecoveryDisplay==null||lastRecoveryText!=s.Recovery){lastRecoveryText=s.Recovery;lastRecoveryDisplay=RecoveryDisplay.Parse(s.Recovery);}RecoveryDisplay target=lastRecoveryDisplay;
+            recoveryValue.Text=target.IsApproximate?target.Value.TrimStart('≈'):target.Value;recoveryTitle.Text=target.Caption+(target.IsApproximate?" ≈":"");recoveryValue.ForeColor=target.HasValue?Theme.Blue:Theme.Muted;
+            recoveryValue.AccessibleName="游戏恢复点："+target.Value+"；"+target.Status;timerRule.Text=target.Status;
+            scan.Enabled=!s.ScanPending;scan.Text=s.ScanPending?"重新定位中":"重新扫描";
+            bool fresh=cs.Value.HasValue&&cs.Age<=.65;
+            gameValue.Text=s.Paused?"—":fresh?cs.Value.Value.ToString(cs.Value<10?"0.00":"0",CultureInfo.InvariantCulture):"—";
+            gameState.Text=s.Paused?"已暂停\r\n停止读取时间":fresh?"已确认\r\n持续读取中":cs.Value.HasValue?"读数已过期\r\n可点校准检查":"等待时间数字\r\n可点校准检查";
+            // Confidence and backend belong to the hovered diagnostic; avoid resetting the native tooltip every 50 ms.
+            if(!interactiveMoving&&gameState.ClientRectangle.Contains(gameState.PointToClient(Cursor.Position)))
+            {
+                string diagnostic=cs.Status+"\r\n"+cs.Backend+"\r\n识别方式："+cs.Method+"；本帧匹配分数："+cs.Confidence.ToString("0.00",CultureInfo.InvariantCulture);
+                if(diagnostic!=lastClockTip){lastClockTip=diagnostic;tips.SetToolTip(gameState,diagnostic);}
+            }
+            gameValue.AccessibleName="游戏时间："+(!s.Paused&&fresh?gameValue.Text:"未确认");
+            sessionBadge.Caption=s.Paused?"监测已暂停":Selected==null?"尚未连接":s.Enabled?"正在监测":"预览模式";sessionBadge.Active=s.Enabled&&!s.Paused;
+            Reading display=s.Enabled?s.ConfirmedReading:s.Reading;dots.Reading=display;countLabel.Text=display!=null&&display.Valid?display.Count+" / 4 颗":"待确认";
+            if(!interactiveMoving){metrics.Text=s.Paused?s.Status : !s.Enabled?"开始监测后显示采样状态":string.Format("采样 {0:0} ms    确认 {1:0} ms    {2}",s.GapMs,s.ConfirmationMs,WindowCapture.Status=="WGC 窗口捕获"?"窗口捕获":"兼容 / 等待帧");metrics.ForeColor=s.Enabled&&s.GapMs>100?Theme.Red:Theme.Muted;}
+            status.Text=uptime.Elapsed.TotalSeconds<transientUntil?transient:s.Status;previewNote.Text=(side==0?"监测左侧":"监测右侧")+"  ·  增长不触发";
+        }
+        [DllImport("user32.dll")]static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]static extern IntPtr SendMessage(IntPtr h,int message,IntPtr wParam,IntPtr lParam);
         public void RenderDemo(Bitmap frame,string path)
         {
             demo=true;pulse.Stop();LocatedPair p=AutoLocator.Find(frame);preview.SetFrame((Bitmap)frame.Clone());preview.LeftRegion=Normalized(p.Left,frame.Size);preview.RightRegion=Normalized(p.Right,frame.Size);if(!p.Right.IsEmpty)crop.SetFrame(frame.Clone(p.Right,PixelFormat.Format32bppArgb));dots.Reading=p.RightReading;
-            windows.Items.Add(new WindowItem{Title="MuMu 安卓设备"});windows.SelectedIndex=0;clockLabel.Text="15.00";clockLabel.ForeColor=Theme.Blue;timerState.Text="计时中 · 再次减少即重置";countLabel.Text=p.RightReading!=null&&p.RightReading.Valid?p.RightReading.Count+" / 4 颗":"待确认";metrics.Text="设计预览 · 演示数据";gameValue.Text="37";gameState.Text="演示读数\r\n未连接游戏";timerRule.Text="恢复点：22 秒（演示）";rail.Remaining=15;sessionBadge.Caption="设计预览";previewNote.Text="监测右侧  ·  增长不触发";status.Text="自动定位左右区域  ·  变色与增长不触发计时  ·  再次减少，重置 15 秒";run.Text="暂停监测";run.Icon="pause";
+            windows.Items.Add(new WindowItem{Title="MuMu 安卓设备"});windows.SelectedIndex=0;clockLabel.Text="15.00";clockLabel.ForeColor=Theme.Blue;timerState.Text="计时中 · 再次减少即重置";countLabel.Text=p.RightReading!=null&&p.RightReading.Valid?p.RightReading.Count+" / 4 颗":"待确认";metrics.Text="设计预览 · 演示数据";gameValue.Text="37";gameState.Text="演示读数\r\n未连接游戏";recoveryValue.Text="22";timerRule.Text="已确认 · 演示";rail.Remaining=15;sessionBadge.Caption="设计预览";previewNote.Text="监测右侧  ·  增长不触发";status.Text="自动定位左右区域  ·  变色与增长不触发计时  ·  再次减少，重置 15 秒";run.Text="暂停监测";run.Icon="pause";
             StartPosition=FormStartPosition.Manual;Location=new Point(-20000,-20000);Show();Application.DoEvents();SaveRender(path);ClientSize=new Size(1040,760);Application.DoEvents();SaveRender(Path.Combine(Path.GetDirectoryName(path),"紧凑界面预览.png"));ClientSize=new Size(1440,960);Application.DoEvents();SaveRender(Path.Combine(Path.GetDirectoryName(path),"大尺寸界面预览.png"));ClientSize=new Size(1040,760);Application.DoEvents();SaveRender(Path.Combine(Path.GetDirectoryName(path),"最小界面预览.png"));Hide();
             using(Overlay hud=new Overlay(delegate{})){hud.ClockLabel.Text="15.00";hud.Detail.Text="3 / 4 颗";hud.Location=new Point(-20000,-20000);hud.Show();Application.DoEvents();using(Bitmap b=hud.Surface()){b.Save(Path.Combine(Path.GetDirectoryName(path),"悬浮窗预览.png"));}hud.Hide();}
         }
         public void RenderStates(Bitmap frame,string folder)
         {
             demo=true;pulse.Stop();Directory.CreateDirectory(folder);StartPosition=FormStartPosition.Manual;Location=new Point(-20000,-20000);ClientSize=new Size(1040,760);Show();Application.DoEvents();
-            windows.Items.Clear();windows.SelectedIndex=-1;preview.SetFrame(null);crop.SetFrame(null);countLabel.Text="待确认";clockLabel.Text="00.00";gameValue.Text="—";gameState.Text="等待时间数字\r\n可点校准检查";timerState.Text="等待下一次少豆";timerRule.Text="少豆时计算恢复点";sessionBadge.Caption="尚未连接";status.Text="选择 MuMu 窗口，然后扫描画面。";run.Text="开始监测";run.Icon="play";rail.Remaining=0;SaveRender(Path.Combine(folder,"未连接.png"));
-            windows.Items.Add(new WindowItem{Title="MuMu 安卓设备（演示）"});windows.SelectedIndex=0;preview.SetFrame((Bitmap)frame.Clone());sessionBadge.Caption="设计预览";clockLabel.Text="08.00";clockLabel.ForeColor=Theme.Blue;timerState.Text="计时中 · 再次减少即重置";timerRule.Text="恢复点：时间未确认（可点校准检查）";rail.Remaining=8;gameState.Text="等待时间数字\r\n可点校准检查";status.Text="设计预览 · 时间未确认时保持冷却计时";run.Text="暂停监测";run.Icon="pause";SaveRender(Path.Combine(folder,"时间未确认.png"));
-            clockLabel.Text="02.00";clockLabel.ForeColor=Theme.Urgency(2);timerState.Text="即将恢复 · 留意游戏时间";timerRule.Text="恢复点≈3.50 秒（中途补算）";rail.Remaining=2;gameValue.Text="5.50";gameState.Text="演示读数\r\n未连接游戏";status.Text="设计预览 · 接近归零时使用紧急颜色";SaveRender(Path.Combine(folder,"接近恢复.png"));
+            windows.Items.Clear();windows.SelectedIndex=-1;preview.SetFrame(null);crop.SetFrame(null);countLabel.Text="待确认";clockLabel.Text="00.00";gameValue.Text="—";gameState.Text="等待时间数字\r\n可点校准检查";timerState.Text="等待下一次少豆";recoveryValue.Text="—";timerRule.Text="等待少豆";sessionBadge.Caption="尚未连接";status.Text="选择 MuMu 窗口，然后扫描画面。";run.Text="开始监测";run.Icon="play";rail.Remaining=0;SaveRender(Path.Combine(folder,"未连接.png"));
+            windows.Items.Add(new WindowItem{Title="MuMu 安卓设备（演示）"});windows.SelectedIndex=0;preview.SetFrame((Bitmap)frame.Clone());sessionBadge.Caption="设计预览";clockLabel.Text="08.00";clockLabel.ForeColor=Theme.Blue;timerState.Text="计时中 · 再次减少即重置";recoveryValue.Text="—";timerRule.Text="游戏时间未确认";rail.Remaining=8;gameState.Text="等待时间数字\r\n可点校准检查";status.Text="设计预览 · 时间未确认时保持冷却计时";run.Text="暂停监测";run.Icon="pause";SaveRender(Path.Combine(folder,"时间未确认.png"));
+            clockLabel.Text="02.00";clockLabel.ForeColor=Theme.Urgency(2);timerState.Text="即将恢复 · 留意游戏时间";recoveryValue.Text="3.50";recoveryTitle.Text="游戏恢复点 ≈";timerRule.Text="估算 · 中途补算";rail.Remaining=2;gameValue.Text="5.50";gameState.Text="演示读数\r\n未连接游戏";status.Text="设计预览 · 接近归零时使用紧急颜色";SaveRender(Path.Combine(folder,"接近恢复.png"));
             run.Text="开始监测";run.Icon="play";sessionBadge.Caption="暂停监测";status.Text="监测暂停 · 已有冷却继续";SaveRender(Path.Combine(folder,"暂停监测.png"));
             LocatedPair pair=AutoLocator.Find(frame);preview.LeftRegion=Normalized(pair.Left,frame.Size);preview.RightRegion=Normalized(pair.Right,frame.Size);preview.Side=0;side=0;left.Selected=true;right.Selected=false;previewNote.Text="监测左侧  ·  增长不触发";if(!pair.Left.IsEmpty)crop.SetFrame(frame.Clone(pair.Left,PixelFormat.Format32bppArgb));
-            dots.Reading=pair.LeftReading;countLabel.Text="0 / 4 颗";sessionBadge.Caption="设计预览";run.Text="暂停监测";run.Icon="pause";SetCountdownDisplay(true,8);timerRule.Text="等待豆子恢复 · 增长不触发计时";status.Text="设计预览 · 已确认四格全空，显示对方已无豆";SaveRender(Path.Combine(folder,"四空豆主界面.png"));ClientSize=new Size(1440,960);Application.DoEvents();SaveRender(Path.Combine(folder,"四空豆大尺寸界面.png"));ClientSize=new Size(1040,760);Application.DoEvents();
-            SetCountdownDisplay(false,8);timerRule.Text="恢复点：时间未确认（可点校准检查）";dots.Reading=new Reading{Lit=new bool[]{false,false,false,true},Reason="演示恢复一豆"};countLabel.Text="1 / 4 颗";timerState.Text="计时中 · 再次减少即重置";status.Text="设计预览 · 豆子恢复后还原数字字号，已有冷却继续";SaveRender(Path.Combine(folder,"豆子恢复数字界面.png"));Hide();
+            dots.Reading=pair.LeftReading;countLabel.Text="0 / 4 颗";sessionBadge.Caption="设计预览";run.Text="暂停监测";run.Icon="pause";SetCountdownDisplay(true,8);recoveryTitle.Text="游戏恢复点";recoveryValue.Text="18";timerRule.Text="已确认 · 演示";status.Text="设计预览 · 已确认四格全空，显示对方已无豆";SaveRender(Path.Combine(folder,"四空豆主界面.png"));ClientSize=new Size(1440,960);Application.DoEvents();SaveRender(Path.Combine(folder,"四空豆大尺寸界面.png"));ClientSize=new Size(1040,760);Application.DoEvents();
+            SetCountdownDisplay(false,8);recoveryValue.Text="—";timerRule.Text="游戏时间未确认";dots.Reading=new Reading{Lit=new bool[]{false,false,false,true},Reason="演示恢复一豆"};countLabel.Text="1 / 4 颗";timerState.Text="计时中 · 再次减少即重置";status.Text="设计预览 · 豆子恢复后还原数字字号，已有冷却继续";SaveRender(Path.Combine(folder,"豆子恢复数字界面.png"));Hide();
             using(Overlay hud=new Overlay(delegate{})){hud.NoBeans=true;hud.ClockLabel.Text="08.00";hud.Detail.Text="0 / 4 颗";hud.Target.Text="等待豆子恢复";hud.SetSide(0);using(Bitmap b=hud.Surface())b.Save(Path.Combine(folder,"四空豆悬浮窗.png"));hud.NoBeans=false;hud.Detail.Text="1 / 4 颗";hud.Target.Text="恢复点：时间未确认";using(Bitmap b=hud.Surface())b.Save(Path.Combine(folder,"豆子恢复悬浮窗.png"));}
             using(ClockPanel panel=new ClockPanel(engine.Clock,frame))panel.SavePreview(folder);
         }
@@ -365,7 +443,7 @@ namespace MuMuBeans
             }
             if(!opened||!Visible||!pulse.Enabled)throw new Exception("音效设置未打开模态面板或停止了主界面计时更新");report.Add("PASS 音效按钮打开独立设置面板，取消后主界面与刷新计时保持运行");Hide();
         }
-        protected override void Dispose(bool disposing){if(disposing&&!released){released=true;pulse.Dispose();tips.Dispose();floatingMenu.Dispose();if(soundAlerts!=null){soundAlerts.StatusChanged-=SoundStatus;soundAlerts.Dispose();}if(overlay!=null)overlay.Dispose();engine.Dispose();}base.Dispose(disposing);}
+        protected override void Dispose(bool disposing){if(disposing&&!released){released=true;pulse.Dispose();tips.Dispose();floatingMenu.Dispose();if(hotkeys!=null)hotkeys.Dispose();performance.Dispose();if(soundAlerts!=null){soundAlerts.StatusChanged-=SoundStatus;soundAlerts.Dispose();}if(overlay!=null)overlay.Dispose();engine.Dispose();}base.Dispose(disposing);}
     }
 }
 

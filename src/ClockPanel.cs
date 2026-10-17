@@ -1,4 +1,4 @@
-﻿using System;using System.Drawing;using System.Drawing.Drawing2D;using System.Windows.Forms;using System.IO;
+using System;using System.Drawing;using System.Drawing.Drawing2D;using System.Windows.Forms;using System.IO;
 namespace MuMuBeans {
 sealed class ClockCanvas:Control {
  readonly Bitmap image;public RectangleF Selection;PointF start;bool dragging;public event Action<RectangleF> Selected;

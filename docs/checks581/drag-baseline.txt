@@ -1,0 +1,4 @@
+MEASURE 100 unchanged idle ticks: badge=100, beans=100, rail=100, crop=25; UI call mean=0.101 ms, max=0.534 ms
+BASELINE V5.8 unchanged-idle-tick measurements only; no V5.8.1 behavior asserted.
+FAILURES=0
+Own-window synthetic UI/counter verification only. No MuMu launch, game accuracy or hardware gameplay latency claim.

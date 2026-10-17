@@ -1,0 +1,32 @@
+﻿PASS CPU 使用累计处理器时间增量，按 8 个逻辑核心归一化
+PASS 确实无 CPU 工作可显示真实 0%
+PASS 无效间隔/时间回退/核心数不伪装成 0
+PASS 拒绝非有限 CPU 读数
+PASS CPU 结果限制为 0–100%
+PASS 同一物理引擎聚合后取最忙引擎，20+15 与 80 不错误求和
+PASS 同物理引擎的独立计数器实例正确相加
+PASS 重复同一实例不重复计入
+PASS 精确 PID 边界排除 1234 与 12
+PASS 不同适配器的同编号引擎不混合相加
+PASS 无效/不支持 GPU 数据返回 unavailable 而非 0%
+PASS GPU 聚合上限 100% 不产生超过整卡的读数
+PASS 只有真实有效 GPU 样本才显示 0%
+PASS 历史窗口恒定最多 60 点，保留最近点且时间正序
+PASS 图表快照数组与内部有界队列隔离
+PASS 构造不启线程/PDH，不给静态 UI 预览增加开销
+PASS 真实当前进程采样：工作集 MB 和物理 RAM 百分比可用
+PASS CPU 首帧等待增量，后续真实采样位于 0–100%
+PASS GPU 实机返回真实有效值或明确 unavailable 原因
+LIVE CPU=0.00% WORKING_SET=23.84MB RAM=0.07% GPU=unavailable% GPU 暂无本程序计数器数据 (0x800007D5)
+PASS 受控单线程真实 CPU 负载被检测到，非固定或随机图表数据
+LIVE_BUSY_CPU=6.17%
+PASS 重复启用/窗口缩放不唤醒额外高频性能采样，仍保持约1 Hz
+PASS 性能读取约 1 Hz，不因启动信号产生紧邻重复样本
+PASS 隐藏性能面板及时停止采样并释放 GPU 查询
+PASS 隐藏后没有周期轮询/新增历史点
+PASS 显示面板恢复后台采样
+PASS 恢复时重新建立 CPU 基准，不把隐藏期间混进短时占用
+PASS Dispose 退出采样线程并释放原生计数器/缓冲区
+PASS 重复 Dispose/关闭后启用均安全，不重启线程
+PASS_COUNT=28
+FAILURES=0
